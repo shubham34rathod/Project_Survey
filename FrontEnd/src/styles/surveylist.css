@@ -1,32 +1,32 @@
-.container{
+.container {
     display: flex;
     justify-content: space-between;
 }
 
-.list-container{
+.list-container {
     margin: 2rem 8rem 0 8rem;
     width: 100%;
 }
 
-.list-header{
+.list-header {
     padding: .5rem 0;
     display: flex;
     justify-content: space-between;
     justify-items: center;
 }
 
-#searchform  label{
+#searchform label {
     font: normal normal 600 1.5rem/2rem Open Sans;
-letter-spacing: .072rem;
-color: #081838;
+    letter-spacing: .072rem;
+    color: #081838;
 }
 
-#searchform > form{
+#searchform>form {
     display: flex;
     justify-items: center;
 }
 
-#searchform  input{
+#searchform input {
     border: none;
     width: 20rem;
     font-size: 1rem;
@@ -34,47 +34,73 @@ color: #081838;
     border-bottom: 0.1rem solid #00000029;
 }
 
-#util{
+#util {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#util div{
+#util div {
     margin-left: 1.5rem;
 }
 
-#sort, #filter{
+#sort,
+#filter {
     width: 1rem;
     height: 1rem;
 }
 
-#sort{
-background: transparent url('../../public/images/sort.svg') 0% 0% no-repeat padding-box;
-background-size: cover;
+#sort {
+    background: transparent url('../../public/images/sort.svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
 }
 
-#filter{
-background: transparent url('../../public/images/sort.svg') 0% 0% no-repeat padding-box;
-background-size: cover;
+#filter {
+    background: transparent url('../../public/images/sort.svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
 }
 
-#create-btn button{
+#create-btn button {
     padding: .5rem 1.5rem;
     background-color: #278DF1;
     border-radius: .4rem;
     color: aliceblue;
+    border: none;
 }
 
-table thead{
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
+.survey-list {
+    margin-top: 2rem;
+}
+
+table {
     width: 100%;
 }
-th{
-    padding: 0 1rem;
+
+thead {
+    text-align: center;
+    background: #F8FAFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px .3rem .6rem #00000029;
+    opacity: 1;
+    border: none;
+    
+}
+
+th {
+    padding: .8rem 0;
     font: normal normal 600 1rem/1.8rem Open Sans;
-letter-spacing: .054rem;
-color: #081838;
+    letter-spacing: .054rem;
+    color: #081838;
+}
+
+td {
+    font: normal normal 600 1rem/1.4rem Open Sans;
+    letter-spacing: .048rem;
+    color: #4D4A4A;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+tr{
+    margin-bottom: .5rem;
+    background: #FAFDFF 0% 0% no-repeat padding-box;
 }
