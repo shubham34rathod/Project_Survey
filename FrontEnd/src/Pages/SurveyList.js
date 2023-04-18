@@ -12,7 +12,7 @@ export default function SurveyList() {
                     <div id='searchform'>
                         <form>
                             <label>Survey List</label>
-                            <input type='text' />
+                            <input type='text' placeholder='Search' />
                         </form>
                     </div>
                     <div id='util'>
@@ -28,12 +28,20 @@ export default function SurveyList() {
                         <thead>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Type</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr></tr>
+                            <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                            <td>Type</td>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                            <td>Action</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
