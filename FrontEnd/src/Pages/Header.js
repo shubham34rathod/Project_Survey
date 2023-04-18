@@ -11,7 +11,7 @@ export default function Header(){
                     <section className='logo'>Logo</section>
                     <section id='profile'>
                         <div id="profilepic"></div>
-                        <div className='dropdown'>&gt;</div>
+                        <div className='dropdown'></div>
                     </section>
                 </div>
 

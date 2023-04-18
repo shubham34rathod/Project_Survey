@@ -56,7 +56,9 @@
 }
 
 #filter {
-    background: transparent url('../../public/images/sort.svg') 0% 0% no-repeat padding-box;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: transparent url('../../public/images/filter.png') 1.5% 1.5% no-repeat padding-box;
     background-size: cover;
 }
 
