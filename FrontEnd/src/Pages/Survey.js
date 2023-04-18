@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/survey.css'
-export default function Survey() {
-
+export default function Survey({data}) {
+const {name, description, type, startDate, endDate} = data
     return <>
         <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Type</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>{name}</td>
+            <td>{description}</td>
+            <td>{type}</td>
+            <td>{startDate}</td>
+            <td>{endDate}</td>
             <td>
                 <div className='action'>
                     <div id='edit'></div>

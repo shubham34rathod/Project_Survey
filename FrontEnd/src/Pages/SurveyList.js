@@ -1,9 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import '../styles/surveylist.css'
+//import axios from 'axios'
 import Survey from './Survey'
+const config = require('../config/config')
+
+const user = [{
+    name: "Sanket",
+    description: "ANC",
+    type: "Q",
+    startDate: "2023",
+    endDate: "2023" 
+},
+{
+    name: "Sanket",
+    description: "ANC",
+    type: "Q",
+    startDate: "2023",
+    endDate: "2023" 
+},
+{
+    name: "Sanket",
+    description: "ANC",
+    type: "Q",
+    startDate: "2023",
+    endDate: "2023" 
+}]
 
 export default function SurveyList() {
+
+    // const [data, setData] = useState([])
+
+    // useEffect(()=>{
+    //     axios.get(config.backEndUrl)
+    //     .then((data)=>{
+    //         setData(data)
+    //     })
+    // })
+    
 
     return <>
         <div className='container'>
@@ -35,15 +69,9 @@ export default function SurveyList() {
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                            <td>Name</td>
-                            <td>Description</td>
-                            <td>Type</td>
-                            <td>Start Date</td>
-                            <td>End Date</td>
-                            <td>Action</td>
-                            </tr> */}
-                            <Survey/>
+                            {user && user.map(item=>{
+                                return <Survey data={item} key={item.id}/>
+                            })}
                         </tbody>
                     </table>
                 </div>
