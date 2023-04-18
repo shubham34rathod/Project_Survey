@@ -9,8 +9,8 @@ tr{
 }
 
 #edit, #delete{
-    width: 1rem;
-    height: 1.2rem;
+    width: 1.4rem;
+    height: 1.6rem;
 }
 
 #edit{
@@ -21,4 +21,11 @@ tr{
 #delete{
     background: transparent url('../../public/images/delete.png') 1.5% 1.5% no-repeat padding-box;
     background-size: cover;
+}
+
+#delete:hover, #edit:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
+
 }

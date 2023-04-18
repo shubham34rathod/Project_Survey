@@ -47,7 +47,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 44rem;
     width: fit-content;
     background-color: #278DF1;
     padding: 0 .7rem;
@@ -78,4 +77,10 @@
     height: 3rem;
     background: transparent url('../../public/images/hamburg.png') 0% 0% no-repeat padding-box;
     background-size: cover;
+}
+
+#create:hover, #list:hover, #home:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
 }

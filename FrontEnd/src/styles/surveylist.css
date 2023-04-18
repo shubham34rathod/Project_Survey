@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
+    height: 100vh;
 }
 
 .list-container {
@@ -62,12 +63,25 @@
     background-size: cover;
 }
 
+#sort:hover, #filter:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
+
+}
+
 #create-btn button {
     padding: .5rem 1.5rem;
     background-color: #278DF1;
     border-radius: .4rem;
     color: aliceblue;
     border: none;
+}
+
+#create-btn button:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
 }
 
 .survey-list {
