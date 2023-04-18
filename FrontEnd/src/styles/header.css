@@ -1,0 +1,82 @@
+
+
+.top-header{
+    box-shadow: 0px 0.3rem .8rem #00000029;
+}
+
+.logo{
+    width: fit-content;
+    font: normal normal bold 2.2rem/3rem Open Sans;
+    letter-spacing: 0.022rem;
+    color: #35393C;
+    opacity: 1;
+}
+
+#surveyheader{
+    margin: 0 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:space-between;
+}
+
+#profile{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:space-between;
+}
+
+#profilepic{
+    margin-right: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/logo192.png') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    }
+
+.dropdown{
+    font-size: 1.5rem;
+    transform: matrix(0, -1, 1, 0, 0, 0);
+    transform: rotate(90deg);
+    color: #b4bcc2;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.sidenav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:44rem;
+    width: fit-content;
+    background-color: #278DF1;
+    padding:0 .9rem;
+    box-sizing: border-box;
+}
+
+.sidenav div{
+    margin-bottom: 1.5rem;
+}
+
+#home{
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/images/home-run\ \(1\).svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+#create{
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/images/home-run\ \(1\).svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+#list{
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/images/home-run\ \(1\).svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
