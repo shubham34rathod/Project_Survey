@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import '../styles/surveylist.css'
+import Survey from './Survey'
 
 export default function SurveyList() {
 
@@ -34,14 +35,15 @@ export default function SurveyList() {
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                             <td>Name</td>
                             <td>Description</td>
                             <td>Type</td>
                             <td>Start Date</td>
                             <td>End Date</td>
                             <td>Action</td>
-                            </tr>
+                            </tr> */}
+                            <Survey/>
                         </tbody>
                     </table>
                 </div>
