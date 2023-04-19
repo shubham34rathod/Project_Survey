@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import '../styles/surveylist.css'
 import '../styles/create-survey.css'
+import '../styles/header.css'
 
 export default function CreateSurvey() {
    

@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import '../styles/surveylist.css'
 //import axios from 'axios'
 import Survey from './Survey'
+import '../styles/header.css'
 const config = require('../config/config')
 
 const user = [{
