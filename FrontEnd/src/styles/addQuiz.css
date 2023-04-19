@@ -1,0 +1,116 @@
+.g_parent{
+    width: 70%;
+    float: right;
+    position: fixed;
+    bottom: 600px;
+    left: 250px;
+    /* border: 1px solid; */
+}
+.s_parent1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.s_child1{
+    width: 100%;
+    /* border: 1px solid; */
+    display: flex;
+    position: relative;
+    /* left: 280px; */
+    /* top: 100px; */
+}
+.rec1{
+    display: flex;
+    margin-top: 15px;
+}
+.rec2{
+    float:right;
+    position: relative;
+    left: 800px;
+    bottom: 10px;
+}
+.arrow{
+    height: 1rem;
+    margin: 0.5rem;
+}
+.create{
+    font-size: 18px;
+}
+.preview{
+    width: 107px;
+    height: 40px;
+    border-radius: 5px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #278DF1;
+    color: #278DF1;
+}
+.save{
+    width: 107px;
+    height: 40px;
+    background-color: #278DF1;
+    border: none;
+    margin: 10px;
+    border-radius: 0px;
+    border-radius: 5px;
+}
+.s_parent2{
+    width: 70%;
+    height: 200px;
+    /* border: 1px solid; */
+    position: fixed;
+    top: 220px;
+    display: flex;
+    background-color: #F4F8FD;
+}
+.ul{
+    margin-left: 10px;
+    margin-top: 10px;
+    list-style: none;
+    font-size: 16px;
+}
+.que{
+    margin: 10px;
+    font-size: 14px;
+}
+.que_input{
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    height: 25px;
+    margin-top: 5px;
+    width:350px;
+    padding-left: 10px;
+}
+.options{
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.label{
+    font-size: 18px;
+    /* border: 1px solid; */
+    height: 20px;
+    margin-left: 10px;
+}
+.que_box{
+    margin: 10px;
+}
+#option{
+    /* margin-top: 5px; */
+    width: 13px;
+}
+.add_que{
+    width: 107px;
+    height: 40px;
+    border: none;
+    position: relative;
+    top: 60px;
+    left: 500px;
+    background-color: #8C95AF;
+    border-radius: 5px;
+}
+.settings{
+    width: 20px;
+    position: fixed;
+    right: 300px;
+    top: 230px;
+}
