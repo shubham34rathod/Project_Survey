@@ -14,7 +14,7 @@ function SignIn()
                     </div>
                     <p id="l1">Sign in to continue access pages</p>
                     <p id="l2">Don’t Have An Account?</p>
-                    <form action="#" method="post">
+                    <form action="#" method="post" className="form-reg">
                         <button>Register</button>
                     </form>
                 </div>
