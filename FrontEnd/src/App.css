@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+}
+
+body{
+    font-size: 62.5%;
+}
+
+.App{
+    height: 100vh;
+}

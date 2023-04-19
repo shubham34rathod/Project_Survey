@@ -1,0 +1,31 @@
+tr{
+    margin-bottom: .5rem;
+    background: #FAFDFF 0% 0% no-repeat padding-box;
+}
+
+.action{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#edit, #delete{
+    width: 1.4rem;
+    height: 1.6rem;
+}
+
+#edit{
+    background: transparent url('../../public/images/edit.png') 1.5% 1.5% no-repeat padding-box;
+    background-size: cover;
+}
+
+#delete{
+    background: transparent url('../../public/images/delete.png') 1.5% 1.5% no-repeat padding-box;
+    background-size: cover;
+}
+
+#delete:hover, #edit:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
+
+}

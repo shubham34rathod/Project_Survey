@@ -1,0 +1,131 @@
+ #next-btn button{
+    padding: .5rem 1.5rem;
+    background-color: #278DF1;
+    border-radius: .4rem;
+    color: aliceblue;
+    border: none;
+}
+
+#cancel-btn button{
+    background: transparent;
+    color: #278DF1;
+    padding: .4rem 1.1rem;
+    border: .1rem solid #278DF1;
+    border-radius: .4rem;
+}
+
+.border-bottom{
+    border-bottom: .1rem solid black;
+}
+
+.text{
+    font: normal normal 600 2rem/2.8rem Open Sans;
+letter-spacing: .072rem;
+color: #081838;
+}
+
+.form-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1.5rem;
+    height: fit-content;
+}
+
+.form-container label{
+    display: block;
+    font: normal normal 600 1rem/1.8rem Open Sans;
+letter-spacing: .018rem;
+color: #2D2D2E;
+}
+
+.form-container input , #select{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #CCCCCC;
+border-radius: 4px;
+padding: .3rem 1rem;
+width: 100%;
+box-sizing: border-box;
+}
+
+.form-container div{
+    margin: 0 2rem 2rem 0;
+
+}
+
+
+.form-left{
+    border-right: .1rem solid #c3c3c8;
+    width: 50%;
+}
+
+.form-right{
+    width: 50%;
+}
+
+.form-right div{
+    margin-left: 1.5rem;
+}
+
+#otherCriteria, #description{
+    height: 6rem;
+}
+
+#startDate, #endDate, #select{
+    width: fit-content;
+}
+
+/* #file{
+    height: 7rem;
+} */
+
+#form-file-upload {
+    height: 16rem;
+    width: 28rem;
+    max-width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  
+  #input-file-upload {
+    display: none;
+  }
+  
+  #label-file-upload {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-radius: 1rem;
+    border-style: dashed;
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
+  }
+  
+  #label-file-upload.drag-active {
+    background-color: #ffffff;
+  }
+  
+  .upload-button {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    background-color: transparent;
+  }
+  
+  .upload-button:hover {
+    text-decoration-line: underline;
+  }
+  
+  #drag-file-element {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }

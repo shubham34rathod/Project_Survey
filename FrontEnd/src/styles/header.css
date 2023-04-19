@@ -1,0 +1,86 @@
+.top-header {
+    box-shadow: 0px 0.3rem .8rem #00000029;
+}
+
+.logo {
+    width: fit-content;
+    font: normal normal bold 2.2rem/3rem Open Sans;
+    letter-spacing: 0.022rem;
+    color: #35393C;
+    opacity: 1;
+}
+
+#surveyheader {
+    margin: 0 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#profile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#profilepic {
+    margin-right: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/logo192.png') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+.dropdown {
+    width: 1.2rem;
+    height: .7rem;
+    background: transparent url('../../public/images/next.svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    color: #b4bcc2;
+}
+
+/* Sidebar */
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    background-color: #278DF1;
+    padding: 0 .7rem;
+    box-sizing: border-box;
+}
+
+.sidenav div {
+    margin-bottom: 1.5rem;
+}
+
+#home {
+    width: 2rem;
+    height: 2rem;
+    background: transparent url('../../public/images/home-run\ \(1\).svg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+#create {
+    width: 3rem;
+    height: 3rem;
+    background: transparent url('../../public/images/people.png') 0% 0% no-repeat padding-box;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+#list {
+    width: 3rem;
+    height: 3rem;
+    background: transparent url('../../public/images/hamburg.png') 0% 0% no-repeat padding-box;
+    background-size: cover;
+}
+
+#create:hover, #list:hover, #home:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
+}
