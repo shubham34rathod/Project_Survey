@@ -1,0 +1,104 @@
+#arrow{
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    margin-right: .5rem;
+    overflow: hidden;
+    width: 1.3rem;
+}
+
+#close-prev-btn {
+    background-color: transparent;
+    border: .1rem solid #278DF1;
+    border-radius: .2rem;
+    height: 2rem;
+    padding: 0 .5rem;
+    box-sizing: border-box;
+}
+
+#save-btn {
+    background-color: #278DF1;
+    border: none;
+    width: 6rem;
+    text-align: center;
+    border-radius: .2rem;
+    height: 2rem;
+}
+#close-prev-btn button{
+    height: 100%;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: #278DF1;
+
+}
+
+#save-btn button{
+    height: 100%;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+#searchform h5{
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.util{
+    justify-items: center;
+}
+
+.question h4{
+    width: fit-content;
+    font-size: 1rem;
+    background-color: white;
+    position: absolute;
+    top: -.8rem;
+    
+}
+
+.question{
+    position: relative;
+    border-top: .1rem solid grey;
+    margin-bottom: 2rem;
+}
+
+.prev-form-container form{
+    margin-top: 2rem ;
+}
+
+.prev-form-container form > label{
+    display: block;
+    color: #090909;
+    font-size: 1rem;
+}
+
+.radio-container{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    width: 20%;
+}
+
+.radio-container input{
+    width: 1rem;
+}
+
+.radio-container label{
+    font-size: .8rem;
+}
+
+#save-btn:hover, #close-prev-btn:hover{
+    transition: transform .2s;
+    transform: scale(1.2);
+    box-shadow: 0px .3rem .2rem #00000029;
+
+}
+
+#close-prev-btn button:hover, #save-btn button:hover{
+    cursor: pointer;
+}
+
