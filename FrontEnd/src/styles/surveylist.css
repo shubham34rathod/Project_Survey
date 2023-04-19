@@ -25,6 +25,7 @@
 #searchform>form {
     display: flex;
     justify-items: center;
+    align-items: center;
 }
 
 #searchform input {
@@ -38,7 +39,6 @@
 .util {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .util div {
