@@ -79,4 +79,9 @@
 .col-12{
     position: relative;
     right: 140px;
+    top: 10px;
+}
+.form-check-input{
+    position: fixed;
+    right: 630px;
 }

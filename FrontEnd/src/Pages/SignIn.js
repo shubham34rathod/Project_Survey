@@ -14,8 +14,13 @@ function SignIn()
                     </div>
                     <p id="l1">Sign in to continue access pages</p>
                     <p id="l2">Don’t Have An Account?</p>
+<<<<<<< HEAD
+                    <form action="#" method="post">
+                        <button className="register_btn">Register</button>
+=======
                     <form action="#" method="post" className="form-reg">
                         <button>Register</button>
+>>>>>>> dfaa6e3e1bf8e39fb9326980e115c7e69a12821b
                     </form>
                 </div>
             </div>
@@ -36,7 +41,7 @@ function SignIn()
                                 <hr style={{marginTop:"0px"}}/>
                             </div>
                             <div>
-                                <button type="Submit" >Sign in</button>
+                                <button type="Submit" className="signin_btn" >Sign in</button>
                             </div>
                         </form>
                     </div>

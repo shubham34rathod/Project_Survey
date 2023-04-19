@@ -39,8 +39,16 @@ h1{
     color: #5C5C5C;
     font-size: 12px;
 }
-
-.form-reg button{
+/* button{
+    width: 107px;
+    height: 40px;
+    border-radius: 28px;
+    border: none;
+    background-color: #278DF1;
+    color: white;
+    margin-top: 20px;
+} */
+.register_btn{
     width: 107px;
     height: 40px;
     border-radius: 28px;
@@ -49,13 +57,7 @@ h1{
     color: white;
     margin-top: 20px;
 }
-
-.form2 >div:nth-child(3){
-    width: fit-content;
-    margin: 0 auto;
-}
-
-.form2 button, .reg-button{
+.signin_btn{
     width: 107px;
     height: 40px;
     border-radius: 28px;
@@ -96,11 +98,11 @@ h1{
 .form2{
     margin-top: 20px;
 }
-.form2 label{
+label{
     font-size: 14px;
     color: #77838F;
 }
- .form2 input, .reg-input {
+input{
     width: 230px;
     height: 20px;
     border: none;
