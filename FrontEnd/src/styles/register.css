@@ -1,6 +1,6 @@
-body{
+/* body{
     background-image: linear-gradient(#FFFFFF,#6ED4FF);
-}
+} */
 .grandParent{
     background-image: linear-gradient(#FFFFFF,#6ED4FF);
     width: 100%;
@@ -79,4 +79,9 @@ body{
 .col-12{
     position: relative;
     right: 140px;
+    top: 10px;
+}
+.form-check-input{
+    position: fixed;
+    right: 630px;
 }

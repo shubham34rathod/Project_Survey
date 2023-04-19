@@ -39,7 +39,25 @@ h1{
     color: #5C5C5C;
     font-size: 12px;
 }
-button{
+/* button{
+    width: 107px;
+    height: 40px;
+    border-radius: 28px;
+    border: none;
+    background-color: #278DF1;
+    color: white;
+    margin-top: 20px;
+} */
+.register_btn{
+    width: 107px;
+    height: 40px;
+    border-radius: 28px;
+    border: none;
+    background-color: #278DF1;
+    color: white;
+    margin-top: 20px;
+}
+.signin_btn{
     width: 107px;
     height: 40px;
     border-radius: 28px;

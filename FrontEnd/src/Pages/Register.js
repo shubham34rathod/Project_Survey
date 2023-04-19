@@ -12,7 +12,7 @@ function Register()
                     <p className="para1">Sign in to continue access pages</p>
                     <p className="para2">Already Have An Account</p>
                     <form action="#" method="post">
-                        <button>Sign In</button>
+                        <button className="signin_btn">Sign In</button>
                     </form>
                 </div>
             </div>
@@ -61,13 +61,13 @@ function Register()
                                         <label class="form-check-label" for="invalidCheck">
                                         <p style={{fontSize:"10px"}}>I agree to Terms & Condition receiving marketing and promotional materials</p>
                                         </label>
-                                        <div class="invalid-feedback">
+                                        {/* <div class="invalid-feedback">
                                         You must agree before submitting.
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit" style={{position:"relative",right:"80px"}}>Register</button>
+                                    <button type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
                                 </div>
                             </div>
                         </form>
