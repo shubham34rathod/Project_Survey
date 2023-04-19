@@ -1,7 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    height: 100vh;
+    min-height: 100%;
 }
 
 .list-container {
@@ -35,13 +35,13 @@
     border-bottom: 0.1rem solid #00000029;
 }
 
-#util {
+.util {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#util div {
+.util div {
     margin-left: 1.5rem;
 }
 

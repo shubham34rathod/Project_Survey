@@ -50,7 +50,7 @@ export default function SurveyList() {
                             <input type='text' placeholder='Search' />
                         </form>
                     </div>
-                    <div id='util'>
+                    <div className='util'>
                         <div id='sort'></div>
                         <div id='filter'></div>
                         <div id='create-btn'>
