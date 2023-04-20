@@ -4,9 +4,11 @@ import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
 import  settings from "../images/gear.jpg"
 import '../styles/addQuiz.css'
+import { useNavigate } from "react-router-dom";
 
 function AddQuiz()
 {
+    const navigate = useNavigate()
     return <>
         <Header></Header>
         <Sidebar></Sidebar>
@@ -18,7 +20,9 @@ function AddQuiz()
                         <p className="create">Create Questions</p>
                     </div>
                     <div className="rec2">
-                        <button className="preview">Preview</button>
+                        <button onClick={()=>{
+                            navigate('/list-survey/create/questions/preview')
+                        }} className="preview">Preview</button>
                         <button className="save">Save</button>
                     </div>
                 </div>

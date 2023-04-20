@@ -1,9 +1,11 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function PreviewSurvey(){
+    const navigate = useNavigate()
     return <>
     <div className='container'>
         <Sidebar />
@@ -15,7 +17,9 @@ export default function PreviewSurvey(){
                 </div>
                 <div className='util'>
                 <div id="close-prev-btn">
-                            <button>Close Preview</button>
+                            <button onClick={()=>{
+                                navigate(-1)
+                            }}>Close Preview</button>
                         </div>
                         <div id="save-btn">
                             <button>Save</button>

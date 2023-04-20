@@ -1,8 +1,10 @@
 import React from "react";
 import "../styles/register.css"
+import { useNavigate } from "react-router-dom";
 
 function Register()
 {
+    const navigate = useNavigate()
     return <>
         <div className="grandParent">
             <div className="p1">
@@ -12,7 +14,9 @@ function Register()
                     <p className="para1">Sign in to continue access pages</p>
                     <p className="para2">Already Have An Account</p>
                     <form action="#" method="post">
-                        <button className="signin_btn">Sign In</button>
+                        <button onClick={()=>{
+                            navigate("/")
+                        }} className="signin_btn">Sign In</button>
                     </form>
                 </div>
             </div>
@@ -67,7 +71,9 @@ function Register()
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
+                                    <button onClick={()=>{
+                                        navigate('/')
+                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
                                 </div>
                             </div>
                         </form>

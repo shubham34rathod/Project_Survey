@@ -4,6 +4,7 @@ import '../styles/surveylist.css'
 //import axios from 'axios'
 import Survey from './Survey'
 import '../styles/header.css'
+import { Outlet, useNavigate } from 'react-router-dom'
 const config = require('../config/config')
 
 const user = [{
@@ -29,6 +30,7 @@ const user = [{
 }]
 
 export default function SurveyList() {
+    const navigate = useNavigate()
 
     // const [data, setData] = useState([])
 
@@ -55,7 +57,9 @@ export default function SurveyList() {
                         <div id='sort'></div>
                         <div id='filter'></div>
                         <div id='create-btn'>
-                            <button>Create</button>
+                            <button onClick={()=>{
+                                navigate('/list-survey/create')
+                            }}>Create</button>
                         </div>
                     </div>
                 </header>
@@ -77,6 +81,7 @@ export default function SurveyList() {
                     </table>
                 </div>
             </div>
+            
         </div>
     </>
 }
