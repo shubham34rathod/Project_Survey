@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -11,4 +12,10 @@ body{
 
 .App{
     height: 100vh;
+}
+
+button:hover, .lift:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
 }
