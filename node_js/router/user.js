@@ -64,6 +64,7 @@ router.post("/register",async (req,res)=>{
     {
         // console.log(req.body);
         let {name,email,phone,profession,password,confirm_password}=req.body;
+        console.log(req.body);
         if(password===confirm_password)
         {
             let pass=await bcrypt.hash(password,10)
@@ -124,7 +125,7 @@ router.post("/login",async (req,res)=>{
 router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
     try 
     {
-        console.log(req.body);
+       
         let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName}=req.body;
         let doc2=new Model2({
             name:name,
@@ -133,14 +134,36 @@ router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
             startDate:startDate,
             endDate:endDate,
             otherCriteria:otherCriteria,
-            imageName:req.file.filename
+            imageName:imageName
         })
-        doc2.save();
+        console.log(doc2);
+        doc2.save()
+        .then(()=>{
+            res.status(200).send({result: doc2})
+        })
+        .catch(err=> res.status(500).send({message: "something went wrong"}))
     } 
     catch (error) 
     {
         res.send(error)
     }
+})
+
+router.get('/get-surveys', verifyToken, async(req, res)=>{
+     await Model2.find()
+    .then((surveys)=>{
+        if(surveys){
+            res.status(200).send({result: surveys})
+        }
+        else{
+            res.status(404).sendStatus({message: "No surveys are available"})
+        }
+    })
+    .catch(err=>{
+        res.status(500).send({message: "something went wrong"})
+    })
+
+    
 })
 
 module.exports=router

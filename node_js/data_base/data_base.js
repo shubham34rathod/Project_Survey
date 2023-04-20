@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 require('dotenv').config()
 
-mongoose.connect(process.env.Db_URL + process.env.Data_Base)
+mongoose.connect(process.env.Db_URL + process.env.Data_Base ,{useNewUrlParser: true})
 .then(()=>console.log("connected to database"))
 .catch(()=>console.log("connection error"))
 
