@@ -152,11 +152,11 @@ router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
 router.get('/get-surveys', verifyToken, async(req, res)=>{
      await Model2.find()
     .then((surveys)=>{
-        if(surveys){
-            res.status(200).send({result: surveys})
+        if(!surveys){
+            res.status(404).sendStatus({message: "No surveys are available"})
         }
         else{
-            res.status(404).sendStatus({message: "No surveys are available"})
+            res.status(200).send({result: surveys})
         }
     })
     .catch(err=>{
