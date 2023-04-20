@@ -1,8 +1,10 @@
 import React from "react";
 import "../styles/signIn.css"
+import { useNavigate } from "react-router-dom";
 
 function SignIn()
 {
+    const navigate = useNavigate()
     return <>
         <div className="box">
             {/* <div id="tmp"></div> */}
@@ -15,7 +17,9 @@ function SignIn()
                     <p id="l1">Sign in to continue access pages</p>
                     <p id="l2">Don’t Have An Account?</p>
                     <form action="#" method="post">
-                        <button className="register_btn">Register</button>
+                        <button onClick={()=>{
+                            navigate('register')
+                        }} className="register_btn">Register</button>
                     </form>
                 </div>
             </div>
@@ -36,7 +40,9 @@ function SignIn()
                                 <hr style={{marginTop:"0px"}}/>
                             </div>
                             <div>
-                                <button type="Submit" className="signin_btn" >Sign in</button>
+                                <button onClick={()=>{
+                                    navigate("list-survey")
+                                }} type="Submit" className="signin_btn" >Sign in</button>
                             </div>
                         </form>
                     </div>

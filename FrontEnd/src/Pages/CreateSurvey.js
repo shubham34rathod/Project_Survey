@@ -3,9 +3,10 @@ import Sidebar from "./Sidebar";
 import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function CreateSurvey() {
-
+const navigate = useNavigate()
 
     return <>
         <div className='container'>
@@ -15,10 +16,14 @@ export default function CreateSurvey() {
                     <div className="text">Create Survey</div>
                     <div className="util">
                         <div id="cancel-btn">
-                            <button>Cancel</button>
+                            <button onClick={()=>{
+                                navigate(-1)
+                            }}>Cancel</button>
                         </div>
                         <div id="next-btn">
-                            <button>Next</button>
+                            <button onClick={()=>{
+                                navigate('/list-survey/create/questions')
+                            }}>Next</button>
                         </div>
                     </div>
                 </header>

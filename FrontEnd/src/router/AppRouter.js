@@ -5,6 +5,7 @@ import SignIn from '../Pages/SignIn';
 import Register from '../Pages/Register';
 import SurveyList from '../Pages/SurveyList';
 import PreviewSurvey from '../Pages/PreviewSurvey';
+import AddQuiz from '../Pages/AddQuiz';
 
 export default function AppRouter(){
     return<>
@@ -12,9 +13,10 @@ export default function AppRouter(){
             <Routes>
                 <Route path='/' element={<SignIn/>}/>
                 <Route path='register' element={<Register/>}/>
-                <Route path='create' element={<CreateSurvey/>}/>
-                <Route path='list-survey' element={<SurveyList/>}/>
-                <Route path='preview' element={<PreviewSurvey/>}/>
+                <Route path='/list-survey' element={<SurveyList/>}/>
+                <Route path='/list-survey/create' element={<CreateSurvey/>}/>
+                <Route path='/list-survey/create/questions' element={<AddQuiz/>}/>
+                <Route path='/list-survey/create/questions/preview' element={<PreviewSurvey/>}/>
                 <Route path='*' element={<SignIn/>}/>
             </Routes>
         </BrowserRouter>
