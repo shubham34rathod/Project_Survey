@@ -4,6 +4,7 @@ import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
 
+
 export default function CreateSurvey() {
 const navigate = useNavigate()
 
@@ -20,7 +21,9 @@ const navigate = useNavigate()
                             }}>Cancel</button>
                         </div>
                         <div id="next-btn">
-                            <button>Next</button>
+                            <button onClick={()=>{
+                                navigate('/list-survey/create/questions')
+                            }}>Next</button>
                         </div>
                     </div>
                 </header>

@@ -5,6 +5,7 @@ import left_arrow from "../images/left-arrow.jpg"
 import  settings from "../images/gear.jpg"
 import '../styles/addQuiz.css'
 
+
 function AddQuiz()
 {
     const navigate = useNavigate()
