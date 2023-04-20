@@ -7,6 +7,7 @@ import Register from './Pages/Register'
 import SurveyList from './Pages/SurveyList';
 import Sidebar from './Pages/Sidebar';
 import AddQuiz from './Pages/AddQuiz';
+import Theme from './Pages/Theme'
 
 function App() {
   return (
@@ -14,10 +15,11 @@ function App() {
       {/* <Header/> */}
       {/* <Sidebar></Sidebar> */}
       {/* <SurveyList/> */}
-      <SignIn></SignIn>
+      {/* <SignIn></SignIn> */}
       {/* <Register></Register> */}
       {/* <CreateSurvey/> */}
       {/* <AddQuiz></AddQuiz> */}
+      <Theme></Theme>
     </div>
   );
 }

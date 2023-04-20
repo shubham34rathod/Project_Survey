@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/signIn.css"
 
 function SignIn()
 {
+    let [signIn_data,updateData]=useState({
+        email:"",
+        password:""
+    })
+    
+    function submitForm(e)
+    {
+        e.preventDefault();
+        console.log(signIn_data);
+        updateData({
+            email:"",
+            password:""
+        })
+    }
+
+    function onChange(e,prop)
+    {
+        updateData((data)=>({
+            ...data,
+            [prop]:e.target.value
+        }))
+    }
+
     return <>
         <div className="box">
             {/* <div id="tmp"></div> */}
@@ -14,13 +37,8 @@ function SignIn()
                     </div>
                     <p id="l1">Sign in to continue access pages</p>
                     <p id="l2">Don’t Have An Account?</p>
-<<<<<<< HEAD
-                    <form action="#" method="post">
-                        <button className="register_btn">Register</button>
-=======
                     <form action="#" method="post" className="form-reg">
-                        <button>Register</button>
->>>>>>> dfaa6e3e1bf8e39fb9326980e115c7e69a12821b
+                        <button className="register_btn">Register</button>
                     </form>
                 </div>
             </div>
@@ -29,15 +47,15 @@ function SignIn()
                     <div className="sub-box-2">
                         <h1 id="h1">Sign In</h1>
                         <p id="l3">Sign in to continue access pages</p>
-                        <form action="#" method="post" className="form2">
+                        <form action="#" method="POST" className="form2" onSubmit={(e)=>submitForm(e)}>
                             <div>
                                 <label for="email">Email</label><br />
-                                <input type="email" id="email"  />
+                                <input type="email" id="email" name="email" value={signIn_data.email} onChange={(e)=>onChange(e,"email")}/>
                                 <hr style={{marginTop:"0px"}}/>
                             </div>
                             <div>
                                 <label for="password">Password</label><br />
-                                <input type="password" id="password"  />
+                                <input type="password" id="password" name="password" value={signIn_data.password} onChange={(e)=>onChange(e,"password")}/>
                                 <hr style={{marginTop:"0px"}}/>
                             </div>
                             <div>

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
+import close from '../images/close-_1_.jpg'
 import  settings from "../images/gear.jpg"
 import '../styles/addQuiz.css'
+import Theme from "./Theme";
 
-function AddQuiz()
+function AddQuiz(props)
 {
+    
+    let [show,change]=useState(false);
+    console.log(props.style);
+    function fn()
+    {
+        if(show===false)
+        {
+            change(true)
+        }
+        else
+        {
+             change(false)
+        }
+    }
+
     return <>
         <Header></Header>
         <Sidebar></Sidebar>
@@ -18,6 +35,7 @@ function AddQuiz()
                         <p className="create">Create Questions</p>
                     </div>
                     <div className="rec2">
+                        <button className="theme_btn">Theme Setting</button>
                         <button className="preview">Preview</button>
                         <button className="save">Save</button>
                     </div>
@@ -51,8 +69,20 @@ function AddQuiz()
                     </div>                    
                 </div>  
                 <div className="s_parent3">
-                <img src={settings} alt="settings" className="settings" />
-            </div>              
+                <img src={settings} alt="settings" className="settings" onClick={fn} />
+                {show && 
+                <div className="float_box">
+                    <div>
+                        <img src={close} alt="close" className="close_tag" />
+                        <p style={{fontSize:"12px",marginBottom:"5px"}}>Question Type</p>
+                        <select className="select">
+                            <option defaultChecked disabled>Select</option>
+                            <option>Multiple Choice</option>
+                        </select>
+                    </div>
+                </div>
+                }
+                </div>              
             </div>            
         </div>
     </>
