@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useNavigate} from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
@@ -7,6 +7,7 @@ import '../styles/addQuiz.css'
 
 function AddQuiz()
 {
+    const navigate = useNavigate()
     return <>
         <Header></Header>
         <Sidebar></Sidebar>
@@ -14,12 +15,18 @@ function AddQuiz()
             <div className="s_parent1">
                 <div className="s_child1">
                     <div className="rec1">
-                        <img src={left_arrow} alt="arrow" className="arrow" />
+                        <img onClick={()=>{
+                            navigate('/list-survey/create')
+                        }} src={left_arrow} alt="arrow" className="arrow lift" />
                         <p className="create">Create Questions</p>
                     </div>
                     <div className="rec2">
-                        <button className="preview">Preview</button>
-                        <button className="save">Save</button>
+                        <button onClick={()=>{
+                            navigate('/list-survey/create/questions/preview')
+                        }} className="preview">Preview</button>
+                        <button onClick={()=>{
+                            navigate('/list-survey/create/questions/preview')
+                        }} className="save">Save</button>
                     </div>
                 </div>
             </div>

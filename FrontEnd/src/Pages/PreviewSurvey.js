@@ -1,21 +1,26 @@
-import React from 'react'
+import React,{useNavigate} from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 
 
 export default function PreviewSurvey(){
+    const navigate = useNavigate()
     return <>
     <div className='container'>
         <Sidebar />
         <div className='list-container'>
             <header className='list-header '>
                 <div id='searchform'>
-                    <button id='arrow'> &larr;</button>
+                    <button onClick={()=>{
+                        navigate('/list-survey/create/questions')
+                    }} id='arrow'> &larr;</button>
                         <h5>Preview</h5>
                 </div>
                 <div className='util'>
                 <div id="close-prev-btn">
-                            <button>Close Preview</button>
+                            <button onClick={()=>{
+                                navigate('/list-survey/create/questions')
+                            }}>Close Preview</button>
                         </div>
                         <div id="save-btn">
                             <button>Save</button>
