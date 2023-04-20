@@ -4,7 +4,10 @@ import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf1ac76a64b8068f940a5389fdae602fd9d9cfd9
 export default function CreateSurvey() {
 const navigate = useNavigate()
 
