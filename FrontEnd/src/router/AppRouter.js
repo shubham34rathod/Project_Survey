@@ -12,7 +12,7 @@ export default function AppRouter(){
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<SignIn/>}/>
-                <Route path='register' element={<Register/>}/>
+                <Route path='/register' element={<Register/>}/>
                 <Route path='/list-survey' element={<SurveyList/>}/>
                 <Route path='/list-survey/create' element={<CreateSurvey/>}/>
                 <Route path='/list-survey/create/questions' element={<AddQuiz/>}/>
