@@ -1,10 +1,13 @@
-import React from "react";
+import React,{useNavigate} from "react";
 import Sidebar from "./Sidebar";
 import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
-import { Outlet, useNavigate } from "react-router-dom";
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> cf1ac76a64b8068f940a5389fdae602fd9d9cfd9
 export default function CreateSurvey() {
 const navigate = useNavigate()
 
@@ -17,7 +20,7 @@ const navigate = useNavigate()
                     <div className="util">
                         <div id="cancel-btn">
                             <button onClick={()=>{
-                                navigate(-1)
+                                navigate('/list-survey')
                             }}>Cancel</button>
                         </div>
                         <div id="next-btn">
