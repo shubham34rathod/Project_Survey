@@ -86,35 +86,35 @@ router.get("/logout",verifyToken,async (req,res)=>{
 })
 
 router.post("/register",async (req,res)=>{
-    console.log(req.body);
-    // try 
-    // {
-    //     // console.log(req.body);
-    //     let {name,email,phone,profession,password,confirm_password}=req.body;
-    //     if(password===confirm_password)
-    //     {
-    //         let pass=await bcrypt.hash(password,10)
-    //         console.log(pass);
-    //         let doc1=await new Model1({
-    //            name:name,
-    //            email:email,
-    //            phone:phone,
-    //            profession:profession,
-    //            password:pass
-    //         })
-    //         // await doc1.save();
-    //         res.send("data received")
+    //console.log(req.body);
+    try 
+    {
+        // console.log(req.body);
+        let {name,email,phone,profession,password,confirm_password}=req.body;
+        if(password===confirm_password)
+        {
+            let pass=await bcrypt.hash(password,10)
+            console.log(pass);
+            let doc1=await new Model1({
+               name:name,
+               email:email,
+               phone:phone,
+               profession:profession,
+               password:pass
+            })
+            // await doc1.save();
+            res.send("data received")
             
-    //     }
-    //     else
-    //     {
-    //         res.send("password does not match")
-    //     }
-    // } 
-    // catch (error) 
-    // {
-    //     res.send(error)
-    // }
+        }
+        else
+        {
+            res.send("password does not match")
+        }
+    } 
+    catch (error) 
+    {
+        res.send(error)
+    }
 })
 
 router.post("/login",async (req,res)=>{
@@ -151,7 +151,7 @@ router.post("/login",async (req,res)=>{
 router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
     try 
     {
-        console.log(req.body);
+       
         let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName}=req.body;
         let doc2=new Model2({
             name:name,
@@ -160,14 +160,36 @@ router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
             startDate:startDate,
             endDate:endDate,
             otherCriteria:otherCriteria,
-            imageName:req.file.filename
+            imageName:imageName
         })
-        doc2.save();
+        console.log(doc2);
+        doc2.save()
+        .then(()=>{
+            res.status(200).send({result: doc2})
+        })
+        .catch(err=> res.status(500).send({message: "something went wrong"}))
     } 
     catch (error) 
     {
         res.send(error)
     }
+})
+
+router.get('/get-surveys', verifyToken, async(req, res)=>{
+     await Model2.find()
+    .then((surveys)=>{
+        if(!surveys){
+            res.status(404).sendStatus({message: "No surveys are available"})
+        }
+        else{
+            res.status(200).send({result: surveys})
+        }
+    })
+    .catch(err=>{
+        res.status(500).send({message: "something went wrong"})
+    })
+
+    
 })
 
 module.exports=router
