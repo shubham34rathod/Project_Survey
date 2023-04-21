@@ -1,15 +1,19 @@
 import React from "react";
 import Sidebar from "./Sidebar";
+import Header from "./Header";
 import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
 import { useNavigate } from "react-router-dom";
+// import 'bootstrap/dist/css/bootstrap.css'
+
 
 export default function CreateSurvey() {
 const navigate = useNavigate()
 
     return <>
-        <div className='container'>
+    <Header></Header>
+        <div className='container' style={{margin:"0px",padding:"0px"}}>
             <Sidebar />
             <div className="list-container">
                 <header className='list-header border-bottom'>
