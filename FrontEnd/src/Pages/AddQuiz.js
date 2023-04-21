@@ -1,14 +1,14 @@
-import React, {useNavigate} from "react";
+import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
 import  settings from "../images/gear.jpg"
 import '../styles/addQuiz.css'
-
+import { useNavigate } from "react-router-dom";
 
 function AddQuiz()
 {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     return <>
         <Header></Header>
         <Sidebar></Sidebar>

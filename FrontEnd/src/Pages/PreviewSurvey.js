@@ -1,7 +1,7 @@
-import React,{useNavigate} from 'react'
+import React from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function PreviewSurvey(){
