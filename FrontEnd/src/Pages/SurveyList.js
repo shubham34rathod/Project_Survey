@@ -4,7 +4,7 @@ import '../styles/surveylist.css'
 //import axios from 'axios'
 import Survey from './Survey'
 import '../styles/header.css'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 const config = require('../config/config')
 
 const user = [{
@@ -30,7 +30,7 @@ const user = [{
 }]
 
 export default function SurveyList() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     // const [data, setData] = useState([])
 
