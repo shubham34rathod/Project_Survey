@@ -1,9 +1,40 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 // import '../styles/create-survey.css'
 import '../styles/theme.css'
 
-export default function Theme() {
+export default function Theme() 
+{
+    let [tmp,changeTmp]=useState(false)
+    let [style,updateStyle]=useState([])
+    let [theme,changeTheme]=useState('None')
+    let [styleName,changeStyle]=useState('none')
 
+    useEffect(()=>{
+        fetch('http://localhost:8000/theme')
+        .then((data)=>data.json())
+        .then((fonts)=>{
+            // console.log(fonts)
+            updateStyle(fonts)
+        })
+        .catch(()=>console.log("fetching error"))
+    },[]) 
+
+    function themeChange(e)
+    {
+       console.log(e.target.value);
+       if(e.target.value==="None")
+       {
+          changeTheme("None")
+       }
+       else if(e.target.value==="Dark")
+       {
+          changeTheme("Dark Theme")
+       }
+       else if(e.target.value==="Light")
+       {
+          changeTheme("Light Theme")
+       }
+    }
     return <>
         <div className='transparent-back'>
             <div className='theme-container'>
@@ -55,9 +86,9 @@ export default function Theme() {
                             <label>Select Font</label>
                             <select>
                                 <option defaultChecked disabled>Select</option>
-
-                                <option>Yes</option>
-                                <option>No</option>
+                                {style.map((a,index)=><option key={index}>{a}</option>)}
+                                {/* <option>Yes</option>
+                                <option>No</option> */}
                             </select>
                         </div>
                         <div>

@@ -16,7 +16,7 @@ router.use(cors())
 router.use(cookieParser());
 
 router.use(express.json());
-router.use(express.urlencoded({extended:true}))
+router.use(express.urlencoded({extended:false}))
 
 //multer storage
 let storage=new MulterGridfsStorage.GridFsStorage({
@@ -58,13 +58,39 @@ router.get("/",(req,res)=>{
     res.send("Hello World")
 })
 
+//sending theme style
+
+router.get("/theme",(req,res)=>{
+    try 
+    {
+        let style=["italic","normal","oblique"]
+        // res.send(JSON.stringify(style))
+        res.send(style)
+    } 
+    catch (error) 
+    {
+        res.send(error)
+    }
+})
+
+router.get("/logout",verifyToken,async (req,res)=>{
+    try 
+    { 
+        res.clearCookie("uid");
+        res.redirect("/login")
+    } 
+    catch (error) 
+    {
+        res.redirect("/login")
+    }
+})
 
 router.post("/register",async (req,res)=>{
+    //console.log(req.body);
     try 
     {
         // console.log(req.body);
         let {name,email,phone,profession,password,confirm_password}=req.body;
-        console.log(req.body);
         if(password===confirm_password)
         {
             let pass=await bcrypt.hash(password,10)
@@ -76,7 +102,7 @@ router.post("/register",async (req,res)=>{
                profession:profession,
                password:pass
             })
-            await doc1.save();
+            // await doc1.save();
             res.send("data received")
             
         }
