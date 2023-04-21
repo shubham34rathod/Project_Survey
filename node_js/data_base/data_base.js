@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 require('dotenv').config()
 
-mongoose.connect(process.env.Db_URL + process.env.Data_Base ,{useNewUrlParser: true})
+mongoose.connect(process.env.Db_URL + process.env.Data_Base)
 .then(()=>console.log("connected to database"))
 .catch(()=>console.log("connection error"))
 
@@ -26,8 +26,7 @@ let Schema2=new mongoose.Schema({
     startDate:{type:String},
     endDate:{type:String},
     otherCriteria:{type:String},
-    imageName:{type:String},
-    questions:{type: String}
+    imageName:{type:String}
 })
 
 let Model2=mongoose.model("survey_data",Schema2)

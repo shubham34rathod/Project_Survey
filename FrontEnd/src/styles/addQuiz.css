@@ -4,6 +4,8 @@
     position: fixed;
     bottom: 600px;
     left: 250px;
+    /* opacity:0.1; */
+   
     /* border: 1px solid; */
 }
 .s_parent1{
@@ -27,7 +29,7 @@
 .rec2{
     float:right;
     position: relative;
-    left: 800px;
+    left: 650px;
     bottom: 10px;
 }
 .arrow{
@@ -36,6 +38,15 @@
 }
 .create{
     font-size: 18px;
+}
+.theme_btn{
+    width: 107px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 8px;
+    background: #8A5DEF 0% 0% no-repeat padding-box;
+    border: 1px solid #8A5DEF;
+    color:#FFFFFF;
 }
 .preview{
     width: 107px;
@@ -62,6 +73,7 @@
     top: 220px;
     display: flex;
     background-color: #F4F8FD;
+    
 }
 .ul{
     margin-left: 10px;
@@ -75,7 +87,7 @@
 }
 .que_input{
     border: 1px solid #CCCCCC;
-    border-radius: 4px;
+    border-radius: 6px;
     height: 25px;
     margin-top: 5px;
     width:350px;
@@ -87,7 +99,8 @@
 }
 .label{
     font-size: 18px;
-    /* border: 1px solid; */
+    border: 1px solid #00000029;
+    border-radius: 6px;
     height: 20px;
     margin-left: 10px;
 }
@@ -113,4 +126,31 @@
     position: fixed;
     right: 300px;
     top: 230px;
+}
+.close_tag{
+    width: 10px;
+    position: fixed;
+    right: 300px;
+    top: 270px;
+}
+.select{
+    border: 1px solid #2A86C7;
+    border-radius: 4px;
+    height: 24px;
+    color: #2A86C7;
+}
+.float_box{
+    width: 180px;
+    height: 80px;
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 280px;
+    top:260px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #E3E3E3;
+    
 }

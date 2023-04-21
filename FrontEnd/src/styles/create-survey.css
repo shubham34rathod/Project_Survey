@@ -5,7 +5,10 @@
     color: aliceblue;
     border: none;
 }
-
+/* .sideB{
+    width: 100%;
+    margin-right: 80px;
+} */
 #cancel-btn button{
     background: transparent;
     color: #278DF1;
@@ -23,6 +26,14 @@
 letter-spacing: .072rem;
 color: #081838;
 }
+
+/* .container{
+    margin: 0px;
+} */
+
+/* .list-container{
+    width: 1320px;
+} */
 
 .form-container{
     display: flex;
