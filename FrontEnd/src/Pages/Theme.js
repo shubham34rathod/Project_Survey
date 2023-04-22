@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 // import '../styles/create-survey.css'
 import '../styles/theme.css'
 
-export default function Theme() 
+export default function Theme({showTheme}) 
 {
     let [tmp,changeTmp]=useState(false)
     let [style,updateStyle]=useState([])
@@ -40,7 +40,7 @@ export default function Theme()
             <div className='theme-container'>
                 <header className='list-header border-bot'>
                     <h3>Theme Settings</h3>
-                    <div id='close-icon'></div>
+                    <div onClick={()=>{showTheme()}} id='close-icon'></div>
                 </header>
                 <form className='theme-form'>
                     <div>

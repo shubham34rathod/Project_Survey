@@ -104,7 +104,9 @@
 
 #close-icon:hover{
     cursor: pointer;
-    text-decoration: underline;
+    border: .1rem solid black;
+    transition: transform .2s;
+    transform: scale(1.2);
 }
 
 .theme-btn{
@@ -118,3 +120,4 @@
     transition: transform .2s;
     transform: scale(1.2);
 }
+

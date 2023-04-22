@@ -54,14 +54,9 @@ function AddQuiz() {
         question: "Your name?",
         choices: "op1"
     }])
-    // const toggleTh=()=>{
-    //     setThemeToggle(false)
-    // }
-    // function PopUp() {
-    //     return <>
-    //         <Theme></Theme>
-    //     </>
-    // }
+    const showTheme=()=>{
+        setThemeToggle(false)
+    }
     //opacity: 0.1;
     const setQ=()=>{
         setQuestions(prevq=>([
@@ -76,6 +71,7 @@ function AddQuiz() {
     const navigate = useNavigate();
     console.log("render");
     return <>
+    <div className="add-q-container">
         <Header></Header>
         <Sidebar></Sidebar>
         
@@ -114,12 +110,12 @@ function AddQuiz() {
            <div style={{ position: "fixed", bottom: "100px", left: "500px" }}>
                 {themeToggle &&
                     <div className="popup">
-                        <Theme></Theme>
+                        <Theme showTheme={showTheme}></Theme>
                     </div>
                 }
             </div>
             
-            
+            </div>   
     </>
 }
 
