@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
 
 import '../styles/addQuiz.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 import Theme from "./Theme";
 import Question from "./Question";
@@ -32,7 +32,14 @@ import Question from "./Question";
 // }]
 
 
-function AddQuiz() {
+
+    
+function AddQuiz() 
+{
+    //receiving data from createSurvey
+    let location=useLocation();
+    // console.log(location.state);
+
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
     const [mergedQuestions, setMergedQuestion] = useState([])

@@ -26,7 +26,8 @@ let Schema2=new mongoose.Schema({
     startDate:{type:String},
     endDate:{type:String},
     otherCriteria:{type:String},
-    imageName:{type:String}
+    imageName:{type:String},
+    questions:{type:Array}
 })
 
 let Model2=mongoose.model("survey_data",Schema2)

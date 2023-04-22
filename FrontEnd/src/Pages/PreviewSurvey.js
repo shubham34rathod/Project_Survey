@@ -1,10 +1,41 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 
-export default function PreviewSurvey(){
+export default function PreviewSurvey()
+{
+    //receiving data ffrom createSurvey
+    // let location=useLocation();
+    // console.log(location.state);
+    
+
+    // async function fn()
+    // {
+    //     console.log("node");
+    //     console.log(location.state);
+    //     // console.log('not received');
+
+    //     //sending survey data to backend...............
+
+    //     await fetch("http://localhost:8000/survey_data",{
+    //         method:"POST",
+    //         headers:{
+    //             "content-type":"application/json"
+    //         },
+    //         body:JSON.stringify(location.state),
+    //     })
+    //     .then((data)=>data.json())
+    //     .then((responce)=>console.log(responce))
+    //     .catch(()=>console.log("uploading error"))
+
+    // }
+
+    
+
+    
+
     const navigate = useNavigate()
     return <>
     <div className='container'>
@@ -24,7 +55,9 @@ export default function PreviewSurvey(){
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn">
-                            <button>Save</button>
+                            <button 
+                            // onClick={fn}
+                                       >Save</button>
                         </div>
                 </div>
             </header>
