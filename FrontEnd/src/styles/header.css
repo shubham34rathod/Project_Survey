@@ -53,6 +53,9 @@
     padding: 0 .7rem;
     box-sizing: border-box;
     min-height: 100%;
+  position: fixed;
+  z-index: 1;
+ 
 }
 
 .sidenav div {
