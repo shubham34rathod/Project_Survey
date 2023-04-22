@@ -1,5 +1,16 @@
+.add-q-container{
+    position: relative;
+}
+
 .width{
     width: fit-content;
+}
+.add-q{
+    font-size: 1.5rem;
+    margin-left: .3rem;
+    color: red;
+    padding: .1rem;
+    text-align: center;
 }
 .g_parent{
     width: 70%;
@@ -181,4 +192,7 @@
     cursor: pointer;
     transition: transform .2s;
     transform: scale(1.2);
+}
+.add-q:hover{
+    cursor: pointer;
 }

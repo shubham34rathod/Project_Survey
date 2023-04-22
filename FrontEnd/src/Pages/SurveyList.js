@@ -5,6 +5,7 @@ import '../styles/surveylist.css'
 import Survey from './Survey'
 import '../styles/header.css'
 import { useNavigate } from "react-router-dom";
+import Header from './Header'
 const config = require('../config/config')
 
 const user = [{
@@ -44,6 +45,7 @@ export default function SurveyList() {
 
     return <>
         <div className='container'>
+            <Header/>
             <Sidebar />
             <div className='list-container'>
                 <header className='list-header'>
