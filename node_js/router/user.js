@@ -162,7 +162,7 @@ router.post("/survey_data",verifyToken,upload.single("image"),(req,res)=>{
             otherCriteria:otherCriteria,
             imageName:imageName
         })
-        console.log(doc2);
+        // console.log(doc2);
         doc2.save()
         .then(()=>{
             res.status(200).send({result: doc2})

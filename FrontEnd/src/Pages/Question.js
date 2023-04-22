@@ -22,29 +22,31 @@ export default function Question({data}){
                         <li>{data.qno}</li>
                     </ul>
                 </div>
-                <div className="que">
-                    <div>
-                        <label for="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                        <input type="text" id="que"  name="que" value={ data.question} className="que_input" placeholder="Enter Question" />
-                    </div>
-                    <div className="options">
-                        <div className="que_box">
-                            <input type="radio" name="option" id="option" />
-                            {/* <label for="option" className="label">Option1</label> */}
-                            <input type="text" value={data.choices}  className="label" />
-                        </div>
-                        <div className="que_box">
-                            <input type="radio" name="option" id="option" />
-                            {/* <label for="option" className="label">Option1</label> */}
-                            <input type="text" value={data.choices}  className="label" />
-                        </div>
-                        <div className="que_box">
-                            <input type="radio" name="option" id="option" />
-                            {/* <label for="option" className="label">Option1</label> */}
-                            <input type="text" value={data.choices}  className="label" />
-                        </div>
-                        
-                    </div>
+                <div className="que">     
+                   <form method="POST">
+                        <div>
+                             <label for="que" style={{ color: "#2D2D2E" }}>Question</label><br />
+                             <input type="text" id="que"  name="que" value={ data.question} className="que_input" placeholder="Enter Question" />
+                         </div>
+                         <div className="options">
+                             <div className="que_box">
+                                 <input type="radio" name="option" id="option" />
+                                 {/* <label for="option" className="label">Option1</label> */}
+                                 <input type="text" value={data.choices}  className="label" />
+                             </div>
+                             <div className="que_box">
+                                 <input type="radio" name="option" id="option" />
+                                 {/* <label for="option" className="label">Option1</label> */}
+                                 <input type="text" value={data.choices}  className="label" />
+                             </div>
+                             <div className="que_box">
+                                 <input type="radio" name="option" id="option" />
+                                 {/* <label for="option" className="label">Option1</label> */}
+                                 <input type="text" value={data.choices}  className="label" />
+                             </div>
+                             
+                         </div>
+                   </form>
                 </div>
                 <div className="s_parent3">
                     <img src={settings} alt="settings" className="settings" onClick={()=>{setToggle(true)}} />

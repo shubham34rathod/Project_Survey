@@ -10,7 +10,26 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function CreateSurvey() {
+export default function CreateSurvey() 
+{
+    const [surveyData,updateData]=useState({
+        name:"",
+        description:"",
+        typeOfSurvey:"",
+        startDate:"",
+        endDate:"",
+        otherCriteria:"",
+        imageName:""
+    })
+
+    function onChange(e,prop)
+    {
+        updateData((data)=>({
+            ...data,
+            [prop]:e.target.value
+        }))
+    }
+
     const navigate = useNavigate()
     const [img, setImg] = useState({
         img: "",
@@ -21,6 +40,10 @@ export default function CreateSurvey() {
             img: URL.createObjectURL(e.target.files[0]),
             name: e.target.files[0].name
         });
+        updateData((img_name)=>({
+            ...img_name,
+            imageName:e.target.files[0].name
+        }))
     }
     function removeImage() {
         setImg({
@@ -29,7 +52,13 @@ export default function CreateSurvey() {
         })
     }
 
-    return <>
+    function fn()
+    {
+        // console.log(surveyData);
+    }
+
+    return  <>
+    {/* <FirstContext></FirstContext> */}
     <Header></Header>
         <div className='container' style={{margin:"0px",padding:"0px"}}>
             <Sidebar />
@@ -44,29 +73,29 @@ export default function CreateSurvey() {
                         </div>
                         <div id="next-btn">
                             <button onClick={() => {
-                                navigate('/list-survey/create/questions')
-                            }}>Next</button>
+                                navigate('/list-survey/create/questions',{state:surveyData})   //sending data to AddQuiz                             
+                            }} onClickCapture={fn}>Next</button>
                         </div>
                     </div>
                 </header>
                 <div className="form-container">
                     <div className="form-left">
-                        <form>
+                        <form method="POST">
                             <div>
                                 <label>Name</label>
-                                <input type="text" id="name" name="name" />
+                                <input type="text" id="name" name="name" value={surveyData.name} onChange={(e)=>onChange(e,"name")}/>
                             </div>
                             <div>
                                 <label>Description</label>
-                                <input type="text" id="description" name="description" />
+                                <input type="text" id="description" name="description" value={surveyData.description} onChange={(e)=>onChange(e,"description")}/>
                             </div>
                             <div>
                                 <label>Type of survey</label>
-                                <select id="select" >
+                                <select id="select" name="type" value={surveyData.typeOfSurvey} onChange={(e)=>onChange(e,"typeOfSurvey")}>
                                     <option defaultChecked disabled>Select</option>
-
-                                    <option>Type-1</option>
-                                    <option>Type-2</option>
+                                    
+                                    <option>Video</option>
+                                    <option>Image</option>
                                 </select>
                             </div>
                         </form>
@@ -76,23 +105,23 @@ export default function CreateSurvey() {
                             <div className="util">
                                 <div>
                                     <label>Start Date</label>
-                                    <input type="date" id="startDate" name="startDate" />
+                                    <input type="date" id="startDate" name="startDate" value={surveyData.startDate} onChange={(e)=>onChange(e,"startDate")}/>
                                 </div>
                                 <div>
                                     <label>End Date</label>
-                                    <input type="date" id="endDate" name="endDate" />
+                                    <input type="date" id="endDate" name="endDate" value={surveyData.endDate} onChange={(e)=>onChange(e,"endDate")}/>
                                 </div>
                             </div>
                             <div>
                                 <label>Other Criteria</label>
-                                <input type="text" id="otherCriteria" name="otherCriteria" />
+                                <input type="text" id="otherCriteria" name="otherCriteria" value={surveyData.otherCriteria} onChange={(e)=>onChange(e,"otherCriteria")}/>
                             </div>
                             <div>
                                 <label>Upload Image</label>
 
 
                                 {!img.img && <div className="image-upload-wrap">
-                                    <input className="file-upload-input" type='file' onChange={handleChange} accept="image/*" />
+                                    <input className="file-upload-input" type='file' onChange={handleChange}  accept="image/*" />
                                     <div className="drag-text">
                                         <h3>Click here to select Image</h3>
                                     </div>
