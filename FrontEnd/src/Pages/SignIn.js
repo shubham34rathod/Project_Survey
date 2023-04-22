@@ -16,16 +16,16 @@ function SignIn()
 
         //sendind data to backend........
 
-        await fetch("http://localhost:8000/login",{
-            method:"POST",
-            headers:{
-                "content-type":"application/json"
-            },
-            body:JSON.stringify(signIn_data),
-        })
-        .then((data)=>data.json())
-        .then((responce)=>console.log(responce))
-        .catch(()=>console.log("uploading error"))
+        // await fetch("http://localhost:8000/login",{
+        //     method:"POST",
+        //     headers:{
+        //         "content-type":"application/json"
+        //     },
+        //     body:JSON.stringify(signIn_data),
+        // })
+        // .then((data)=>data.json())
+        // .then((responce)=>console.log(responce))
+        // .catch(()=>console.log("uploading error"))
 
         updateData({
             email:"",

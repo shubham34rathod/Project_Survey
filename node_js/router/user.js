@@ -150,42 +150,43 @@ router.post("/login",async (req,res)=>{
 
 router.post("/survey_data",upload.single("image"),(req,res)=>{
     
-    console.log(req.body);    
-    // try 
-    // {
+    // console.log(req.body);    
+    try 
+    {
+        // console.log(req.body);  
        
-    //     let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions}=req.body;
-    //     let doc2=new Model2({
-    //         name:name,
-    //         description:description,
-    //         typeOfSurvey:typeOfSurvey,
-    //         startDate:startDate,
-    //         endDate:endDate,
-    //         otherCriteria:otherCriteria,
-    //         imageName:imageName,
-    //         questions:questions
-    //     })
-    //     // console.log(doc2);
-    //     doc2.save()
-    //     .then(()=>{
-    //         res.status(200).send({result: doc2})
-    //     })
-    //     .catch(err=> res.status(500).send({message: "something went wrong"}))
-    // } 
-    // catch (error) 
-    // {
-    //     res.send(error)
-    // }
+        let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions}=req.body;
+        let doc2=new Model2({
+            name:name,
+            description:description,
+            typeOfSurvey:typeOfSurvey,
+            startDate:startDate,
+            endDate:endDate,
+            otherCriteria:otherCriteria,
+            imageName:imageName,
+            questions:questions
+        })
+        // console.log(doc2);
+        doc2.save()
+        .then(()=>{
+            res.status(200).send({result: doc2})
+        })
+        .catch(err=> res.status(500).send({message: "something went wrong"}))
+    } 
+    catch (error) 
+    {
+        res.send(error)
+    }
 })
 
-router.get('/get-surveys', verifyToken, async(req, res)=>{
+router.get('/get-surveys', async(req, res)=>{
      await Model2.find()
     .then((surveys)=>{
         if(!surveys){
             res.status(404).sendStatus({message: "No surveys are available"})
         }
         else{
-            res.status(200).send({result: surveys})
+            res.status(200).send(surveys)
         }
     })
     .catch(err=>{
@@ -194,5 +195,14 @@ router.get('/get-surveys', verifyToken, async(req, res)=>{
 
     
 })
+
+
+
+router.post('/delete_survey',async (req,res)=>{
+    console.log(req.body._id);
+
+    await Model2.findByIdAndDelete(req.body._id)
+})
+
 
 module.exports=router

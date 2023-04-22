@@ -94,8 +94,8 @@ export default function CreateSurvey()
                                 <select id="select" name="type" value={surveyData.typeOfSurvey} onChange={(e)=>onChange(e,"typeOfSurvey")}>
                                     <option defaultChecked disabled>Select</option>
                                     
-                                    <option>Video</option>
-                                    <option>Image</option>
+                                    <option value="video">Video</option>
+                                    <option value="image">Image</option>
                                 </select>
                             </div>
                         </form>
@@ -121,7 +121,7 @@ export default function CreateSurvey()
 
 
                                 {!img.img && <div className="image-upload-wrap">
-                                    <input className="file-upload-input" type='file' onChange={handleChange}  accept="image/*" />
+                                    <input className="file-upload-input" type='file' onChange={handleChange}  accept="image/*" name="image"/>
                                     <div className="drag-text">
                                         <h3>Click here to select Image</h3>
                                     </div>
