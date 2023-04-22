@@ -98,7 +98,7 @@ function AddQuiz()
                             navigate('/list-survey/create/questions/preview')
                         }} className="preview">Preview</button>
                         <button onClick={() => {
-                            navigate('/list-survey/create/questions/preview',{state:location.state}) //sending data to previewSurvey
+                            navigate('/list-survey/create/questions/preview') //sending data to previewSurvey
                         }} className="save">Save</button>
                     </div>
 
