@@ -18,21 +18,31 @@ export default function PreviewSurvey()
     //     console.log("node");
     //     console.log(location.state);
     //     // console.log('not received');
+    console.log(location.state);
+    
 
-    //     //sending survey data to backend...............
+    async function fn()
+    {
+        console.log("node");
+        console.log(location.state);
+        // console.log('not received');
 
-    //     await fetch("http://localhost:8000/survey_data",{
-    //         method:"POST",
-    //         headers:{
-    //             "content-type":"application/json"
-    //         },
-    //         body:JSON.stringify(location.state),
-    //     })
-    //     .then((data)=>data.json())
-    //     .then((responce)=>console.log(responce))
-    //     .catch(()=>console.log("uploading error"))
+        //sending survey data to backend...............
 
-    // }
+        await fetch("http://localhost:8000/survey_data",{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify(location.state),
+        })
+        .then((data)=>data.json())
+        .then((responce)=>console.log(responce))
+        .catch(()=>console.log("uploading error"))
+
+        navigate('/list-survey')
+
+    }
 
     
 
@@ -69,7 +79,7 @@ export default function PreviewSurvey()
                         </div>
                         <div id="save-btn " >
                             <button className='dark-themebutton'
-                            // onClick={fn}
+                            onClick={fn}
                                        >Save</button>
                         </div>
                 </div>

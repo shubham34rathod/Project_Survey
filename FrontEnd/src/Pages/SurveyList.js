@@ -4,7 +4,7 @@ import '../styles/surveylist.css'
 //import axios from 'axios'
 import Survey from './Survey'
 import '../styles/header.css'
-import { useNavigate } from "react-router-dom";
+import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import Header from './Header'
 const config = require('../config/config')
 
@@ -41,8 +41,19 @@ export default function SurveyList() {
     //         setData(data)
     //     })
     // })
-    
 
+    const [data,setData]=useState([]);
+
+    useEffect(()=>{
+            fetch("http://localhost:8000/get-surveys")
+           .then((data)=>data.json())
+           .then((responce)=>{
+                setData(responce)
+                // console.log(responce[0])
+           })
+           .catch(()=>console.log("servey fetching error"))
+    },[])
+    
     return <>
         <div className='container'>
             <Header/>
@@ -76,7 +87,7 @@ export default function SurveyList() {
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            {user && user.map(item=>{
+                            {data && data.map(item=>{
                                 return <Survey data={item} key={item.id}/>
                             })}
                         </tbody>
