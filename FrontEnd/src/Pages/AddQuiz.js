@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
@@ -33,43 +33,38 @@ import Question from "./Question";
 
 
 function AddQuiz() {
+    const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
+    const [mergedQuestions, setMergedQuestion] = useState([])
     const [questions, setQuestions] = useState([{
         qno: 1,
-        question: "Your name?",
-        choices: "op1"
-    },
-    {
-        qno: 1,
-        question: "Your name?",
-        choices: "op1"
-    },
-    {
-        qno: 1,
-        question: "Your name?",
-        choices: "op1"
-    },
-    {
-        qno: 1,
-        question: "Your name?",
-        choices: "op1"
+        question: "",
+        choices: ""
     }])
     const showTheme=()=>{
         setThemeToggle(false)
     }
     //opacity: 0.1;
-    const setQ=()=>{
+    const addQuestion=()=>{
         setQuestions(prevq=>([
             ...prevq,
             {
-                qno: 1,
-                question: "Your name?",
-                choices: "op1"
+                qno: questions.length+1,
+                question: "",
+                choices: ""
             }
         ]))
+        ref.current.sendQ();
     }
+    const mergeQuestion=(question)=>{
+        setMergedQuestion(prevQs=>([
+            ...prevQs,
+            {...question}
+        ]))
+    }
+    console.log(mergedQuestions);
     const navigate = useNavigate();
-    console.log("render");
+    
     return <>
     <div className="add-q-container">
         <Header></Header>
@@ -92,7 +87,7 @@ function AddQuiz() {
                             navigate('/list-survey/create/questions/preview')
                         }} className="preview">Preview</button>
                         <button onClick={() => {
-                            navigate('/list-survey/create/questions/preview')
+                            ref.current.sendQ();
                         }} className="save">Save</button>
                     </div>
 
@@ -100,10 +95,10 @@ function AddQuiz() {
             </div>
             </div>
             
-                {questions.map(item => {
-                    return <Question data={item} />
+                {questions.map((item,i) => {
+                    return <Question data={item} mergeQuestion={mergeQuestion} ref = {ref}  key={i} />
                 })}
-                <button onClick={setQ} className="add_que">Add question</button>
+                <button onClick={addQuestion} className="add_que">Add question</button>
             
            </div>
             
