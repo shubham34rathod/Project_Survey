@@ -38,7 +38,6 @@ function AddQuiz()
 {
     //receiving data from createSurvey
     let location=useLocation();
-    // console.log(location.state);
 
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
@@ -68,8 +67,17 @@ function AddQuiz()
             ...prevQs,
             {...question}
         ]))
+       
     }
-    console.log(mergedQuestions);
+    function mergeSurveyInfoAndQ(){
+        location.state = {
+            ...location.state,
+            questions: mergedQuestions
+        }
+    }
+    console.log(location.state);
+    mergeSurveyInfoAndQ()
+    
     const navigate = useNavigate();
     
     return <>
