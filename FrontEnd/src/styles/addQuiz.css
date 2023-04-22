@@ -1,3 +1,6 @@
+.width{
+    width: fit-content;
+}
 .g_parent{
     width: 70%;
     float: right;
@@ -7,6 +10,13 @@
     /* opacity:0.1; */
    
     /* border: 1px solid; */
+}
+
+.create-question{
+    position: absolute;
+    top: 5rem;
+    left: 11rem;
+
 }
 .s_parent1{
     width: 100%;
@@ -66,13 +76,14 @@
     border-radius: 5px;
 }
 .s_parent2{
-    width: 70%;
-    height: 200px;
+    width: 61rem;
     /* border: 1px solid; */
-    position: fixed;
-    top: 220px;
+    position: relative;
     display: flex;
+    justify-content: space-between;
     background-color: #F4F8FD;
+    margin-bottom: 1rem;
+    height: fit-content;
     
 }
 .ul{
@@ -84,6 +95,11 @@
 .que{
     margin: 10px;
     font-size: 14px;
+    margin-right: 34rem;
+}
+.s_parent3{
+    width: fit-content;
+    position: relative;
 }
 .que_input{
     border: 1px solid #CCCCCC;
@@ -122,16 +138,17 @@
     border-radius: 5px;
 }
 .settings{
+    top: 0;
+    right: 0;
     width: 20px;
-    position: fixed;
-    right: 300px;
-    top: 230px;
+    margin: 1.5rem 1.5rem 0 0;
 }
 .close_tag{
+    position: absolute;
     width: 10px;
-    position: fixed;
-    right: 300px;
-    top: 270px;
+    float: right;
+    right: 1rem;
+    top: 1rem;
 }
 .select{
     border: 1px solid #2A86C7;
@@ -140,17 +157,28 @@
     color: #2A86C7;
 }
 .float_box{
+    position: absolute;
     width: 180px;
     height: 80px;
     border: 1px solid;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: fixed;
-    right: 280px;
-    top:260px;
+    z-index: 3;
+    top: 0;
+    right: .3rem;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #E3E3E3;
     
+}
+.float_box>div{
+    margin: .5rem;
+}
+
+
+.close_tag:hover{
+    cursor: pointer;
+    transition: transform .2s;
+    transform: scale(1.2);
 }

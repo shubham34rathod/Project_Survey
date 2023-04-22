@@ -6,6 +6,7 @@ import Register from '../Pages/Register';
 import SurveyList from '../Pages/SurveyList';
 import PreviewSurvey from '../Pages/PreviewSurvey';
 import AddQuiz from '../Pages/AddQuiz';
+import Question from '../Pages/Question';
 
 export default function AppRouter(){
     return<>
@@ -20,5 +21,7 @@ export default function AppRouter(){
                 <Route path='*' element={<SignIn/>}/>
             </Routes>
         </BrowserRouter>
+      
     </>
+    
 }

@@ -5,7 +5,7 @@
 
 .transparent-back{
     position: absolute;
-    z-index: -9;
+    z-index: 12;
     background-color: rgb(43, 54, 65,.4);
     width: 100vw;
     height: 100vh;
