@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
@@ -6,11 +6,13 @@ import { useNavigate,useLocation } from "react-router-dom";
 
 export default function PreviewSurvey()
 {
+    const [showqQuestions, setShowQuestions] = useState([])
     //receiving data ffrom createSurvey
-    // let location=useLocation();
-    // console.log(location.state);
-    
-
+    let location=useLocation();
+    //console.log(location.state.questions);
+    useEffect(()=>{
+        setShowQuestions(location.state.questions)
+    },[])
     // async function fn()
     // {
     //     console.log("node");
@@ -38,9 +40,20 @@ export default function PreviewSurvey()
 
     const navigate = useNavigate()
     return <>
-    <div className='container'>
-        <Sidebar />
-        <div className='list-container'>
+    <div className='container dark-theme'>
+        {/* <Sidebar/> */}
+        <div className='sidenav dark-themesidenav'>
+                <div onClick={()=>{
+                    navigate('/list-survey')
+                }} id='home'></div>
+                <div onClick={()=>{
+                    navigate('/list-survey/create')
+                }} id='create'></div>
+                <div onClick={()=>{
+                    navigate('/register')
+                }} id='list'></div>
+            </div>
+        <div className='list-container '>
             <header className='list-header '>
                 <div id='searchform'>
                     <button onClick={()=>{
@@ -49,13 +62,13 @@ export default function PreviewSurvey()
                         <h5>Preview</h5>
                 </div>
                 <div className='util'>
-                <div id="close-prev-btn">
-                            <button onClick={()=>{
+                <div id="close-prev-btn " >
+                            <button className='dark-themebutton'  onClick={()=>{
                                 navigate('/list-survey/create/questions')
                             }}>Close Preview</button>
                         </div>
-                        <div id="save-btn">
-                            <button 
+                        <div id="save-btn " >
+                            <button className='dark-themebutton'
                             // onClick={fn}
                                        >Save</button>
                         </div>
@@ -76,23 +89,33 @@ export default function PreviewSurvey()
                     </div>
                     
                </div> */}
-               <div className='question'>
-                    <h4>Question 1</h4>
+             {showqQuestions.map(item=>{
+                return<>
+                  <div className='question'>
+                    <h4 className='dark-theme' >{`Question ${item.qno}`}</h4>
                     <div className='prev-form-container'>
                         <form>
-                            <label htmlFor='question'>Question i'll be here</label>
+                            <label className='dark-theme'  htmlFor='question'>{item.question}</label>
                             <div id='question' className='radio-container'>
-                                <input id='opt-1' type="radio" value={1} name='q'/>
-                                <label htmlFor='op1-1'>Option 1</label>
-                                <input id='opt-2' type="radio" value={2} name='q' />
-                                <label htmlFor='op1-2'>Option 2</label>
-                                <input id='opt-3' type="radio" value={3} name='q' />
-                                <label htmlFor='op1-3'>Option 3</label>
+                                <div>
+                                <input className='dark-theme' id='opt-1' type="radio" value={1} name='q' disabled/>
+                                <label className='dark-theme' htmlFor='op1-1'>{Object.keys(item.choices)[0]}</label>
+                                </div>
+                                <div>
+                                <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
+                                <label className='dark-theme' htmlFor='op1-2'>{Object.keys(item.choices)[1]}</label>
+                                </div>
+                                
+                                {/* <input id='opt-3' type="radio" value={3} name='q' />
+                                <label htmlFor='op1-3'>Option 3</label> */}
                             </div>
                         </form>
                     </div>
                     
                </div>
+                </>
+             })}  
+             
             </div>
             
         </div>

@@ -99,7 +99,7 @@ export default function Theme({showTheme})
                 </form>
                 <div className="util theme-btn">
                     <div id="cancel-btn">
-                        <button>Cancel</button>
+                        <button onClick={()=>{showTheme()}}>Cancel</button>
                     </div>
                     <div id="next-btn">
                         <button>Save</button>

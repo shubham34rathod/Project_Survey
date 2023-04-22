@@ -38,7 +38,7 @@ function AddQuiz()
 {
     //receiving data from createSurvey
     let location=useLocation();
-
+    const mergerdData = location.state;
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
     const [mergedQuestions, setMergedQuestion] = useState([])
@@ -99,7 +99,7 @@ function AddQuiz()
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
-                            navigate('/list-survey/create/questions/preview')
+                            navigate('/list-survey/create/questions/preview',{state: mergerdData})
                         }} className="preview">Preview</button>
                         <button onClick={() => {
                             ref.current.sendQ();

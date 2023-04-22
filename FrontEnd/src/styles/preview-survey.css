@@ -33,7 +33,7 @@
 
 }
 
-#save-btn button{
+#save-btn > button{
     height: 100%;
     margin: 0;
     border: none;
@@ -69,10 +69,10 @@
     margin-top: 2rem ;
 }
 
-.prev-form-container form > label{
+.prev-form-container form > label {
     display: block;
     color: #090909;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .radio-container{
@@ -83,12 +83,14 @@
     width: 20%;
 }
 
+
+
 .radio-container input{
     width: 1rem;
 }
 
 .radio-container label{
-    font-size: .8rem;
+    font-size: 1.5rem;
 }
 
 #save-btn:hover, #close-prev-btn:hover{
@@ -102,3 +104,23 @@
     cursor: pointer;
 }
 
+.dark-theme{
+    background-color:#5f5d5d !important; 
+    color: white !important;
+
+}
+
+
+.dark-themesidenav{
+    background-color: #201f1f !important;
+}
+
+.dark-themebutton {
+    background-color: #201f1f !important;
+    border: .1rem solid white !important;
+    color: white !important;
+    height: 100%;
+    border-radius: .3rem;
+    width: 6rem;
+    
+}
