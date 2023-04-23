@@ -13,14 +13,16 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
     const [choice, setChoice] = useState({})
     const [question, setQuestion] = useState({
         qno: data.qno,
-        question: "",
-        choices: {}
+        question: data.question,
+        choices: data.choices
     })
+    //console.log(question);
     const getQuestion = (e) => {
         setQuestion(prevQuestion => ({
             ...prevQuestion,
             question: `${e.target.value}`
         }))
+       // console.log(e.target.value);
     }
 
     const getChoices = () => {
@@ -34,6 +36,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
     }
     const getChoice = (e) => {
         setChoice({ [e.target.value]: false })
+       // console.log(e.target.value);
     }
     return <>
         <div className="s_parent2" >
@@ -45,18 +48,18 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
             <div className="que">
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                    <input type="text" id="que" name="que" onChange={getQuestion} value={question.question} className="que_input" placeholder="Enter Question" />
+                    <input type="text"  id="que" name="que" onChange={getQuestion} value={question.question} className="que_input" placeholder="Enter Question" />
                 </div>
                 <div className="options">
                     <div className="que_box">
                         <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
                         {/* <label htmlFor="option" className="label">Option1</label> */}
-                        <input type="text" onChange={getChoice}  className="label" /><span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
+                        <input type="text" value={Object.keys(question.choices)[0]} onChange={getChoice}  className="label" /><span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
                     </div>
                     <div className="que_box">
                         <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
                         {/* <label htmlFor="option" className="label">Option1</label> */}
-                        <input type="text" onChange={getChoice} className="label" /><span hidden={!(Object.keys(choice)[0] && true)} onClick={getChoices} className="add-q">+</span>
+                        <input type="text" value={Object.keys(question.choices)[1]} onChange={getChoice} className="label" /><span hidden={!(Object.keys(choice)[0] && true)} onClick={getChoices} className="add-q">+</span>
                     </div>
 
                 </div>

@@ -18,7 +18,7 @@ export default function PreviewSurvey()
     //     console.log("node");
     //     console.log(location.state);
     //     // console.log('not received');
-    console.log(location.state);
+    //console.log(location.state);
     
 
     async function fn()
@@ -74,7 +74,7 @@ export default function PreviewSurvey()
                 <div className='util'>
                 <div id="close-prev-btn " >
                             <button className='dark-themebutton'  onClick={()=>{
-                                navigate('/list-survey/create/questions')
+                                navigate('/list-survey/create/questions',{state: location.state})
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn " >
