@@ -86,75 +86,78 @@ router.get("/logout",verifyToken,async (req,res)=>{
 })
 
 router.post("/register",async (req,res)=>{
-    console.log(req.body);
-    // try 
-    // {
-    //     // console.log(req.body);
-    //     let {name,email,phone,profession,password,confirm_password}=req.body;
-    //     if(password===confirm_password)
-    //     {
-    //         let pass=await bcrypt.hash(password,10)
-    //         console.log(pass);
-    //         let doc1=await new Model1({
-    //            name:name,
-    //            email:email,
-    //            phone:phone,
-    //            profession:profession,
-    //            password:pass
-    //         })
-    //         // await doc1.save();
-    //         res.send("data received")
-            
-    //     }
-    //     else
-    //     {
-    //         res.send("password does not match")
-    //     }
-    // } 
-    // catch (error) 
-    // {
-    //     res.send(error)
-    // }
+    // console.log(req.body);
+    try 
+    {
+        // console.log(req.body);
+        let {name,email,phone,profession,password}=req.body;
+        
+            let pass=await bcrypt.hash(password,10)
+            console.log(pass);
+            let doc1=await new Model1({
+               name:name,
+               email:email,
+               phone:phone,
+               profession:profession,
+               password:pass
+            })
+            await doc1.save();
+            res.send("data received")            
+    } 
+    catch (error) 
+    {
+        res.send(error)
+    }
 })
 
 router.post("/login",async (req,res)=>{
-    // try 
-    // {
-    //     let {email,password}=req.body;
-    //     let data=await Model1.findOne({email:email})
-    //     if(data)
-    //     {
-    //         let match=await bcrypt.compare(password,data.password)
-    //         if(match)
-    //         {
-    //             let token=await jwt.sign({use:email},process.env.secret_key)
-    //             await res.cookie("uid",token)
-    //             res.send("login successfully")
-    //         }
-    //         else
-    //         {
-    //             res.send("incorrect password")
-    //         }
-    //     }
-    //     else
-    //     {
-    //         res.send("not registered")
-    //     }
+    try 
+    {
+        let {email,password}=req.body;
+        let data=await Model1.findOne({email:email})
+        if(data)
+        {
+            let match=await bcrypt.compare(password,data.password)
+            if(match)
+            {
+                const token=await jwt.sign({use:email},process.env.secret_key)
+
+                // res.cookie("react",token,{
+                //     expires:new Date(Date.now()+90 * 24*60*60*1000),
+                //     // secure:true,
+                //     domain:"http://localhost:3000",
+                //     httpOnly:true
+                // })
+
+                res.json(token)
+
+            }
+            else
+            {
+                res.json('incorrect password')
+            }
+        }
+        else
+        {
+            res.json("not registered")
+        }
       
-    // } 
-    // catch (error) 
-    // {
-    //     res.send(error)
-    // }
+    } 
+    catch (error) 
+    {
+        res.send(error)
+    }
 })
 
-router.post("/survey_data",upload.single("image"),(req,res)=>{
+router.post("/survey_data", upload.single("image"),(req,res)=>{
     
     // console.log(req.body);    
     try 
     {
         // console.log(req.body);  
-       
+        let Boolean=req.cookies.uid
+        console.log(Boolean);
+
         let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions}=req.body;
         let doc2=new Model2({
             name:name,
@@ -198,9 +201,8 @@ router.get('/get-surveys', async(req, res)=>{
 
 
 
-router.post('/delete_survey',async (req,res)=>{
+router.post('/delete_survey', async (req,res)=>{
     console.log(req.body._id);
-
     await Model2.findByIdAndDelete(req.body._id)
 })
 

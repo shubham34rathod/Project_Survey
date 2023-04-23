@@ -22,6 +22,7 @@ async function fn()
     .then((responce)=>console.log(responce))
     .catch(()=>console.log("uploading error"))
 }
+
     return <>
         <tr>
             <td>{name}</td>

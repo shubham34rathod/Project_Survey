@@ -1,9 +1,13 @@
 import React,{useState} from "react";
 import "../styles/signIn.css"
+import Cookies from'universal-cookie'
+import jwt from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
 
 function SignIn()
 {
+    const cookies=new Cookies()
+
     let [signIn_data,updateData]=useState({
         email:"",
         password:""
@@ -14,18 +18,25 @@ function SignIn()
         e.preventDefault();
         console.log(signIn_data);
 
-        //sendind data to backend........
+        // sendind data to backend........
 
-        // await fetch("http://localhost:8000/login",{
-        //     method:"POST",
-        //     headers:{
-        //         "content-type":"application/json"
-        //     },
-        //     body:JSON.stringify(signIn_data),
-        // })
-        // .then((data)=>data.json())
-        // .then((responce)=>console.log(responce))
-        // .catch(()=>console.log("uploading error"))
+        await fetch("http://localhost:8000/login",{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify(signIn_data),
+        })
+        .then((data)=>data.json())
+        .then((responce)=>{
+            console.log(responce)
+
+            cookies.set("uid",responce,{
+                expires:new Date(Date.now()+90 * 24*60*60*1000)
+            })
+            // localStorage.setItem('token', responce); 
+        })
+        .catch(()=>console.log("uploading error"))
 
         updateData({
             email:"",
