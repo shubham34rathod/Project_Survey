@@ -37,20 +37,34 @@ import Question from "./Question";
 function AddQuiz() 
 {
     //receiving data from createSurvey
-    let location=useLocation();
-    const mergerdData = location.state;
+    const location=useLocation();
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
+    
     const [mergedQuestions, setMergedQuestion] = useState([])
-    const [questions, setQuestions] = useState([{
-        qno: 1,
-        question: "",
-        choices: ""
-    }])
+    const [questions, setQuestions] = useState(initialData())
     const showTheme=()=>{
         setThemeToggle(false)
     }
+    
+    //console.log(location.state);
     //opacity: 0.1;
+    
+    function initialData(){
+        if(location.state.dataFromSurvey === undefined || !location.state.dataFromSurvey.questions.length ){
+            
+            return [{
+                    qno: 1,
+                    question: "",
+                choices: {}
+            }]
+        }
+            else{
+                
+                return [...location.state.dataFromSurvey.questions]
+            }
+        
+    }
     const addQuestion=()=>{
         setQuestions(prevq=>([
             ...prevq,
@@ -62,18 +76,23 @@ function AddQuiz()
         ]))
         ref.current.sendQ();
     }
-    const mergeQuestion=(question)=>{
+    const mergeQuestion=(questionFromQ)=>{
         setMergedQuestion(prevQs=>([
             ...prevQs,
-            {...question}
+            {...questionFromQ}
         ]))
-       
+        location.state.dataFromSurvey.questions = [...mergedQuestions]
+        location.state.dataFromSurvey.questions = [...mergedQuestions]
     }
+   
+    
+    console.log(location.state);
     function mergeSurveyInfoAndQ(){
         location.state = {
             ...location.state,
-            questions: mergedQuestions
+            questions: [...mergedQuestions]
         }
+        
     }
     // console.log(location.state);
     mergeSurveyInfoAndQ()

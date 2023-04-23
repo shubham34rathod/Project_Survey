@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/survey.css'
+import { useNavigate } from 'react-router-dom';
 export default function Survey({data}) {
+    const navigate = useNavigate()
 const {name, description, typeOfSurvey, startDate, endDate} = data
 
 async function fn()
@@ -20,6 +22,7 @@ async function fn()
     .then((responce)=>console.log(responce))
     .catch(()=>console.log("uploading error"))
 }
+
     return <>
         <tr>
             <td>{name}</td>
@@ -29,7 +32,10 @@ async function fn()
             <td>{endDate}</td>
             <td>
                 <div className='action'>
-                    <div id='edit'></div>
+                    <div onClick={()=>{
+                        
+                        navigate('/list-survey/create/questions',{state: {dataFromSurvey: data}})
+                    }} id='edit'></div>
                     <div id='delete' onClick={fn}></div>
                 </div>
             </td>

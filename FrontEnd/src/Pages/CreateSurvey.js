@@ -93,9 +93,9 @@ export default function CreateSurvey()
                                 <label>Type of survey</label>
                                 <select id="select" name="type" value={surveyData.typeOfSurvey} onChange={(e)=>onChange(e,"typeOfSurvey")}>
                                     <option defaultChecked disabled>Select</option>
-                                    
-                                    <option value="video">Video</option>
-                                    <option value="image">Image</option>
+                                    <option>None</option>
+                                    <option>Video</option>
+                                    <option>Image</option>
                                 </select>
                             </div>
                         </form>
