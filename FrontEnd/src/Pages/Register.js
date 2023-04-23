@@ -1,9 +1,12 @@
 import React,{useState} from "react";
 import "../styles/register.css"
 import { useNavigate } from "react-router-dom";
+// import Cookies from 'universal-cookie'
 
 function Register()
 {
+    // const cookie=new Cookies
+
     let [reg_data,updateData]=useState({
         name:"",
         email:"",
@@ -22,6 +25,18 @@ function Register()
         if(reg_data.password===conf_password)
         {
             console.log(reg_data);
+            await fetch("http://localhost:8000/register",{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(reg_data),
+            })
+            .then((data)=>data.json())
+            .then((responce)=>{
+                console.log(responce);
+            })
+            .catch(()=>console.log("uploading error"))
             // console.log(data);
         }
         else
@@ -31,16 +46,16 @@ function Register()
           
         //sending data to backend
 
-        await fetch("http://localhost:8000/survey_data",{
-            method:"POST",
-            headers:{
-                "content-type":"application/json"
-            },
-            body:JSON.stringify(reg_data),
-        })
-        .then((data)=>data.json())
-        .then((responce)=>console.log(responce))
-        .catch(()=>console.log("uploading error"))
+        // await fetch("http://localhost:8000/register",{
+        //     method:"POST",
+        //     headers:{
+        //         "content-type":"application/json"
+        //     },
+        //     body:JSON.stringify(reg_data),
+        // })
+        // .then((data)=>data.json())
+        // .then((responce)=>console.log(responce))
+        // .catch(()=>console.log("uploading error"))
 
         updateData({
             name:"",
@@ -49,8 +64,10 @@ function Register()
             profession:"",
             password:""
         })
+
+        checkPassword('')
         
-        navigate('/');
+        // navigate('/');
     }
 
     function change(e,propName)
@@ -128,9 +145,12 @@ function Register()
                                     </div>
                                 </div>
                                 <div>
-                                    <button onClick={()=>{
+                                    <button onClick={async ()=>{
+                                        await setTimeout(()=>{
+                                            navigate('/')
+                                        },5000)
                                         // navigate('/')
-                                        submitForm()
+                                        // submitForm()
                                     }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
                                 </div>
                             </div>
