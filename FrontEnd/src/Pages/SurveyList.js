@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import '../styles/surveylist.css'
+import Cookies from'universal-cookie'
 //import axios from 'axios'
 import Survey from './Survey'
 import '../styles/header.css'
 import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import Header from './Header'
+
 const config = require('../config/config')
+
 
 const user = [{
     name: "Sanket",
@@ -30,8 +33,19 @@ const user = [{
     endDate: "2023" 
 }]
 
-export default function SurveyList() {
+export default function SurveyList() 
+{
     const navigate = useNavigate();
+
+    const cookies=new Cookies()
+
+    let token=cookies.get("uid")
+        if(!token)
+        {
+            navigate('/')
+        }
+        
+    
 
     // const [data, setData] = useState([])
 
@@ -52,6 +66,7 @@ export default function SurveyList() {
                 // console.log(responce[0])
            })
            .catch(()=>console.log("servey fetching error"))
+        //    const cookies=new Cookies()
     },[])
     
     return <>
@@ -71,7 +86,12 @@ export default function SurveyList() {
                         <div id='filter'></div>
                         <div id='create-btn'>
                             <button onClick={()=>{
-                                navigate('/list-survey/create')
+                                let token=cookies.get("uid")
+                                if(!token)
+                                {
+                                    navigate('/')
+                                }
+                               else( navigate('/list-survey/create'))
                             }}>Create</button>
                         </div>
                     </div>

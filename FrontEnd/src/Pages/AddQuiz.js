@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "./Header";
+import Cookies from'universal-cookie'
 import Sidebar from "./Sidebar";
 import left_arrow from "../images/left-arrow.jpg"
 
@@ -37,6 +38,25 @@ import { Filecontext } from "../config/FileContext";
     
 function AddQuiz() 
 {
+    const navigate = useNavigate();
+
+    // let [themeData,themeUpdate]=useState({})
+
+    let [theme_data,update]=useState({
+        themeName:"",
+        styleName:"",
+        colorName:""
+    })
+
+
+    const cookies=new Cookies()
+
+    let token=cookies.get("uid")
+    if(!token)
+    {
+        navigate('/')
+    }
+
     //receiving data from createSurvey
     const location=useLocation();
     const ref = useRef(null)
@@ -65,10 +85,13 @@ function AddQuiz()
     }, [])
     //const [questions, setQuestions] = useState(initialData())
     const showTheme=()=>{
+       
         setThemeToggle(false)
     }
   // console.log(surveyInfo);
     
+    // console.log(theme_data);
+    //console.log(location.state);
     //opacity: 0.1;
     
     
@@ -109,7 +132,7 @@ function AddQuiz()
     // console.log(location.state);
     mergeSurveyInfoAndQ()
     
-    const navigate = useNavigate();
+   
     
     return <>
     <div className="add-q-container">
@@ -130,7 +153,7 @@ function AddQuiz()
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
-                            navigate('/list-survey/create/questions/preview',{state:location.state}) //sending data to preview
+                            navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
                         }} className="preview">Preview</button>
                         <button onClick={() => {
                             setSurveyInfo(prevInfo=>({
@@ -156,7 +179,7 @@ function AddQuiz()
            <div style={{ position: "fixed", bottom: "100px", left: "500px" }}>
                 {themeToggle &&
                     <div className="popup">
-                        <Theme showTheme={showTheme}></Theme>
+                        <Theme showTheme={showTheme} update={update}></Theme>
                     </div>
                 }
             </div>
