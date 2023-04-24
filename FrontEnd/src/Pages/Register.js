@@ -7,6 +7,10 @@ function Register()
 {
     // const cookie=new Cookies
 
+    const navigate = useNavigate()
+
+    let [verifyPass,showAlert]=useState(false)
+
     let [reg_data,updateData]=useState({
         name:"",
         email:"",
@@ -22,8 +26,9 @@ function Register()
         e.preventDefault();
         // let data=new FormData(e.target)
         // console.log(data);
-        if(reg_data.password===conf_password)
+        if(reg_data.password===conf_password && reg_data.password!=='')
         {
+            showAlert(false)
             console.log(reg_data);
             await fetch("http://localhost:8000/register",{
                 method:"POST",
@@ -38,9 +43,11 @@ function Register()
             })
             .catch(()=>console.log("uploading error"))
             // console.log(data);
+            navigate('/');
         }
         else
         {
+            showAlert(true)
             console.log("password is not match");
         }
           
@@ -78,7 +85,7 @@ function Register()
         }))
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     return <>
         <div className="grandParent">
             <div className="p1">
@@ -146,12 +153,13 @@ function Register()
                                 </div>
                                 <div>
                                     <button onClick={async ()=>{
-                                        await setTimeout(()=>{
-                                            navigate('/')
-                                        },5000)
+                                        // await setTimeout(()=>{
+                                        //     navigate('/')
+                                        // },5000)
                                         // navigate('/')
-                                        // submitForm()
+                                        submitForm()
                                     }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
+                                    {verifyPass && <h2 className="alert">Password doesn't match</h2>}
                                 </div>
                             </div>
                         </form>

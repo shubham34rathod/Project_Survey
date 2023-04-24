@@ -35,7 +35,7 @@ let upload=multer({storage:storage})
 
 async function verifyToken(req,res,next){
     let get_token=await req.cookies?.uid;
-
+    console.log(`token is ${get_token}`);
     if(!get_token)
     {
         res.redirect("/login")
@@ -182,7 +182,7 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
     }
 })
 
-router.get('/get-surveys', async(req, res)=>{
+router.get('/get-surveys',async(req, res)=>{
      await Model2.find()
     .then((surveys)=>{
         if(!surveys){
