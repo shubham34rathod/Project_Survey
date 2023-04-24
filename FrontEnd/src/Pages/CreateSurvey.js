@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Sidebar from "./Sidebar";
 import Cookies from'universal-cookie'
 import Header from "./Header";
@@ -6,6 +6,7 @@ import '../styles/surveylist.css'
 import '../styles/create-survey.css'
 import '../styles/header.css'
 import { useNavigate } from "react-router-dom";
+import { Filecontext } from "../config/FileContext";
 // import 'bootstrap/dist/css/bootstrap.css'
 
 
@@ -14,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 export default function CreateSurvey() 
 {
     const navigate = useNavigate()
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
 
     const cookies=new Cookies()
 
@@ -86,6 +88,10 @@ export default function CreateSurvey()
                         </div>
                         <div id="next-btn">
                             <button onClick={() => {
+                                setSurveyInfo(prev=>({
+                                    ...surveyData,
+                                    questions: []
+                                }))
                                 let token=cookies.get("uid")
                                 if(!token)
                                 {
