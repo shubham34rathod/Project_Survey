@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../styles/register.css"
 import { useNavigate } from "react-router-dom";
+import backEndUrl from '../config/config'
 // import Cookies from 'universal-cookie'
 
 function Register()
@@ -30,7 +31,7 @@ function Register()
         {
             showAlert(false)
             console.log(reg_data);
-            await fetch("http://localhost:8000/register",{
+            await fetch(`https://survey-backend-cp5k.onrender.com/register`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"

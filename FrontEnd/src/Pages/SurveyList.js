@@ -8,6 +8,7 @@ import '../styles/header.css'
 import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import Header from './Header'
 import { Filecontext } from '../config/FileContext'
+import backEndUrl from '../config/config'
 
 const config = require('../config/config')
 
@@ -85,7 +86,7 @@ export default function SurveyList()
     const [data,setData]=useState([]);
 
     useEffect(()=>{
-            fetch("http://localhost:8000/get-surveys",{
+            fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"

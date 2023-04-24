@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
 import { Filecontext } from '../config/FileContext';
+import backEndUrl from '../config/config'
 
 
 
@@ -83,7 +84,7 @@ export default function PreviewSurvey()
 
         //sending survey data to backend...............
 
-        await fetch("http://localhost:8000/survey_data",{
+        await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"

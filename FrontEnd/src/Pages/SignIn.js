@@ -3,6 +3,7 @@ import "../styles/signIn.css"
 import Cookies from'universal-cookie'
 import jwt from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
+import backEndUrl from '../config/config'
 
 function SignIn()
 {
@@ -27,8 +28,12 @@ function SignIn()
         console.log(signIn_data);
 
         // sendind data to backend........
-
-        await fetch("http://localhost:8000/login",{
+        if(cookies.get("uid"))
+        {
+            navigate('list-survey')
+        }
+        else{
+        await fetch(`https://survey-backend-cp5k.onrender.com/login`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -92,6 +97,7 @@ function SignIn()
         
 
     }
+} 
 
     function onChange(e,prop)
     {
