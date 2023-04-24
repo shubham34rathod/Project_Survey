@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
+import { Filecontext } from '../config/FileContext';
 
 
 
 export default function PreviewSurvey()
 {
     const [showqQuestions, setShowQuestions] = useState([])
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+console.log(questions);
     //receiving data ffrom createSurvey
     let location=useLocation();
-    //console.log(location.state.questions);
+   // console.log(location.state);
     useEffect(()=>{
         setShowQuestions(location.state.questions)
+       
     },[])
     // async function fn()
     // {
@@ -75,6 +79,7 @@ export default function PreviewSurvey()
                 <div className='util'>
                 <div id="close-prev-btn " >
                             <button className='dark-themebutton'  onClick={()=>{
+                                
                                 navigate('/list-survey/create/questions',{state: location.state})
                             }}>Close Preview</button>
                         </div>
