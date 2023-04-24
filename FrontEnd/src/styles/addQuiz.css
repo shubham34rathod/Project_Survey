@@ -196,3 +196,13 @@
 .add-q:hover{
     cursor: pointer;
 }
+/* #addOption{
+    background-color: #8A5DEF;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    position: fixed;
+    right: 600px;
+    top: 250px;
+} */

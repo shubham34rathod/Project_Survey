@@ -18,6 +18,8 @@ router.use(cookieParser());
 router.use(express.json());
 router.use(express.urlencoded({extended:false}))
 
+let tmp_token=0
+
 //multer storage
 let storage=new MulterGridfsStorage.GridFsStorage({
     url: process.env.Db_URL + process.env.Data_Base,
@@ -91,7 +93,8 @@ router.post("/register",async (req,res)=>{
     {
         // console.log(req.body);
         let {name,email,phone,profession,password}=req.body;
-        
+        const token=await jwt.sign({use:email},process.env.secret_key)
+        tmp_token=token;
             let pass=await bcrypt.hash(password,10)
             console.log(pass);
             let doc1=await new Model1({
@@ -99,7 +102,8 @@ router.post("/register",async (req,res)=>{
                email:email,
                phone:phone,
                profession:profession,
-               password:pass
+               password:pass,
+               token:token
             })
             await doc1.save();
             res.send("data received")            
@@ -117,10 +121,11 @@ router.post("/login",async (req,res)=>{
         let data=await Model1.findOne({email:email})
         if(data)
         {
+
             let match=await bcrypt.compare(password,data.password)
             if(match)
             {
-                const token=await jwt.sign({use:email},process.env.secret_key)
+                // const token=await jwt.sign({use:email},process.env.secret_key)
 
                 // res.cookie("react",token,{
                 //     expires:new Date(Date.now()+90 * 24*60*60*1000),
@@ -129,8 +134,7 @@ router.post("/login",async (req,res)=>{
                 //     httpOnly:true
                 // })
 
-                res.json(token)
-
+                res.json(data.token)
             }
             else
             {
@@ -158,7 +162,7 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
         let Boolean=req.cookies.uid
         console.log(Boolean);
 
-        let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions}=req.body;
+        let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token}=req.body;
         let doc2=new Model2({
             name:name,
             description:description,
@@ -167,7 +171,8 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
             endDate:endDate,
             otherCriteria:otherCriteria,
             imageName:imageName,
-            questions:questions
+            questions:questions,
+            token:token
         })
         // console.log(doc2);
         doc2.save()
@@ -182,8 +187,8 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
     }
 })
 
-router.get('/get-surveys',async(req, res)=>{
-     await Model2.find()
+router.post('/get-surveys',async (req,res)=>{
+    await Model2.find({token:req.body.token})
     .then((surveys)=>{
         if(!surveys){
             res.status(404).sendStatus({message: "No surveys are available"})
@@ -195,9 +200,25 @@ router.get('/get-surveys',async(req, res)=>{
     .catch(err=>{
         res.status(500).send({message: "something went wrong"})
     })
+})
+
+// router.get('/get-surveys',async(req, res)=>{
+//     // console.log(req.body);
+//      await Model2.find({token:tmp_token})
+//     .then((surveys)=>{
+//         if(!surveys){
+//             res.status(404).sendStatus({message: "No surveys are available"})
+//         }
+//         else{
+//             res.status(200).send(surveys)
+//         }
+//     })
+//     .catch(err=>{
+//         res.status(500).send({message: "something went wrong"})
+//     })
 
     
-})
+// })
 
 
 

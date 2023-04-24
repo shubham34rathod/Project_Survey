@@ -46,7 +46,9 @@ export default function SurveyList()
         }
         
     
-
+    let [tmp_token,updateToken]=useState({
+        token:cookies.get("uid")
+    })
     // const [data, setData] = useState([])
 
     // useEffect(()=>{
@@ -59,7 +61,13 @@ export default function SurveyList()
     const [data,setData]=useState([]);
 
     useEffect(()=>{
-            fetch("http://localhost:8000/get-surveys")
+            fetch("http://localhost:8000/get-surveys",{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(tmp_token),
+            })
            .then((data)=>data.json())
            .then((responce)=>{
                 setData(responce)

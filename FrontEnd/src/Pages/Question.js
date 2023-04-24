@@ -80,6 +80,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
                     </div>
                 }
+                {/* <button id="addOption">Add Option</button> */}
             </div>
         </div>
 

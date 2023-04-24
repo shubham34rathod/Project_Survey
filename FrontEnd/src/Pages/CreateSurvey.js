@@ -20,6 +20,7 @@ export default function CreateSurvey()
     let token=cookies.get("uid")
     if(!token)
     {
+        // window.location.reload(true)
         navigate('/')
     }
 
@@ -30,7 +31,8 @@ export default function CreateSurvey()
         startDate:"",
         endDate:"",
         otherCriteria:"",
-        imageName:""
+        imageName:"",
+        token:cookies.get("uid")
     })
 
     function onChange(e,prop)
