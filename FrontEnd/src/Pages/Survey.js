@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../styles/survey.css'
 import { useNavigate } from 'react-router-dom';
+import { Filecontext } from '../config/FileContext';
 export default function Survey({data}) {
     const navigate = useNavigate()
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
 const {name, description, typeOfSurvey, startDate, endDate} = data
-
+useEffect(()=>{
+    setSurveyInfo({})
+}, [])
 async function fn()
 {
     let obj={
@@ -34,6 +38,7 @@ async function fn()
                 <div className='action'>
                     <div onClick={()=>{
                         
+                        setSurveyInfo(data)
                         navigate('/list-survey/create/questions',{state: {dataFromSurvey: data}})
                     }} id='edit'></div>
                     <div id='delete' onClick={fn}></div>

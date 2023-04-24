@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Cookies from'universal-cookie'
 import Sidebar from "./Sidebar";
@@ -9,6 +9,7 @@ import { useNavigate,useLocation } from "react-router-dom";
 
 import Theme from "./Theme";
 import Question from "./Question";
+import { Filecontext } from "../config/FileContext";
 
 
 // let questions1 = [{
@@ -60,32 +61,40 @@ function AddQuiz()
     const location=useLocation();
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false)
-    
-    const [mergedQuestions, setMergedQuestion] = useState([])
-    const [questions, setQuestions] = useState(initialData())
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+   
+    useEffect(()=>{
+        
+        setQuestions(initialData())
+        function initialData(){
+            if(surveyInfo === {} || surveyInfo.questions === undefined ){
+                
+                return [{
+                        qno: 1,
+                        question: "",
+                    choices: {}
+                }]
+            }
+                else{
+                    
+                    return [...surveyInfo.questions]
+                }
+               
+        }
+        setMergedQuestion([])
+    }, [])
+    //const [questions, setQuestions] = useState(initialData())
     const showTheme=()=>{
        
         setThemeToggle(false)
     }
+  // console.log(surveyInfo);
+    
     // console.log(theme_data);
     //console.log(location.state);
     //opacity: 0.1;
     
-    function initialData(){
-        if(location.state.dataFromSurvey === undefined || !location.state.dataFromSurvey.questions.length ){
-            
-            return [{
-                    qno: 1,
-                    question: "",
-                choices: {}
-            }]
-        }
-            else{
-                
-                return [...location.state.dataFromSurvey.questions]
-            }
-        
-    }
+    
     const addQuestion=()=>{
         setQuestions(prevq=>([
             ...prevq,
@@ -96,24 +105,29 @@ function AddQuiz()
             }
         ]))
         ref.current.sendQ();
+       
     }
     const mergeQuestion=(questionFromQ)=>{
+    
+
+        
         setMergedQuestion(prevQs=>([
             ...prevQs,
             {...questionFromQ}
         ]))
-        location.state.dataFromSurvey.questions = [...mergedQuestions]
-        location.state.dataFromSurvey.questions = [...mergedQuestions]
+       
+        
     }
-   
     
-    console.log(location.state);
+    console.log(mergedQuestions);
     function mergeSurveyInfoAndQ(){
+        
         location.state = {
             ...location.state,
             questions: [...mergedQuestions]
         }
         
+        //location.state.dataFromSurvey.questions = [...mergedQuestions]
     }
     // console.log(location.state);
     mergeSurveyInfoAndQ()
@@ -142,6 +156,11 @@ function AddQuiz()
                             navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
                         }} className="preview">Preview</button>
                         <button onClick={() => {
+                            setSurveyInfo(prevInfo=>({
+                                ...prevInfo,
+                                questions: [ ...mergedQuestions]
+                            }))
+                            
                             ref.current.sendQ();
                         }} className="save">Save</button>
                     </div>
