@@ -12,7 +12,8 @@ let Schema1=new mongoose.Schema({
     email:{type:String},
     phone:{type:Number},
     profession:{type:String},
-    password:{type:String}
+    password:{type:String},
+    token:{type:String}
 })
 
 let Model1=mongoose.model("storage",Schema1);
@@ -27,7 +28,8 @@ let Schema2=new mongoose.Schema({
     endDate:{type:String},
     otherCriteria:{type:String},
     imageName:{type:String},
-    questions:{type:Array}
+    questions:{type:Array},
+    token:{type:String}
 })
 
 let Model2=mongoose.model("survey_data",Schema2)

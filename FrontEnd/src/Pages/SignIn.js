@@ -59,12 +59,16 @@ function SignIn()
             else
             {
                 showReg(false)
+                cookies.set("uid",responce,{
+                    expires:new Date(Date.now()+90 * 24*60*60*1000),
+    
+                })
                 navigate('list-survey')
             }
-            cookies.set("uid",responce,{
-                expires:new Date(Date.now()+90 * 24*60*60*1000),
+            // cookies.set("uid",responce,{
+            //     expires:new Date(Date.now()+90 * 24*60*60*1000),
 
-            })
+            // })
             // localStorage.setItem('token', responce); 
         })
         .catch(()=>console.log("uploading error"))

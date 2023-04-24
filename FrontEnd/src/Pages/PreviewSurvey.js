@@ -8,6 +8,7 @@ import { Filecontext } from '../config/FileContext';
 
 
 
+
 export default function PreviewSurvey()
 {
     const navigate = useNavigate()
@@ -22,6 +23,8 @@ export default function PreviewSurvey()
     let [prevColor,updatePrevColor]=useState('#081838')
     let [saveColor,saveUpdate]=useState('#278DF1')
     let [saveFontColor,saveColorUpdate]=useState('#FFFFFF')
+    let [queColor,updateQueColor]=useState('#2D2D2E')
+    let [FontStyle,updateFont]=useState('normal')
 
     const cookies=new Cookies()
 
@@ -33,9 +36,11 @@ export default function PreviewSurvey()
 
     const [showqQuestions, setShowQuestions] = useState([])
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
-console.log(questions);
+
     //receiving data ffrom createSurvey
     let location=useLocation();
+    console.log(location.state);
+    console.log(location.state.theme_data);
    // console.log(location.state);
    
         
@@ -46,9 +51,8 @@ console.log(questions);
    
     useEffect(()=>{
         
-       
-    console.log(location.state);
-    console.log(location.state.theme_data);
+       setSurveyInfo({...location.state})
+    console.log(surveyInfo);
         setShowQuestions(location.state.questions)
         if(location.state.theme_data.themeName==='Dark')
         {
@@ -59,7 +63,9 @@ console.log(questions);
             updatePrevColor('black')
             updateClosePrev('white')
             updatePrevBorder('none')
+            updateQueColor('white')
         }
+        updateFont(location.state.theme_data.styleName)
     },[])
     // async function fn()
     // {
@@ -117,16 +123,16 @@ console.log(questions);
                     <button onClick={()=>{
                         navigate('/list-survey/create/questions')
                     }} id='arrow'> &larr;</button>
-                        <h5 style={{color:prevColor}}>Preview</h5>
+                        <h5 style={{color:prevColor,fontStyle:FontStyle}}>Preview</h5>
                 </div>
                 <div className='util'>
                 <div id="close-prev-btn " >
-                            <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder}}  onClick={()=>{
+                            <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder,fontStyle:FontStyle}}  onClick={()=>{
                                 navigate('/list-survey/create/questions',{state: location.state})
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn " >
-                            <button className='dark-themebutton' style={{backgroundColor:saveColor,border:"none",color:saveFontColor}}
+                            <button className='dark-themebutton' style={{backgroundColor:saveColor,border:"none",color:saveFontColor,fontStyle:FontStyle}}
                             onClick={fn}
                                        >Save</button>
                         </div>
@@ -150,18 +156,18 @@ console.log(questions);
              {showqQuestions.map(item=>{
                 return<>
                   <div className='question'>
-                    <h4 className='dark-theme' >{`Question ${item.qno}`}</h4>
+                    <h4 className='dark-theme' style={{fontStyle:FontStyle,backgroundColor:wallColor}}>{`Question ${item.qno}`}</h4>
                     <div className='prev-form-container'>
                         <form>
-                            <label className='dark-theme'  htmlFor='question'>{item.question}</label>
+                            <label className='dark-theme'  htmlFor='question' style={{color:queColor,fontStyle:FontStyle}}>{item.question}</label>
                             <div id='question' className='radio-container'>
                                 <div>
                                 <input className='dark-theme' id='opt-1' type="radio" value={1} name='q' disabled/>
-                                <label className='dark-theme' htmlFor='op1-1'>{Object.keys(item.choices)[0]}</label>
+                                <label className='dark-theme' htmlFor='op1-1'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[0]}</label>
                                 </div>
                                 <div>
                                 <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
-                                <label className='dark-theme' htmlFor='op1-2'>{Object.keys(item.choices)[1]}</label>
+                                <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[1]}</label>
                                 </div>
                                 
                                 {/* <input id='opt-3' type="radio" value={3} name='q' />

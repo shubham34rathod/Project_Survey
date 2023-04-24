@@ -64,10 +64,11 @@ function AddQuiz()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
     useEffect(()=>{
-        
+        console.log(location.state);
+        setSurveyInfo({...location.state} )
         setQuestions(initialData())
         function initialData(){
-            if(surveyInfo === {} || surveyInfo.questions === undefined ){
+            if(!Object.keys(surveyInfo).length || !surveyInfo.questions.length ){
                 
                 return [{
                         qno: 1,
@@ -81,8 +82,13 @@ function AddQuiz()
                 }
                
         }
-        setMergedQuestion([])
+      
+    setMergedQuestion([])
     }, [])
+
+    
+    
+    
     //const [questions, setQuestions] = useState(initialData())
     const showTheme=()=>{
        
@@ -101,25 +107,21 @@ function AddQuiz()
             {
                 qno: questions.length+1,
                 question: "",
-                choices: ""
+                choices: {}
             }
         ]))
-        ref.current.sendQ();
+        
+       ref.current.sendQ();
        
     }
-    const mergeQuestion=(questionFromQ)=>{
-    
-
-        
-        setMergedQuestion(prevQs=>([
-            ...prevQs,
-            {...questionFromQ}
-        ]))
-       
+    const mergeQuestion=()=>{   
+        setSurveyInfo(prev=>({
+            ...prev,
+            questions: [...mergedQuestions]
+        }))
         
     }
     
-    console.log(mergedQuestions);
     function mergeSurveyInfoAndQ(){
         
         location.state = {
@@ -127,13 +129,10 @@ function AddQuiz()
             questions: [...mergedQuestions]
         }
         
-        //location.state.dataFromSurvey.questions = [...mergedQuestions]
     }
-    // console.log(location.state);
     mergeSurveyInfoAndQ()
-    
-   
-    
+    console.log(questions);
+    console.log(mergedQuestions);
     return <>
     <div className="add-q-container">
         <Header></Header>
@@ -153,14 +152,13 @@ function AddQuiz()
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
-                            navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
-                        }} className="preview">Preview</button>
-                        <button onClick={() => {
                             setSurveyInfo(prevInfo=>({
                                 ...prevInfo,
                                 questions: [ ...mergedQuestions]
                             }))
-                            
+                            navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
+                        }} className="preview">Preview</button>
+                        <button onClick={() => {
                             ref.current.sendQ();
                         }} className="save">Save</button>
                     </div>

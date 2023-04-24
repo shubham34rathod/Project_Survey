@@ -1,16 +1,25 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import settings from "../images/gear.jpg"
 import close from '../images/close-_1_.jpg'
 import '../styles/addQuiz.css'
+import { Filecontext } from "../config/FileContext";
 
 const Question = forwardRef(({ data, mergeQuestion }, ref) => {
     useImperativeHandle(ref, () => ({
         sendQ() {
-            mergeQuestion(question)
+            mergeQuestion();
+            setMergedQuestion(prevQs=>([
+                ...prevQs,
+                question
+            ]))
+            
+        
         }
     }));
     const [toggle, setToggle] = useState(false)
     const [choice, setChoice] = useState({})
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+
     const [question, setQuestion] = useState({
         qno: data.qno,
         question: data.question,
@@ -80,6 +89,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
                     </div>
                 }
+                {/* <button id="addOption">Add Option</button> */}
             </div>
         </div>
 
