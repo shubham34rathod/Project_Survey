@@ -33,7 +33,7 @@ export default function PreviewSurvey()
 
     const [showqQuestions, setShowQuestions] = useState([])
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
-console.log(questions);
+
     //receiving data ffrom createSurvey
     let location=useLocation();
    // console.log(location.state);
@@ -46,9 +46,8 @@ console.log(questions);
    
     useEffect(()=>{
         
-       
-    console.log(location.state);
-    console.log(location.state.theme_data);
+       setSurveyInfo({...location.state})
+    console.log(surveyInfo);
         setShowQuestions(location.state.questions)
         if(location.state.theme_data.themeName==='Dark')
         {

@@ -37,7 +37,6 @@ async function fn()
             <td>
                 <div className='action'>
                     <div onClick={()=>{
-                        
                         setSurveyInfo(data)
                         navigate('/list-survey/create/questions',{state: {dataFromSurvey: data}})
                     }} id='edit'></div>
