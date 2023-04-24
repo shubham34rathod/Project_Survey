@@ -1,13 +1,18 @@
 import React,{useState,useEffect} from 'react'
 // import '../styles/create-survey.css'
 import '../styles/theme.css'
+import { useNavigate } from 'react-router-dom'
+import AddQuiz from './AddQuiz';
 
-export default function Theme({showTheme}) 
+export default function Theme({showTheme,update}) 
 {
-    let [tmp,changeTmp]=useState(false)
+    // const navigate=useNavigate();
+
+    // let [tmp,changeTmp]=useState(false)
     let [style,updateStyle]=useState([])
-    let [theme,changeTheme]=useState('None')
-    let [styleName,changeStyle]=useState('none')
+    // let [theme,changeTheme]=useState('None')
+    // let [styleName,changeStyle]=useState('none')
+
 
     useEffect(()=>{
         fetch('http://localhost:8000/theme')
@@ -19,22 +24,30 @@ export default function Theme({showTheme})
         .catch(()=>console.log("fetching error"))
     },[]) 
 
-    function themeChange(e)
+    function themeChange(e,prop)
     {
-       console.log(e.target.value);
-       if(e.target.value==="None")
-       {
-          changeTheme("None")
-       }
-       else if(e.target.value==="Dark")
-       {
-          changeTheme("Dark Theme")
-       }
-       else if(e.target.value==="Light")
-       {
-          changeTheme("Light Theme")
-       }
+    //    console.log(e.target.value);
+    //    if(e.target.value==="None")
+    //    {
+    //       changeTheme("None")
+    //    }
+    //    else if(e.target.value==="Dark")
+    //    {
+    //       changeTheme("Dark Theme")
+    //    }
+    //    else if(e.target.value==="Light")
+    //    {
+    //       changeTheme("Light Theme")
+    //    }
+         
+         update((data)=>({
+            ...data,
+            [prop]:e.target.value
+         }))
+
+                   
     }
+    
     return <>
         <div className='transparent-back'>
             <div className='theme-container'>
@@ -45,7 +58,7 @@ export default function Theme({showTheme})
                 <form className='theme-form'>
                     <div>
                         <label>Theme</label>
-                        <select >
+                        <select onClick={(e)=>themeChange(e,"themeName")}>
                             <option defaultChecked disabled>Select</option>
                             <option>Dark</option>
                             <option>Light</option>
@@ -84,7 +97,7 @@ export default function Theme({showTheme})
                     <div>
                         <div>
                             <label>Select Font</label>
-                            <select>
+                            <select onChange={(e)=>themeChange(e,"styleName")}>
                                 <option defaultChecked disabled>Select</option>
                                 {style.map((a,index)=><option key={index}>{a}</option>)}
                                 {/* <option>Yes</option>
@@ -93,7 +106,7 @@ export default function Theme({showTheme})
                         </div>
                         <div>
                             <label>Color</label>
-                            <input id='color' type='color' />
+                            <input id='color' type='color' onChange={(e)=>themeChange(e,"colorName")}/>
                         </div>
                     </div>
                 </form>
@@ -107,5 +120,6 @@ export default function Theme({showTheme})
                 </div>
             </div>
         </div>
+        
     </>
 }

@@ -1,6 +1,11 @@
 body{
     /* background-image: linear-gradient(#FFFFFF,#6ED4FF); */
 }
+.invalid{
+    margin-top: 12px;
+    margin-left: 8px;
+    color: red;
+}
 .box{
     background-image: linear-gradient(#FFFFFF,#6ED4FF);
     height: 800px;

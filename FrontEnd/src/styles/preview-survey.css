@@ -105,20 +105,23 @@
 }
 
 .dark-theme{
-    background-color:#5f5d5d !important; 
+    /* background-color:#5f5d5d !important;  */
+    /* background-color:#5f5d5d !important;  */
     color: white !important;
 
 }
 
 
 .dark-themesidenav{
-    background-color: #201f1f !important;
+    /* background-color: white !important; */
+    /* background-color: #201f1f !important; */
 }
 
 .dark-themebutton {
-    background-color: #201f1f !important;
-    border: .1rem solid white !important;
-    color: white !important;
+    /* background-color: #201f1f !important; */
+    /* background-color: #201f1f !important; */
+    /* border: .1rem solid white !important; */
+    /* color: white !important; */
     height: 100%;
     border-radius: .3rem;
     width: 6rem;

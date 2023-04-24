@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
+import Cookies from'universal-cookie'
 import Header from "./Header";
 import '../styles/surveylist.css'
 import '../styles/create-survey.css'
@@ -12,6 +13,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function CreateSurvey() 
 {
+    const navigate = useNavigate()
+
+    const cookies=new Cookies()
+
+    let token=cookies.get("uid")
+    if(!token)
+    {
+        navigate('/')
+    }
+
     const [surveyData,updateData]=useState({
         name:"",
         description:"",
@@ -30,7 +41,7 @@ export default function CreateSurvey()
         }))
     }
 
-    const navigate = useNavigate()
+    
     const [img, setImg] = useState({
         img: "",
         name:""
@@ -73,7 +84,12 @@ export default function CreateSurvey()
                         </div>
                         <div id="next-btn">
                             <button onClick={() => {
-                                navigate('/list-survey/create/questions',{state:surveyData})   //sending data to AddQuiz                             
+                                let token=cookies.get("uid")
+                                if(!token)
+                                {
+                                    navigate('/')
+                                }
+                                else{navigate('/list-survey/create/questions',{state:surveyData}) }  //sending data to AddQuiz                             
                             }} onClickCapture={fn}>Next</button>
                         </div>
                     </div>

@@ -85,3 +85,9 @@
     position: fixed;
     right: 630px;
 }
+.alert{
+    color: red;
+    position: fixed;
+    right: 420px;
+    bottom: 180px;
+}
