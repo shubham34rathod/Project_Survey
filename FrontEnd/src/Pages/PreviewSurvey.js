@@ -1,31 +1,78 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Cookies from'universal-cookie'
 import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
+import { Filecontext } from '../config/FileContext';
+
 
 
 
 export default function PreviewSurvey()
 {
+    const navigate = useNavigate()
+
+    let [th,abc]=useState([])
+    let [Theme,themeFn]=useState(true)
+    let [backColor,updateBackColor]=useState('#278DF1')
+    let [wallColor,wallUpdate]=useState('white')
+    let [closePrev,prevUpdate]=useState('white')
+    let [closePrevColor,updateClosePrev]=useState('#278DF1')
+    let [closePrevBorder,updatePrevBorder]=useState('1px solid #278DF1')
+    let [prevColor,updatePrevColor]=useState('#081838')
+    let [saveColor,saveUpdate]=useState('#278DF1')
+    let [saveFontColor,saveColorUpdate]=useState('#FFFFFF')
+
+    const cookies=new Cookies()
+
+    let token=cookies.get("uid")
+    if(!token)
+    {
+        navigate('/')
+    }
+
     const [showqQuestions, setShowQuestions] = useState([])
+    const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+console.log(questions);
     //receiving data ffrom createSurvey
     let location=useLocation();
-    //console.log(location.state.questions);
+   // console.log(location.state);
+   
+        
+    
+    // console.log(location.state.theme_data.themeName);
+   
+   
+   
     useEffect(()=>{
+        
+       
+    console.log(location.state);
+    console.log(location.state.theme_data);
         setShowQuestions(location.state.questions)
+        if(location.state.theme_data.themeName==='Dark')
+        {
+            updateBackColor('#201f1f')
+            wallUpdate('#5f5d5d ')
+            prevUpdate('#201f1f')
+            saveUpdate('#201f1f')
+            updatePrevColor('black')
+            updateClosePrev('white')
+            updatePrevBorder('none')
+        }
     },[])
     // async function fn()
     // {
     //     console.log("node");
     //     console.log(location.state);
     //     // console.log('not received');
-    //console.log(location.state);
+    // console.log(location.state);
     
 
     async function fn()
     {
-        console.log("node");
-        console.log(location.state);
+        // console.log("node");
+        // console.log(location.state);
         // console.log('not received');
 
         //sending survey data to backend...............
@@ -49,11 +96,11 @@ export default function PreviewSurvey()
 
     
 
-    const navigate = useNavigate()
+   
     return <>
-    <div className='container dark-theme'>
+    <div className='container dark-theme'style={{backgroundColor:wallColor}}>
         {/* <Sidebar/> */}
-        <div className='sidenav dark-themesidenav'>
+        <div className='sidenav dark-themesidenav' style={{backgroundColor:backColor}} >
                 <div onClick={()=>{
                     navigate('/list-survey')
                 }} id='home'></div>
@@ -70,16 +117,16 @@ export default function PreviewSurvey()
                     <button onClick={()=>{
                         navigate('/list-survey/create/questions')
                     }} id='arrow'> &larr;</button>
-                        <h5>Preview</h5>
+                        <h5 style={{color:prevColor}}>Preview</h5>
                 </div>
                 <div className='util'>
                 <div id="close-prev-btn " >
-                            <button className='dark-themebutton'  onClick={()=>{
+                            <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder}}  onClick={()=>{
                                 navigate('/list-survey/create/questions',{state: location.state})
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn " >
-                            <button className='dark-themebutton'
+                            <button className='dark-themebutton' style={{backgroundColor:saveColor,border:"none",color:saveFontColor}}
                             onClick={fn}
                                        >Save</button>
                         </div>

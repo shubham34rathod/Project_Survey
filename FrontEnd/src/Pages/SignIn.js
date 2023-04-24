@@ -6,7 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 function SignIn()
 {
+    // window.location.reload(true)
+
     const cookies=new Cookies()
+
+    const navigate = useNavigate()
+
+    let [invalid,update]=useState(false)
+    let [notReg,showReg]=useState(false)
+    let [enterDetail,showDetalAlert]=useState(false)
 
     let [signIn_data,updateData]=useState({
         email:"",
@@ -30,9 +38,32 @@ function SignIn()
         .then((data)=>data.json())
         .then((responce)=>{
             console.log(responce)
-
+            if(responce==='incorrect password')
+            {
+                update(true)
+                navigate('/')
+            }
+            else if(responce==='not registered')
+            {
+                showReg(true)
+                setTimeout(()=>{
+                    navigate('register')
+                },2000)
+               
+            }
+            else if(signIn_data.email==="" && signIn_data.password==="")
+            {
+                showDetalAlert(true)
+                navigate('/')
+            }
+            else
+            {
+                showReg(false)
+                navigate('list-survey')
+            }
             cookies.set("uid",responce,{
-                expires:new Date(Date.now()+90 * 24*60*60*1000)
+                expires:new Date(Date.now()+90 * 24*60*60*1000),
+
             })
             // localStorage.setItem('token', responce); 
         })
@@ -43,7 +74,18 @@ function SignIn()
             password:""
         })
 
-        navigate("list-survey")
+        let token=cookies.get("uid")
+        if(token)
+        {
+            // navigate("list-survey")
+            
+        }
+        else
+        {
+            navigate('/')
+        }
+
+        
 
     }
 
@@ -55,8 +97,9 @@ function SignIn()
         }))
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     return <>
+         {/* <h2 className="invalid">invalid details</h2> */}
         <div className="box">
             {/* <div id="tmp"></div> */}
             <div className="parent1">
@@ -95,6 +138,9 @@ function SignIn()
                                     // navigate("list-survey")
                                     submitForm
                                 } type="Submit" className="signin_btn" >Sign in</button>
+                                {invalid && <h2 className="invalid">invalid password</h2>}  
+                                {notReg && <h2 className="invalid">user not registered</h2>} 
+                                {enterDetail && <h2 className="invalid">please enter the details</h2>} 
                             </div>
                         </form>
                     </div>
