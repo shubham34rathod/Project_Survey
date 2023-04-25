@@ -17,7 +17,7 @@ async function fn()
         _id:data._id
     }
     // console.log(obj);
-    await fetch(`http://localhost:8000/delete_survey`,{
+    await fetch(`https://survey-backend-cp5k.onrender.com/delete_survey`,{
         method:"POST",
         headers:{
             "content-type":"application/json"
