@@ -16,6 +16,7 @@ export default function CreateSurvey()
 {
     const navigate = useNavigate()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+    const [emtAlert,updateAlert]=useState(false)
 
     const cookies=new Cookies()
 
@@ -97,7 +98,15 @@ export default function CreateSurvey()
                                 {
                                     navigate('/')
                                 }
-                                else{navigate('/list-survey/create/questions',{state:surveyData}) }  //sending data to AddQuiz                             
+                                else{
+                                    if(surveyData.name==='' || surveyData.description==='' || surveyData.typeOfSurvey==='' || surveyData.startDate==='' || surveyData.endDate==='' || surveyData.imageName==='')
+                                    {
+                                       alert('All fields are required')
+                                    }
+                                    else{
+                                    navigate('/list-survey/create/questions',{state:surveyData})
+                                    } 
+                                }  //sending data to AddQuiz                             
                             }} onClickCapture={fn}>Next</button>
                         </div>
                     </div>

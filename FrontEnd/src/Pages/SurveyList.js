@@ -159,10 +159,10 @@ export default function SurveyList()
                         <tbody>
                             
                             {data && data.filter((item)=>{
-            return search.toLowerCase() === '' 
-            ? item 
-            : item['name'].toLowerCase().includes(search);
-        }).map((item, i)=>{
+                                return search.toLowerCase() === '' 
+                                ? item 
+                                : item['name'].toLowerCase().includes(search);
+                            }).map((item, i)=>{
                                 return <Survey data={item} key={i}/>
                             })}
                         </tbody>

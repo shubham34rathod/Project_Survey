@@ -34,19 +34,45 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
        // console.log(e.target.value);
     }
 
-    const getChoices = () => {
-        setQuestion(prevChoices => ({
-            ...prevChoices,
-            choices: {
-                ...prevChoices.choices,
-                ...choice
-            }
-        }))
-    }
+    // const getChoices = () => {
+    //     setQuestion(prevChoices => ({
+    //         ...prevChoices,
+    //         choices:{...prevChoices,
+    //            options[options.length-1]:false
+    //         }
+    //     }))
+    // }
     const getChoice = (e) => {
         setChoice({ [e.target.value]: false })
        // console.log(e.target.value);
     }
+
+    // .....................
+    const [options, setOptions] = useState([]);
+    // const [options, setOptions] = useState([]);
+    const handleOptionChange = (e, index) => {
+        getChoice(e)
+        const updatedOptions = [...options];
+        updatedOptions[index] = e.target.value;
+        setOptions(updatedOptions);
+        // console.log(choice);
+        // console.log(Object.assign({},options));
+      };
+       const addOption = (e) => {
+        // getChoices(e)
+        setOptions([...options, ""]);
+        // console.log( question.choices);
+  };
+    
+  const getChoices = () => {
+    setQuestion(prevChoices => ({
+        ...prevChoices,
+        choices:{...prevChoices.choices,
+          [ options[options.length-1]]:false
+        }
+    }))
+}
+
     return <>
         <div className="s_parent2" >
             <div className="list">
@@ -55,23 +81,40 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
                 </ul>
             </div>
             <div className="que">
+            
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
                     <input type="text"  id="que" name="que" onChange={getQuestion} value={question.question} className="que_input" placeholder="Enter Question" />
                 </div>
                 <div className="options">
-                    <div className="que_box">
-                        <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
-                        {/* <label htmlFor="option" className="label">Option1</label> */}
-                        <input type="text" value={Object.keys(question.choices)[0]} onChange={getChoice}  className="label" /><span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
+                     {/* <label htmlFor="options">Options:</label> */}
+                    {options.map((option, index) => (
+                    <div key={index}>
+                     <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />   
+                    <input
+                     type="text"
+                     value={option}
+                     className="label"
+                    //  style={{border:"1px solid green",margin:"5px"}}
+                     onChange={(e) => handleOptionChange(e, index)}
+                    /> <span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
                     </div>
-                    <div className="que_box">
-                        <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
-                        {/* <label htmlFor="option" className="label">Option1</label> */}
-                        <input type="text" value={Object.keys(question.choices)[1]} onChange={getChoice} className="label" /><span hidden={!(Object.keys(choice)[0] && true)} onClick={getChoices} className="add-q">+</span>
-                    </div>
-
+                ))}
+                   <button onClick={addOption} className="addOption">Add Option</button>
                 </div>
+                {/* <div className="options">
+                    <div className="que_box">
+                        <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" /> */}
+                        {/* <label htmlFor="option" className="label">Option1</label> */}
+                        {/* <input type="text" value={Object.keys(question.choices)[0]} onChange={getChoice}  className="label" /><span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
+                    </div>
+                    <div className="que_box">
+                        <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" /> */}
+                        {/* <label htmlFor="option" className="label">Option1</label> */}
+                        {/* <input type="text" value={Object.keys(question.choices)[1]} onChange={getChoice} className="label" /><span hidden={!(Object.keys(choice)[0] && true)} onClick={getChoices} className="add-q">+</span>
+                    </div>
+                   
+                </div> */}
             </div>
             <div className="s_parent3">
                 <img src={settings} alt="settings" className="settings" onClick={() => { setToggle(true) }} />
@@ -89,6 +132,23 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
                     </div>
                 }
+
+                {/* new addition....... */}
+                {/* <div className="addQue">
+                     <label htmlFor="options">Options:</label>
+                    {options.map((option, index) => (
+                    <div key={index}>
+                    <input
+                     type="text"
+                     value={option}
+                     style={{border:"1px solid green",margin:"5px"}}
+                     onChange={(e) => handleOptionChange(e, index)}
+                    />
+                    </div>
+                ))}
+                   <button onClick={addOption}>Add Option</button>
+                </div> */}
+                {/* ................ */}
                 {/* <button id="addOption">Add Option</button> */}
             </div>
         </div>

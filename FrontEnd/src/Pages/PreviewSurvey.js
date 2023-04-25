@@ -162,14 +162,21 @@ export default function PreviewSurvey()
                         <form>
                             <label className='dark-theme'  htmlFor='question' style={{color:queColor,fontStyle:FontStyle}}>{item.question}</label>
                             <div id='question' className='radio-container'>
-                                <div>
-                                <input className='dark-theme' id='opt-1' type="radio" value={1} name='q' disabled/>
-                                <label className='dark-theme' htmlFor='op1-1'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[0]}</label>
-                                </div>
-                                <div>
+                                {
+                                    Object.keys(item.choices).map((key)=>{
+                                        return <>
+                                        <div>
+                                           <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
+                                           <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{key}</label>
+                                        </div>
+                                        </>
+                                        
+                                    })
+                                }
+                                {/* <div>
                                 <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
                                 <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[1]}</label>
-                                </div>
+                                </div> */}
                                 
                                 {/* <input id='opt-3' type="radio" value={3} name='q' />
                                 <label htmlFor='op1-3'>Option 3</label> */}

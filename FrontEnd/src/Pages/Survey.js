@@ -16,7 +16,7 @@ async function fn()
     let obj={
         _id:data._id
     }
-    console.log(obj);
+    // console.log(obj);
     await fetch(`https://survey-backend-cp5k.onrender.com/delete_survey`,{
         method:"POST",
         headers:{
@@ -27,7 +27,11 @@ async function fn()
     .then((data)=>data.json())
     .then((responce)=>{
         console.log(responce)
-        window.location.reload(true)    
+        if(responce==='delete successfull')
+        {
+            navigate('/list-survey/create')
+        }
+        // window.location.reload(true)    
     })
     .catch(()=>console.log("uploading error"))
     

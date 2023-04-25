@@ -223,8 +223,17 @@ router.post('/get-surveys',async (req,res)=>{
 
 
 router.post('/delete_survey', async (req,res)=>{
-    console.log(req.body._id);
-    await Model2.findByIdAndDelete(req.body._id)
+    try 
+    {
+        console.log(req.body._id);
+        await Model2.findByIdAndDelete(req.body._id)
+        res.json('delete successfull')
+    } 
+    catch (error) 
+    {
+        res.json('error')
+    }
+
 })
 
 

@@ -11,6 +11,7 @@ function Register()
     const navigate = useNavigate()
 
     let [verifyPass,showAlert]=useState(false)
+    let [emtFiled,updateEmt]=useState(false)
 
     let [reg_data,updateData]=useState({
         name:"",
@@ -27,7 +28,7 @@ function Register()
         e.preventDefault();
         // let data=new FormData(e.target)
         // console.log(data);
-        if(reg_data.password===conf_password && reg_data.password!=='')
+        if(reg_data.password===conf_password && reg_data.password!=='' && reg_data.name!=='' && reg_data.email!=='' && reg_data.phone!=='' && reg_data.profession!=='')
         {
             showAlert(false)
             console.log(reg_data);
@@ -46,9 +47,15 @@ function Register()
             // console.log(data);
             navigate('/');
         }
-        else
+        else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
+        {
+             updateEmt(true)
+             setTimeout(()=>{updateEmt(false)},3000)
+        }
+        else if(reg_data.password!==conf_password)
         {
             showAlert(true)
+            setTimeout(()=>{showAlert(false)},3000)
             console.log("password is not match");
         }
           
@@ -160,7 +167,8 @@ function Register()
                                         // navigate('/')
                                         submitForm()
                                     }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
-                                    {verifyPass && <h2 className="alert">Password doesn't match</h2>}
+                                    {verifyPass && <h2 className="alert_password">Password doesn't match</h2>}
+                                    {emtFiled && <h2 className="alert">All fields are required</h2>}
                                 </div>
                             </div>
                         </form>

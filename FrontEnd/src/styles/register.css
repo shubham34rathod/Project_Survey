@@ -88,6 +88,12 @@
 .alert{
     color: red;
     position: fixed;
-    right: 420px;
+    right: 435px;
+    bottom: 180px;
+}
+.alert_password{
+    color: red;
+    position: fixed;
+    right: 425px;
     bottom: 180px;
 }
