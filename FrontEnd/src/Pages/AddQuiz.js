@@ -12,26 +12,6 @@ import Question from "./Question";
 import { Filecontext } from "../config/FileContext";
 
 
-// let questions1 = [{
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// }]
 
 
 
@@ -59,27 +39,28 @@ function AddQuiz()
 
     //receiving data from createSurvey
     const location=useLocation();
+    
     const ref = useRef(null)
-    const [themeToggle, setThemeToggle] = useState(false)
+    const [themeToggle, setThemeToggle] = useState(false);
+    
+    const [listQuestions, setListQuestions] = useState([])
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
+       
     useEffect(()=>{
-        console.log(location.state);
-        setSurveyInfo({...location.state} )
-        setQuestions(initialData())
+        
+        console.log(surveyInfo);
+        setListQuestions(initialData())
         function initialData(){
-            if(!Object.keys(surveyInfo).length || !surveyInfo.questions.length ){
-                
+            if(!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)){
+               
                 return [{
-                        qno: 1,
-                        question: "",
+                    qno:1,
+                    question: "",
                     choices: {}
                 }]
             }
-                else{
-                    
-                    return [...surveyInfo.questions]
-                }
+           return [...surveyInfo.questions]
                
         }
       
@@ -102,10 +83,12 @@ function AddQuiz()
     
     
     const addQuestion=()=>{
-        setQuestions(prevq=>([
+
+        setListQuestions(prevq=>([
             ...prevq,
+        
             {
-                qno: questions.length+1,
+                qno: listQuestions.length+1,
                 question: "",
                 choices: {}
             }
@@ -115,10 +98,7 @@ function AddQuiz()
        
     }
     const mergeQuestion=()=>{   
-        setSurveyInfo(prev=>({
-            ...prev,
-            questions: [...mergedQuestions]
-        }))
+       
         
     }
     
@@ -131,8 +111,11 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    console.log(questions);
-    console.log(mergedQuestions);
+    // console.log(listQuestions);
+    // console.log(location.state);
+     console.log(mergedQuestions);
+    console.log(surveyInfo);
+    
     return <>
     <div className="add-q-container">
         <Header></Header>
@@ -152,10 +135,18 @@ function AddQuiz()
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
+                            if(surveyInfo.isEdit){
+                                setSurveyInfo(prevInfo=>({
+                                    ...prevInfo,
+                                    questions: [...surveyInfo.questions, ...mergedQuestions]
+                                }))
+                            }
+                            else{
                             setSurveyInfo(prevInfo=>({
                                 ...prevInfo,
                                 questions: [ ...mergedQuestions]
                             }))
+                        }
                             navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
                         }} className="preview">Preview</button>
                         <button onClick={() => {
@@ -167,8 +158,10 @@ function AddQuiz()
             </div>
             </div>
             
-                {questions.map((item,i) => {
-                    return <Question data={item} mergeQuestion={mergeQuestion} ref = {ref}  key={i} />
+                {listQuestions.map((item,i) => {
+                    return <Question data={item} mergeQuestion={mergeQuestion} 
+                    
+                    ref = {ref}  key={i} />
                 })}
                 <button onClick={addQuestion} className="add_que">Add question</button>
             

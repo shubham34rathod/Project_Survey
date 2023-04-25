@@ -47,8 +47,8 @@ async function fn()
             <td>
                 <div className='action'>
                     <div onClick={()=>{
-                        setSurveyInfo(data)
-                        navigate('/list-survey/create/questions',{state: {dataFromSurvey: data}})
+                        setSurveyInfo({...data,isEdit: true})
+                        navigate('/list-survey/create/questions',{state: {...data,isEdit: true}})
                     }} id='edit'></div>
                     <div id='delete' onClick={fn}></div>
                 </div>
