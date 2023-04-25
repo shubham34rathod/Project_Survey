@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import "../styles/register.css"
 import { useNavigate } from "react-router-dom";
-import backEndUrl from '../config/config'
+//import backEndUrl from '../config/config'
 // import Cookies from 'universal-cookie'
 
 function Register()
