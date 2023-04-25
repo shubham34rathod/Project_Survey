@@ -11,7 +11,7 @@ function Register()
     const navigate = useNavigate()
 
     let [verifyPass,showAlert]=useState(false)
-    let [emtFiled,updateEmt]=useState(true)
+    let [emtFiled,updateEmt]=useState(false)
 
     let [reg_data,updateData]=useState({
         name:"",
@@ -50,7 +50,7 @@ function Register()
         else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
         {
             // alert("All fields are required")
-            //  updateEmt(true)
+             updateEmt(true)
              setTimeout(()=>{updateEmt(false)},3000)
         }
         else if(reg_data.password!==conf_password)
@@ -168,7 +168,7 @@ function Register()
                                         // },5000)
                                         // navigate('/')
                                         submitForm()
-                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
+                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px",bottom:"-20px"}}>Register</button>
                                     {verifyPass && <h2 className="alert_password">Password doesn't match</h2>}
                                     {emtFiled && <h2 className="alert">All fields are required</h2>}
                                 </div>
