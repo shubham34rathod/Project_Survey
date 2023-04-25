@@ -11,7 +11,7 @@ function Register()
     const navigate = useNavigate()
 
     let [verifyPass,showAlert]=useState(false)
-    let [emtFiled,updateEmt]=useState(false)
+    let [emtFiled,updateEmt]=useState(true)
 
     let [reg_data,updateData]=useState({
         name:"",
@@ -49,11 +49,13 @@ function Register()
         }
         else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
         {
-             updateEmt(true)
+            // alert("All fields are required")
+            //  updateEmt(true)
              setTimeout(()=>{updateEmt(false)},3000)
         }
         else if(reg_data.password!==conf_password)
         {
+            // alert("Password doesn't match")
             showAlert(true)
             setTimeout(()=>{showAlert(false)},3000)
             console.log("password is not match");

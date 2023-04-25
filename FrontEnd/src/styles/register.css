@@ -82,18 +82,19 @@
     top: 10px;
 }
 .form-check-input{
-    position: fixed;
-    right: 630px;
+    position: relative;
+    right: 20px;
+    bottom: -20px;
 }
 .alert{
     color: red;
-    position: fixed;
-    right: 435px;
-    bottom: 180px;
+    position: relative;
+    right: 100px;
+    bottom: -10px;
 }
 .alert_password{
     color: red;
-    position: fixed;
-    right: 425px;
-    bottom: 180px;
+    position: relative;
+    right: 110px;
+    bottom: -10px;
 }
