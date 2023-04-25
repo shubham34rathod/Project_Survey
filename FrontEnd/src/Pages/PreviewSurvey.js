@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
 import { Filecontext } from '../config/FileContext';
+import backEndUrl from '../config/config'
 
 
 
@@ -82,7 +83,7 @@ export default function PreviewSurvey()
 
         //sending survey data to backend...............
 
-        await fetch("http://localhost:8000/survey_data",{
+        await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -127,7 +128,7 @@ export default function PreviewSurvey()
                 <div className='util'>
                 <div id="close-prev-btn " >
                             <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder,fontStyle:FontStyle}}  onClick={()=>{
-                                navigate('/list-survey/create/questions',{state: location.state})
+                                navigate('/list-survey/create/questions',{state: location.state.questions})
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn " >
@@ -160,14 +161,21 @@ export default function PreviewSurvey()
                         <form>
                             <label className='dark-theme'  htmlFor='question' style={{color:queColor,fontStyle:FontStyle}}>{item.question}</label>
                             <div id='question' className='radio-container'>
-                                <div>
-                                <input className='dark-theme' id='opt-1' type="radio" value={1} name='q' disabled/>
-                                <label className='dark-theme' htmlFor='op1-1'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[0]}</label>
-                                </div>
-                                <div>
+                                {
+                                    Object.keys(item.choices).map((key)=>{
+                                        return <>
+                                        <div>
+                                           <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
+                                           <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{key}</label>
+                                        </div>
+                                        </>
+                                        
+                                    })
+                                }
+                                {/* <div>
                                 <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
                                 <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[1]}</label>
-                                </div>
+                                </div> */}
                                 
                                 {/* <input id='opt-3' type="radio" value={3} name='q' />
                                 <label htmlFor='op1-3'>Option 3</label> */}

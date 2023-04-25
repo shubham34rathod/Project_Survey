@@ -59,9 +59,10 @@ function AddQuiz()
 
     //receiving data from createSurvey
     const location=useLocation();
+    
     const ref = useRef(null)
     const [themeToggle, setThemeToggle] = useState(false);
-    const [choice, setChoice] = useState({})
+    
     const [listQuestions, setListQuestions] = useState([])
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
@@ -129,10 +130,11 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    console.log(listQuestions);
+    // console.log(listQuestions);
+    // console.log(location.state);
+    // console.log(mergedQuestions);
+    //console.log(surveyInfo);
     
-    console.log(mergedQuestions);
-    console.log(surveyInfo);
     return <>
     <div className="add-q-container">
         <Header></Header>

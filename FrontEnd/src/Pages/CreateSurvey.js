@@ -16,6 +16,7 @@ export default function CreateSurvey()
 {
     const navigate = useNavigate()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+    const [emtAlert,updateAlert]=useState(false)
 
     const cookies=new Cookies()
 
@@ -89,13 +90,23 @@ export default function CreateSurvey()
                         </div>
                         <div id="next-btn">
                             <button onClick={() => {
-                                setSurveyInfo({...surveyData, isEdit: false})
+                                
                                 let token=cookies.get("uid")
                                 if(!token)
                                 {
                                     navigate('/')
                                 }
-                                else{navigate('/list-survey/create/questions',{state:{...surveyData,isEdit: false}}) }  //sending data to AddQuiz                             
+                                else{
+                                    if(surveyData.name==='' || surveyData.description==='' || surveyData.typeOfSurvey==='' || surveyData.startDate==='' || surveyData.endDate==='' || surveyData.imageName==='')
+                                    {
+                                       alert('All fields are required')
+                                    }
+                                    else{
+                                        setSurveyInfo({...surveyData, isEdit: false})
+                                        navigate('/list-survey/create/questions',{state:{...surveyData,isEdit: false}}) //sending data to AddQuiz                             
+
+                                    } 
+                                }  //sending data to AddQuiz                             
                             }} onClickCapture={fn}>Next</button>
                         </div>
                     </div>
