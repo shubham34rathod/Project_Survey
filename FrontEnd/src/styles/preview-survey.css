@@ -77,7 +77,8 @@
 
 .radio-container{
     margin-top: 2rem;
-    display: flex;
+    margin-bottom: 2rem;
+    /* display: flex; */
     justify-content: space-between;
     justify-items: center;
     width: 20%;
@@ -87,6 +88,7 @@
 
 .radio-container input{
     width: 1rem;
+    margin-right: 1rem;
 }
 
 .radio-container label{

@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react'
 import '../styles/theme.css'
 import { useNavigate } from 'react-router-dom'
 import AddQuiz from './AddQuiz';
+import backEndUrl from '../config/config'
 
 export default function Theme({showTheme,update}) 
 {
@@ -15,7 +16,7 @@ export default function Theme({showTheme,update})
 
 
     useEffect(()=>{
-        fetch('http://localhost:8000/theme')
+        fetch(`https://survey-backend-cp5k.onrender.com/theme`)
         .then((data)=>data.json())
         .then((fonts)=>{
             // console.log(fonts)

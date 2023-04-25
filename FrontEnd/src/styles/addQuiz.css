@@ -211,3 +211,17 @@
     right: 600px;
     top: 250px;
 } */
+
+.addQue{
+    position: fixed;
+    left: 160px;
+    top: 300px;
+}
+.addOption{
+    background: #8A5DEF;
+    width: 100px;
+    height: 25px;
+    border: #8A5DEF;
+    border-radius: 4px;
+    margin: 5px;
+}
