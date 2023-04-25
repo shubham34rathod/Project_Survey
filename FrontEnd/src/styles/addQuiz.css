@@ -193,6 +193,11 @@
     transition: transform .2s;
     transform: scale(1.2);
 }
+#op-delete{
+    position: absolute;
+    left: 54rem;
+    top: 1.5rem;
+}
 .add-q:hover{
     cursor: pointer;
 }

@@ -39,8 +39,7 @@ export default function PreviewSurvey()
 
     //receiving data ffrom createSurvey
     let location=useLocation();
-    console.log(location.state);
-    console.log(location.state.theme_data);
+    
    // console.log(location.state);
    
         

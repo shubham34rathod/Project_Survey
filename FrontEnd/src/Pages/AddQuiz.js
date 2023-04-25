@@ -60,26 +60,25 @@ function AddQuiz()
     //receiving data from createSurvey
     const location=useLocation();
     const ref = useRef(null)
-    const [themeToggle, setThemeToggle] = useState(false)
+    const [themeToggle, setThemeToggle] = useState(false);
+    const [choice, setChoice] = useState({})
+    const [listQuestions, setListQuestions] = useState([])
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
+       
     useEffect(()=>{
-        console.log(location.state);
-        setSurveyInfo({...location.state} )
-        setQuestions(initialData())
+        
+        console.log(surveyInfo);
+        setListQuestions(initialData())
         function initialData(){
-            if(!Object.keys(surveyInfo).length || !surveyInfo.questions.length ){
-                
+            if(!surveyInfo.isEdit){
                 return [{
-                        qno: 1,
-                        question: "",
+                    qno:1,
+                    question: "",
                     choices: {}
                 }]
             }
-                else{
-                    
-                    return [...surveyInfo.questions]
-                }
+           return [...surveyInfo.questions]
                
         }
       
@@ -102,10 +101,12 @@ function AddQuiz()
     
     
     const addQuestion=()=>{
-        setQuestions(prevq=>([
+
+        setListQuestions(prevq=>([
             ...prevq,
+        
             {
-                qno: questions.length+1,
+                qno: listQuestions.length+1,
                 question: "",
                 choices: {}
             }
@@ -115,10 +116,7 @@ function AddQuiz()
        
     }
     const mergeQuestion=()=>{   
-        setSurveyInfo(prev=>({
-            ...prev,
-            questions: [...mergedQuestions]
-        }))
+       
         
     }
     
@@ -131,8 +129,10 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    console.log(questions);
+    console.log(listQuestions);
+    
     console.log(mergedQuestions);
+    console.log(surveyInfo);
     return <>
     <div className="add-q-container">
         <Header></Header>
@@ -167,8 +167,10 @@ function AddQuiz()
             </div>
             </div>
             
-                {questions.map((item,i) => {
-                    return <Question data={item} mergeQuestion={mergeQuestion} ref = {ref}  key={i} />
+                {listQuestions.map((item,i) => {
+                    return <Question data={item} mergeQuestion={mergeQuestion} 
+                    
+                    ref = {ref}  key={i} />
                 })}
                 <button onClick={addQuestion} className="add_que">Add question</button>
             

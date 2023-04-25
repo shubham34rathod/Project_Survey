@@ -34,7 +34,8 @@ export default function CreateSurvey()
         endDate:"",
         otherCriteria:"",
         imageName:"",
-        token:cookies.get("uid")
+        token:cookies.get("uid"),
+        questions: []
     })
 
     function onChange(e,prop)
@@ -88,16 +89,13 @@ export default function CreateSurvey()
                         </div>
                         <div id="next-btn">
                             <button onClick={() => {
-                                setSurveyInfo(prev=>({
-                                    ...surveyData,
-                                    questions: []
-                                }))
+                                setSurveyInfo({...surveyData, isEdit: false})
                                 let token=cookies.get("uid")
                                 if(!token)
                                 {
                                     navigate('/')
                                 }
-                                else{navigate('/list-survey/create/questions',{state:surveyData}) }  //sending data to AddQuiz                             
+                                else{navigate('/list-survey/create/questions',{state:{...surveyData,isEdit: false}}) }  //sending data to AddQuiz                             
                             }} onClickCapture={fn}>Next</button>
                         </div>
                     </div>
