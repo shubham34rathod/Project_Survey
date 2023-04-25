@@ -12,26 +12,6 @@ import Question from "./Question";
 import { Filecontext } from "../config/FileContext";
 
 
-// let questions1 = [{
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// }]
 
 
 
@@ -72,7 +52,8 @@ function AddQuiz()
         console.log(surveyInfo);
         setListQuestions(initialData())
         function initialData(){
-            if(!surveyInfo.isEdit){
+            if(!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)){
+               
                 return [{
                     qno:1,
                     question: "",
@@ -132,8 +113,8 @@ function AddQuiz()
     mergeSurveyInfoAndQ()
     // console.log(listQuestions);
     // console.log(location.state);
-    // console.log(mergedQuestions);
-    //console.log(surveyInfo);
+     console.log(mergedQuestions);
+    console.log(surveyInfo);
     
     return <>
     <div className="add-q-container">
@@ -154,10 +135,18 @@ function AddQuiz()
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
+                            if(surveyInfo.isEdit){
+                                setSurveyInfo(prevInfo=>({
+                                    ...prevInfo,
+                                    questions: [...surveyInfo.questions, ...mergedQuestions]
+                                }))
+                            }
+                            else{
                             setSurveyInfo(prevInfo=>({
                                 ...prevInfo,
                                 questions: [ ...mergedQuestions]
                             }))
+                        }
                             navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
                         }} className="preview">Preview</button>
                         <button onClick={() => {

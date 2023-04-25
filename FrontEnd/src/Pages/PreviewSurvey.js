@@ -51,9 +51,9 @@ export default function PreviewSurvey()
    
     useEffect(()=>{
         
-       setSurveyInfo({...location.state})
+       //setSurveyInfo({...location.state})
     console.log(surveyInfo);
-        setShowQuestions(location.state.questions)
+        setShowQuestions(surveyInfo.questions)
         if(location.state.theme_data.themeName==='Dark')
         {
             updateBackColor('#201f1f')
@@ -82,7 +82,22 @@ export default function PreviewSurvey()
         // console.log('not received');
 
         //sending survey data to backend...............
+        if(surveyInfo.isEdit){
+            await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify(surveyInfo),
+        })
+        .then((data)=>data.json())
+        .then((responce)=>console.log(responce))
+        .catch(()=>console.log("uploading error"))
+        console.log("sent edited");
+        navigate('/list-survey')
+        }
 
+else{
         await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
             method:"POST",
             headers:{
@@ -95,6 +110,7 @@ export default function PreviewSurvey()
         .catch(()=>console.log("uploading error"))
 
         navigate('/list-survey')
+    }
 
     }
 
@@ -128,6 +144,7 @@ export default function PreviewSurvey()
                 <div className='util'>
                 <div id="close-prev-btn " >
                             <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder,fontStyle:FontStyle}}  onClick={()=>{
+                                setSurveyInfo({...surveyInfo,isEdit:true})
                                 navigate('/list-survey/create/questions',{state: location.state.questions})
                             }}>Close Preview</button>
                         </div>

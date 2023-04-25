@@ -9,14 +9,19 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
         sendQ() {
 
             mergeQuestion();
+            if(surveyInfo.isEdit){
+                mergedQuestions.pop()
+                setMergedQuestion(prevQs=>([
+                    ...prevQs,
+                    question
+                ]))
+            }
+            else{
             setMergedQuestion(prevQs=>([
                 ...prevQs,
                 question
-            ]))
-            setSurveyInfo(prev => ({
-                ...prev,
-                questions: [].push[question]
-            }))
+            ]))}
+           
 
         }
     }));
@@ -30,7 +35,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
         question: data.question,
         choices: data.choices
     })
-   // console.log(question);
+   //console.log(question);
     const getQuestion = (e) => {
         setQuestion(prevQuestion => ({
             ...prevQuestion,
@@ -53,7 +58,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
     }
 
     // .....................
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState(Object.keys(question.choices));
     // const [options, setOptions] = useState([]);
     const handleOptionChange = (e, index) => {
         getChoice(e)
@@ -90,7 +95,7 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                    <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" /> <span id="op-delete">DELETE</span>
+                    <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" />{/*  <span id="op-delete">DELETE</span> */}
                 </div>
                 <div className="options">
                     {options.map((option, index) => (
