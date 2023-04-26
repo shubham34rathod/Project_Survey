@@ -83,7 +83,7 @@ export default function PreviewSurvey()
 
         //sending survey data to backend...............
         if(surveyInfo._id !== undefined){
-            await fetch(`https://survey-backend-cp5k.onrender.com/update-survey`,{
+            await fetch(`https://survey-backend-2coa.onrender.com/update-survey`,{
             method:"PUT",
             headers:{
                 "content-type":"application/json"
@@ -99,7 +99,7 @@ export default function PreviewSurvey()
         }
 
 else{
-        await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
+        await fetch(`https://survey-backend-2coa.onrender.com/survey_data`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"

@@ -90,7 +90,7 @@ export default function SurveyList()
               
   
 
-            fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
+            fetch(`https://survey-backend-2coa.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
