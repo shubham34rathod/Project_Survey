@@ -54,7 +54,7 @@ function AddQuiz()
         console.log(surveyInfo);
         setListQuestions(initialData())
         function initialData(){
-            if((!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)) || surveyInfo.questions === undefined ){
+            if(surveyInfo.questions === undefined || (!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)) ){
                
                 return [{
                     qno:1,
@@ -97,7 +97,7 @@ function AddQuiz()
 // }
     const addQuestion=()=>{
         if(listQuestions.length > 0){
-             ref.current.sendQ();
+             if (ref.current.sendQ()) return
              setListQuestions(prevq=>([
                 ...prevq,
              {

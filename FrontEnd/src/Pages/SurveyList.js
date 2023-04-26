@@ -20,6 +20,7 @@ export default function SurveyList()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
 
     const navigate = useNavigate();
+    const [isLoading, setLoading] = useState(true);
     const [isAscending, setIsAscending] = useState({
         name: true,
         sod: true,
@@ -101,8 +102,11 @@ export default function SurveyList()
            .then((responce)=>{
                 setData(responce)
                 // console.log(responce[0])
+                
            })
-           .catch(()=>console.log("servey fetching error"))
+           .catch(()=>{
+            console.log("servey fetching error")})
+            
         //    const cookies=new Cookies()
     // },[])
     
@@ -162,7 +166,9 @@ export default function SurveyList()
                         </thead>
                         <tbody>
                             
-                            {data && data.filter((item)=>{
+                            {
+                            
+                            data && data.filter((item)=>{
                                 return search.toLowerCase() === '' 
                                 ? item 
                                 : item['name'].toLowerCase().includes(search);
@@ -171,6 +177,9 @@ export default function SurveyList()
                             })}
                         </tbody>
                     </table>
+                    { ( data.length ===0)? <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
+                        <div class="lds-facebook"><div></div><div></div><div></div></div>    
+                    </div> :<div></div>}
                 </div>
             </div>
             
