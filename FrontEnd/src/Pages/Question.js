@@ -4,10 +4,15 @@ import close from '../images/close-_1_.jpg'
 import '../styles/addQuiz.css'
 import { Filecontext } from "../config/FileContext";
 
-const Question = forwardRef(({ data, mergeQuestion }, ref) => {
+const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete,  mergeQuestion }, ref) => {
     useImperativeHandle(ref, () => ({
         sendQ() {
-
+            listQuestions.pop()
+            setListQuestions(prev=>([
+                ...prev,
+                question
+            ]))
+            
             mergeQuestion();
             if(surveyInfo.isEdit){
                 mergedQuestions.pop()
@@ -28,10 +33,11 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
     const [toggle, setToggle] = useState(false)
     const [choice, setChoice] = useState({})
+    const [ondelete, setOnDelete] = useState(true)
     const { questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo } = useContext(Filecontext)
 
     const [question, setQuestion] = useState({
-        qno: data.qno,
+        qno: num + 1,
         question: data.question,
         choices: data.choices
     })
@@ -95,7 +101,9 @@ const Question = forwardRef(({ data, mergeQuestion }, ref) => {
 
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                    <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" />{/*  <span id="op-delete">DELETE</span> */}
+                     <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" /> {/* <span onClick={()=>{onDelete(question.qno)
+                    setOnDelete(!ondelete)
+                    }} id="op-delete">DELETE</span>  */}
                 </div>
                 <div className="options">
                     {options.map((option, index) => (

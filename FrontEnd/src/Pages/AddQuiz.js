@@ -44,6 +44,7 @@ function AddQuiz()
     const [themeToggle, setThemeToggle] = useState(false);
     
     const [listQuestions, setListQuestions] = useState([])
+    // const [ondelete, setOnDelete] = useState(true)
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
        
@@ -52,7 +53,7 @@ function AddQuiz()
         console.log(surveyInfo);
         setListQuestions(initialData())
         function initialData(){
-            if(!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)){
+            if((!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)) || surveyInfo.questions === undefined ){
                
                 return [{
                     qno:1,
@@ -81,20 +82,43 @@ function AddQuiz()
     //console.log(location.state);
     //opacity: 0.1;
     
-    
-    const addQuestion=()=>{
+    // const onDelete =()=>{
 
+    // }
+// const onDelete =(qno)=>{
+//     setOnDelete(!ondelete)
+//     console.log(qno);
+//    const result =  listQuestions.filter(item=> item.qno !== qno)
+//     console.log(result);
+//     setListQuestions(result)
+//     setOnDelete(!ondelete)
+//     console.log(listQuestions);
+// }
+    const addQuestion=()=>{
+        if(listQuestions.length > 0){
+             ref.current.sendQ();
+             setListQuestions(prevq=>([
+                ...prevq,
+             {
+                    qno: listQuestions.length+1,
+                    question: "",
+                    choices: {}
+                }
+            ]))
+        }
+
+        else{
         setListQuestions(prevq=>([
             ...prevq,
-        
-            {
+         {
                 qno: listQuestions.length+1,
                 question: "",
                 choices: {}
             }
         ]))
+    }
         
-       ref.current.sendQ();
+      
        
     }
     const mergeQuestion=()=>{   
@@ -111,10 +135,10 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    // console.log(listQuestions);
+    //console.log(listQuestions);
     // console.log(location.state);
-     console.log(mergedQuestions);
-    console.log(surveyInfo);
+    //  console.log(mergedQuestions);
+     //console.log(surveyInfo);
     
     return <>
     <div className="add-q-container">
@@ -160,8 +184,11 @@ function AddQuiz()
             
                 {listQuestions.map((item,i) => {
                     return <Question data={item} mergeQuestion={mergeQuestion} 
-                    
-                    ref = {ref}  key={i} />
+                    num = {i}
+                    ref = {ref}  key={i}
+                    setListQuestions={setListQuestions}
+                    listQuestions={listQuestions} 
+                    />
                 })}
                 <button onClick={addQuestion} className="add_que">Add question</button>
             
