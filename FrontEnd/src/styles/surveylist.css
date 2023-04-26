@@ -88,6 +88,10 @@
     margin-top: 2rem;
 }
 
+.survey-list th:hover{
+    cursor: pointer;
+}
+
 table {
     width: 100%;
 }

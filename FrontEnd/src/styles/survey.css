@@ -29,3 +29,8 @@ tr{
     transform: scale(1.2);
 
 }
+.list-sur:hover{
+    cursor: pointer;
+    transform: translateY(5px);
+    box-shadow: inset 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}

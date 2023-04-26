@@ -13,6 +13,7 @@ export default function Theme({showTheme,update})
     let [style,updateStyle]=useState([])
     // let [theme,changeTheme]=useState('None')
     // let [styleName,changeStyle]=useState('none')
+    let [themeName,changeThemeName]=useState('')
 
 
     useEffect(()=>{
@@ -46,6 +47,8 @@ export default function Theme({showTheme,update})
             [prop]:e.target.value
          }))
 
+         changeThemeName(`${e.target.value} Theme`)
+
                    
     }
     
@@ -59,7 +62,7 @@ export default function Theme({showTheme,update})
                 <form className='theme-form'>
                     <div>
                         <label>Theme</label>
-                        <select onClick={(e)=>themeChange(e,"themeName")}>
+                        <select onClick={(e)=>themeChange(e,"themeName")} style={{fontSize:"12px"}}>
                             <option defaultChecked disabled>Select</option>
                             <option>Dark</option>
                             <option>Light</option>
@@ -69,13 +72,13 @@ export default function Theme({showTheme,update})
                         <div>
                             <div>
                                 <label>Theme name</label>
-                                <input id='themename' type='text' />
+                                <input id='themename' type='text' value={themeName} style={{fontSize:"12px"}}/>
                             </div>
                         </div>
                         <div>
                             <div>
                                 <label>All Questions Mandatory</label>
-                                <select>
+                                <select style={{fontSize:"12px"}}>
                                     <option defaultChecked disabled>Select</option>
 
                                     <option>Yes</option>
@@ -86,7 +89,7 @@ export default function Theme({showTheme,update})
                         <div>
                             <div>
                                 <label>Enable Skip</label>
-                                <select>
+                                <select style={{fontSize:"12px"}}>
                                     <option defaultChecked disabled>Select</option>
 
                                     <option>Yes</option>

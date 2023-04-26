@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { Filecontext } from '../config/FileContext';
 import backEndUrl from '../config/config'
 
+
 export default function Survey({data}) {
+    
     const navigate = useNavigate()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
 const {name, description, typeOfSurvey, startDate, endDate} = data
@@ -17,7 +19,7 @@ async function fn()
         _id:data._id
     }
     // console.log(obj);
-    await fetch(`https://survey-backend-cp5k.onrender.com/delete_survey`,{
+    await fetch(`http://localhost:8000/delete_survey`,{
         method:"POST",
         headers:{
             "content-type":"application/json"
@@ -29,18 +31,19 @@ async function fn()
         console.log(responce)
         if(responce==='delete successfull')
         {
-            navigate('/list-survey/create')
+            // navigate('/list-survey/create')
         }
         // window.location.reload(true)    
     })
     .catch(()=>console.log("uploading error"))
     
-    navigate('/list-survey/create')
+    // navigate('/list-survey/create')
+
 
 }
 
     return <>
-        <tr>
+        <tr className='list-sur'>
             <td>{name}</td>
             <td>{description}</td>
             <td>{typeOfSurvey}</td>
