@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../styles/register.css"
 import { useNavigate } from "react-router-dom";
+import backEndUrl from '../config/config'
 // import Cookies from 'universal-cookie'
 
 function Register()
@@ -10,6 +11,7 @@ function Register()
     const navigate = useNavigate()
 
     let [verifyPass,showAlert]=useState(false)
+    let [emtFiled,updateEmt]=useState(false)
 
     let [reg_data,updateData]=useState({
         name:"",
@@ -26,11 +28,11 @@ function Register()
         e.preventDefault();
         // let data=new FormData(e.target)
         // console.log(data);
-        if(reg_data.password===conf_password && reg_data.password!=='')
+        if(reg_data.password===conf_password && reg_data.password!=='' && reg_data.name!=='' && reg_data.email!=='' && reg_data.phone!=='' && reg_data.profession!=='')
         {
             showAlert(false)
             console.log(reg_data);
-            await fetch("http://localhost:8000/register",{
+            await fetch(`https://survey-backend-cp5k.onrender.com/register`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -45,9 +47,17 @@ function Register()
             // console.log(data);
             navigate('/');
         }
-        else
+        else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
         {
+            // alert("All fields are required")
+             updateEmt(true)
+             setTimeout(()=>{updateEmt(false)},3000)
+        }
+        else if(reg_data.password!==conf_password)
+        {
+            // alert("Password doesn't match")
             showAlert(true)
+            setTimeout(()=>{showAlert(false)},3000)
             console.log("password is not match");
         }
           
@@ -158,8 +168,9 @@ function Register()
                                         // },5000)
                                         // navigate('/')
                                         submitForm()
-                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
-                                    {verifyPass && <h2 className="alert">Password doesn't match</h2>}
+                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px",bottom:"-20px"}}>Register</button>
+                                    {verifyPass && <h2 className="alert_password">Password doesn't match</h2>}
+                                    {emtFiled && <h2 className="alert">All fields are required</h2>}
                                 </div>
                             </div>
                         </form>

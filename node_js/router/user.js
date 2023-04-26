@@ -158,11 +158,13 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
     // console.log(req.body);    
     try 
     {
+        //const {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token, _id} = req.body;
         // console.log(req.body);  
         let Boolean=req.cookies.uid
-        console.log(Boolean);
+       // console.log(req.body);
 
         let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token}=req.body;
+        
         let doc2=new Model2({
             name:name,
             description:description,
@@ -180,6 +182,8 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
             res.status(200).send({result: doc2})
         })
         .catch(err=> res.status(500).send({message: "something went wrong"}))
+    
+    
     } 
     catch (error) 
     {
@@ -220,11 +224,30 @@ router.post('/get-surveys',async (req,res)=>{
     
 // })
 
+router.put('/update-survey',(req, res)=>{
+    let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token, _id}=req.body;
+
+    const upd =  Model2.findByIdAndUpdate({_id}, req.body)
+    .then(()=> res.status(200).json({result: upd}))
+        .catch (err=> res.status(500).send({message: err.message}))
+        
+        
+})
+
 
 
 router.post('/delete_survey', async (req,res)=>{
-    console.log(req.body._id);
-    await Model2.findByIdAndDelete(req.body._id)
+    try 
+    {
+        console.log(req.body._id);
+        await Model2.findByIdAndDelete(req.body._id)
+        res.json('delete successfull')
+    } 
+    catch (error) 
+    {
+        res.json('error')
+    }
+
 })
 
 

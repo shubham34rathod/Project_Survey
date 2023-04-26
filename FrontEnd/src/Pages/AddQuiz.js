@@ -12,26 +12,6 @@ import Question from "./Question";
 import { Filecontext } from "../config/FileContext";
 
 
-// let questions1 = [{
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// },
-// {
-//     qno: 1,
-//     question: "Your name?",
-//     choices: "op1"
-// }]
 
 
 
@@ -41,6 +21,7 @@ function AddQuiz()
     const navigate = useNavigate();
 
     // let [themeData,themeUpdate]=useState({})
+
 
     let [theme_data,update]=useState({
         themeName:"",
@@ -59,27 +40,29 @@ function AddQuiz()
 
     //receiving data from createSurvey
     const location=useLocation();
+    
     const ref = useRef(null)
-    const [themeToggle, setThemeToggle] = useState(false)
+    const [themeToggle, setThemeToggle] = useState(false);
+    
+    const [listQuestions, setListQuestions] = useState([])
+    // const [ondelete, setOnDelete] = useState(true)
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
    
+       
     useEffect(()=>{
-        console.log(location.state);
-        setSurveyInfo({...location.state} )
-        setQuestions(initialData())
+        
+        console.log(surveyInfo);
+        setListQuestions(initialData())
         function initialData(){
-            if(!Object.keys(surveyInfo).length || !surveyInfo.questions.length ){
-                
+            if((!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)) || surveyInfo.questions === undefined ){
+               
                 return [{
-                        qno: 1,
-                        question: "",
+                    qno:1,
+                    question: "",
                     choices: {}
                 }]
             }
-                else{
-                    
-                    return [...surveyInfo.questions]
-                }
+           return [...surveyInfo.questions]
                
         }
       
@@ -100,25 +83,47 @@ function AddQuiz()
     //console.log(location.state);
     //opacity: 0.1;
     
-    
+    // const onDelete =()=>{
+
+    // }
+// const onDelete =(qno)=>{
+//     setOnDelete(!ondelete)
+//     console.log(qno);
+//    const result =  listQuestions.filter(item=> item.qno !== qno)
+//     console.log(result);
+//     setListQuestions(result)
+//     setOnDelete(!ondelete)
+//     console.log(listQuestions);
+// }
     const addQuestion=()=>{
-        setQuestions(prevq=>([
+        if(listQuestions.length > 0){
+             ref.current.sendQ();
+             setListQuestions(prevq=>([
+                ...prevq,
+             {
+                    qno: listQuestions.length+1,
+                    question: "",
+                    choices: {}
+                }
+            ]))
+        }
+
+        else{
+        setListQuestions(prevq=>([
             ...prevq,
-            {
-                qno: questions.length+1,
+         {
+                qno: listQuestions.length+1,
                 question: "",
                 choices: {}
             }
         ]))
+    }
         
-       ref.current.sendQ();
+      
        
     }
     const mergeQuestion=()=>{   
-        setSurveyInfo(prev=>({
-            ...prev,
-            questions: [...mergedQuestions]
-        }))
+       
         
     }
     
@@ -131,8 +136,11 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    console.log(questions);
-    console.log(mergedQuestions);
+    //console.log(listQuestions);
+    // console.log(location.state);
+    //  console.log(mergedQuestions);
+     //console.log(surveyInfo);
+    
     return <>
     <div className="add-q-container">
         <Header></Header>
@@ -145,17 +153,29 @@ function AddQuiz()
                 <div className="s_child1">
                     <div className="rec1">
                         <img onClick={() => {
-                            navigate('/list-survey/create')
+                            if(surveyInfo._id === undefined){
+                                setSurveyInfo({...surveyInfo,isEdit: true})
+                                navigate('/list-survey/create')
+                            }
+                            
                         }} src={left_arrow} alt="arrow" className="arrow lift" />
                         <p className="create">Create Questions</p>
                     </div>
                     <div className="rec2">
                         <button className="theme_btn" onClick={() =>{setThemeToggle(true)}}>Theme Setting</button>
                         <button onClick={() => {
+                            if(surveyInfo.isEdit){
+                                setSurveyInfo(prevInfo=>({
+                                    ...prevInfo,
+                                    questions: [...surveyInfo.questions, ...mergedQuestions]
+                                }))
+                            }
+                            else{
                             setSurveyInfo(prevInfo=>({
                                 ...prevInfo,
                                 questions: [ ...mergedQuestions]
                             }))
+                        }
                             navigate('/list-survey/create/questions/preview',{state:{...location.state,theme_data}}) //sending data to preview{state:{...location.state,theme_data}})
                         }} className="preview">Preview</button>
                         <button onClick={() => {
@@ -167,8 +187,13 @@ function AddQuiz()
             </div>
             </div>
             
-                {questions.map((item,i) => {
-                    return <Question data={item} mergeQuestion={mergeQuestion} ref = {ref}  key={i} />
+                {listQuestions.map((item,i) => {
+                    return <Question data={item} mergeQuestion={mergeQuestion} 
+                    num = {i}
+                    ref = {ref}  key={i}
+                    setListQuestions={setListQuestions}
+                    listQuestions={listQuestions} 
+                    />
                 })}
                 <button onClick={addQuestion} className="add_que">Add question</button>
             

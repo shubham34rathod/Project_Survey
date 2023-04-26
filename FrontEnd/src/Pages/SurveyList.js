@@ -8,6 +8,7 @@ import '../styles/header.css'
 import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import Header from './Header'
 import { Filecontext } from '../config/FileContext'
+import backEndUrl from '../config/config'
 
 const config = require('../config/config')
 
@@ -84,8 +85,12 @@ export default function SurveyList()
 
     const [data,setData]=useState([]);
 
-    useEffect(()=>{
-            fetch("http://localhost:8000/get-surveys",{
+    
+    // useEffect(()=>{
+              
+  
+
+            fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -99,7 +104,7 @@ export default function SurveyList()
            })
            .catch(()=>console.log("servey fetching error"))
         //    const cookies=new Cookies()
-    },[])
+    // },[])
     
     return <>
         <div className='container'>
@@ -158,10 +163,10 @@ export default function SurveyList()
                         <tbody>
                             
                             {data && data.filter((item)=>{
-            return search.toLowerCase() === '' 
-            ? item 
-            : item['name'].toLowerCase().includes(search);
-        }).map((item, i)=>{
+                                return search.toLowerCase() === '' 
+                                ? item 
+                                : item['name'].toLowerCase().includes(search);
+                            }).map((item, i)=>{
                                 return <Survey data={item} key={i}/>
                             })}
                         </tbody>

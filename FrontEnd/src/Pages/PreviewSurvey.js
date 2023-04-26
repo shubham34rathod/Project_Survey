@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import '../styles/preview-survey.css'
 import { useNavigate,useLocation } from "react-router-dom";
 import { Filecontext } from '../config/FileContext';
+import backEndUrl from '../config/config'
 
 
 
@@ -39,8 +40,7 @@ export default function PreviewSurvey()
 
     //receiving data ffrom createSurvey
     let location=useLocation();
-    console.log(location.state);
-    console.log(location.state.theme_data);
+    
    // console.log(location.state);
    
         
@@ -51,9 +51,9 @@ export default function PreviewSurvey()
    
     useEffect(()=>{
         
-       setSurveyInfo({...location.state})
+       //setSurveyInfo({...location.state})
     console.log(surveyInfo);
-        setShowQuestions(location.state.questions)
+        setShowQuestions(surveyInfo.questions)
         if(location.state.theme_data.themeName==='Dark')
         {
             updateBackColor('#201f1f')
@@ -82,8 +82,24 @@ export default function PreviewSurvey()
         // console.log('not received');
 
         //sending survey data to backend...............
+        if(surveyInfo._id !== undefined){
+            await fetch(`https://survey-backend-cp5k.onrender.com/update-survey`,{
+            method:"PUT",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify(surveyInfo),
+        })
+        .then((data)=>data.json())
+        .then((responce)=>console.log(responce))
+        .catch(()=>console.log("uploading error"))
+        console.log("sent edited");
+        setSurveyInfo({})
+        navigate('/list-survey')
+        }
 
-        await fetch("http://localhost:8000/survey_data",{
+else{
+        await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -93,8 +109,9 @@ export default function PreviewSurvey()
         .then((data)=>data.json())
         .then((responce)=>console.log(responce))
         .catch(()=>console.log("uploading error"))
-
+setSurveyInfo({})
         navigate('/list-survey')
+    }
 
     }
 
@@ -107,20 +124,24 @@ export default function PreviewSurvey()
     <div className='container dark-theme'style={{backgroundColor:wallColor}}>
         {/* <Sidebar/> */}
         <div className='sidenav dark-themesidenav' style={{backgroundColor:backColor}} >
-                <div onClick={()=>{
+        <acronym title="List"><div onClick={()=>{
                     navigate('/list-survey')
-                }} id='home'></div>
-                <div onClick={()=>{
-                    navigate('/list-survey/create')
-                }} id='create'></div>
-                <div onClick={()=>{
+                }} id='home'></div></acronym>
+                <acronym title="Create new Survey"><div onClick={()=>{
+                    if(surveyInfo._id === undefined){
+                        setSurveyInfo({...surveyInfo,isEdit: true})
+                        navigate('/list-survey/create')
+                    }
+                }} id='create'></div></acronym>
+                <acronym title="Register"><div onClick={()=>{
                     navigate('/register')
-                }} id='list'></div>
+                }} id='list'></div></acronym>
             </div>
         <div className='list-container '>
             <header className='list-header '>
                 <div id='searchform'>
                     <button onClick={()=>{
+                        setSurveyInfo({...surveyInfo,isEdit:true})
                         navigate('/list-survey/create/questions')
                     }} id='arrow'> &larr;</button>
                         <h5 style={{color:prevColor,fontStyle:FontStyle}}>Preview</h5>
@@ -128,7 +149,8 @@ export default function PreviewSurvey()
                 <div className='util'>
                 <div id="close-prev-btn " >
                             <button className='dark-themebutton' style={{backgroundColor:closePrev,color:closePrevColor,border:closePrevBorder,fontStyle:FontStyle}}  onClick={()=>{
-                                navigate('/list-survey/create/questions',{state: location.state})
+                                setSurveyInfo({...surveyInfo,isEdit:true})
+                                navigate('/list-survey/create/questions',{state: location.state.questions})
                             }}>Close Preview</button>
                         </div>
                         <div id="save-btn " >
@@ -161,14 +183,21 @@ export default function PreviewSurvey()
                         <form>
                             <label className='dark-theme'  htmlFor='question' style={{color:queColor,fontStyle:FontStyle}}>{item.question}</label>
                             <div id='question' className='radio-container'>
-                                <div>
-                                <input className='dark-theme' id='opt-1' type="radio" value={1} name='q' disabled/>
-                                <label className='dark-theme' htmlFor='op1-1'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[0]}</label>
-                                </div>
-                                <div>
+                                {
+                                    Object.keys(item.choices).map((key)=>{
+                                        return <>
+                                        <div>
+                                           <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
+                                           <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{key}</label>
+                                        </div>
+                                        </>
+                                        
+                                    })
+                                }
+                                {/* <div>
                                 <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
                                 <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{Object.keys(item.choices)[1]}</label>
-                                </div>
+                                </div> */}
                                 
                                 {/* <input id='opt-3' type="radio" value={3} name='q' />
                                 <label htmlFor='op1-3'>Option 3</label> */}

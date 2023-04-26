@@ -88,6 +88,10 @@
     margin-top: 2rem;
 }
 
+.survey-list th:hover{
+    cursor: pointer;
+}
+
 table {
     width: 100%;
 }
@@ -119,4 +123,8 @@ td {
 tr{
     margin-bottom: .5rem;
     background: #FAFDFF 0% 0% no-repeat padding-box;
+}
+
+.survey-list th:hover{
+    cursor: pointer;
 }

@@ -2,7 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import '../styles/survey.css'
 import { useNavigate } from 'react-router-dom';
 import { Filecontext } from '../config/FileContext';
+import backEndUrl from '../config/config'
+
+
 export default function Survey({data}) {
+    
     const navigate = useNavigate()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
 const {name, description, typeOfSurvey, startDate, endDate} = data
@@ -14,8 +18,8 @@ async function fn()
     let obj={
         _id:data._id
     }
-    console.log(obj);
-    await fetch("http://localhost:8000/delete_survey",{
+    // console.log(obj);
+    await fetch(`http://localhost:8000/delete_survey`,{
         method:"POST",
         headers:{
             "content-type":"application/json"
@@ -23,12 +27,23 @@ async function fn()
         body:JSON.stringify(obj),
     })
     .then((data)=>data.json())
-    .then((responce)=>console.log(responce))
+    .then((responce)=>{
+        console.log(responce)
+        if(responce==='delete successfull')
+        {
+            // navigate('/list-survey/create')
+        }
+        // window.location.reload(true)    
+    })
     .catch(()=>console.log("uploading error"))
+    
+    // navigate('/list-survey/create')
+
+
 }
 
     return <>
-        <tr>
+        <tr className='list-sur'>
             <td>{name}</td>
             <td>{description}</td>
             <td>{typeOfSurvey}</td>
@@ -37,8 +52,8 @@ async function fn()
             <td>
                 <div className='action'>
                     <div onClick={()=>{
-                        setSurveyInfo(data)
-                        navigate('/list-survey/create/questions',{state: {dataFromSurvey: data}})
+                        setSurveyInfo({...data,isEdit: true})
+                        navigate('/list-survey/create/questions',{state: {...data,isEdit: true}})
                     }} id='edit'></div>
                     <div id='delete' onClick={fn}></div>
                 </div>

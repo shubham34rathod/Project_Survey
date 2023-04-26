@@ -193,6 +193,11 @@
     transition: transform .2s;
     transform: scale(1.2);
 }
+#op-delete{
+    position: absolute;
+    left: 54rem;
+    top: 1.5rem;
+}
 .add-q:hover{
     cursor: pointer;
 }
@@ -206,3 +211,17 @@
     right: 600px;
     top: 250px;
 } */
+
+.addQue{
+    position: fixed;
+    left: 160px;
+    top: 300px;
+}
+.addOption{
+    background: #8A5DEF;
+    width: 100px;
+    height: 25px;
+    border: #8A5DEF;
+    border-radius: 4px;
+    margin: 5px;
+}
