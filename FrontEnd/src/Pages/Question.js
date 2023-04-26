@@ -36,21 +36,19 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
     const [toggle, setToggle] = useState(false)
     const [queType,updateQueType]=useState(true)
     const [choice, setChoice] = useState({})
-    const [ondelete, setOnDelete] = useState(true)
     const { questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo } = useContext(Filecontext)
 
-    const [question, setQuestion] = useState({
-        qno: num + 1,
-        question: data.question,
-        choices: data.choices
-    })
-   //console.log(question);
+    const [question, setQuestion] = useState(data)
+//    useEffect(()=>{
+//     console.log(question);
+//     console.log(data);
+//    }, [])
     const getQuestion = (e) => {
         setQuestion(prevQuestion => ({
             ...prevQuestion,
             question: `${e.target.value}`
         }))
-        // console.log(e.target.value);
+       
     }
 
     // const getChoices = () => {
@@ -91,7 +89,10 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                 [options[options.length - 1]]: false
             }
         }))
+        
     }
+    // console.log(question);
+    console.log(data);
 
     return <>
         <div className="s_parent2" >
@@ -103,9 +104,18 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
             <div className="que">
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                     <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" required/> {/* <span onClick={()=>{onDelete(question.qno)
-                    setOnDelete(!ondelete)
-                    }} id="op-delete">DELETE</span>  */}
+                     <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" required/> <span onClick={()=>{
+                        
+                        console.log(num);
+                        console.log(listQuestions);
+                        const result = [...listQuestions]
+                        result.splice(num,1)
+                        console.log(result);
+                        setListQuestions(result);
+                        
+                        console.log(listQuestions);
+                    
+                    }} id="op-delete">DELETE</span> 
                 </div>
                   <div className="options">
                     {options.map((option, index) => (

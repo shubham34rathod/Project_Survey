@@ -20,3 +20,17 @@ button:hover, .lift:hover{
     transition: transform .2s;
     transform: scale(1.2);
 }
+
+/* @media screen and (max-width: 980px) {
+    body {
+      background-color: lightgreen;
+      font-size: 50%;
+    }
+  } */
+
+  /* @media screen and (min-width: 375px) {
+    body {
+      background-color: lightgreen;
+      font-size: 30%;
+    }
+  } */

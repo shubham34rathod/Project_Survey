@@ -54,7 +54,7 @@ function AddQuiz()
         console.log(surveyInfo);
         setListQuestions(initialData())
         function initialData(){
-            if((!surveyInfo.isEdit && !(surveyInfo.questions.length > 0)) || surveyInfo.questions === undefined ){
+            if(surveyInfo.questions === undefined || (!surveyInfo.isEdit && !(surveyInfo.questions.length > 0))){
                
                 return [{
                     qno:1,
@@ -65,7 +65,7 @@ function AddQuiz()
            return [...surveyInfo.questions]
                
         }
-      
+      console.log("object");
     setMergedQuestion([])
     }, [])
 
@@ -83,16 +83,14 @@ function AddQuiz()
     //console.log(location.state);
     //opacity: 0.1;
     
-    // const onDelete =()=>{
-
-    // }
+   
 // const onDelete =(qno)=>{
-//     setOnDelete(!ondelete)
 //     console.log(qno);
-//    const result =  listQuestions.filter(item=> item.qno !== qno)
+//     console.log(listQuestions);
+//     const result = [...listQuestions]
+//     result.splice(qno,1)
 //     console.log(result);
-//     setListQuestions(result)
-//     setOnDelete(!ondelete)
+//     setListQuestions(result);
 //     console.log(listQuestions);
 // }
     const addQuestion=()=>{
@@ -136,7 +134,7 @@ function AddQuiz()
         
     }
     mergeSurveyInfoAndQ()
-    //console.log(listQuestions);
+    console.log(listQuestions);
     // console.log(location.state);
     //  console.log(mergedQuestions);
      //console.log(surveyInfo);
@@ -193,6 +191,7 @@ function AddQuiz()
                     ref = {ref}  key={i}
                     setListQuestions={setListQuestions}
                     listQuestions={listQuestions} 
+                    // onDelete={onDelete}
                     />
                 })}
                 <button onClick={addQuestion} className="add_que">Add question</button>
