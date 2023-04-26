@@ -34,6 +34,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
     }));
 
     const [toggle, setToggle] = useState(false)
+    const [queType,updateQueType]=useState(true)
     const [choice, setChoice] = useState({})
     const [ondelete, setOnDelete] = useState(true)
     const { questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo } = useContext(Filecontext)
@@ -100,14 +101,13 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                 </ul>
             </div>
             <div className="que">
-
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
                      <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" required/> {/* <span onClick={()=>{onDelete(question.qno)
                     setOnDelete(!ondelete)
                     }} id="op-delete">DELETE</span>  */}
                 </div>
-                <div className="options">
+                  <div className="options">
                     {options.map((option, index) => (
                         <div key={index}>
                             <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
@@ -118,11 +118,12 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                                 className="label"
                                 //  style={{border:"1px solid green",margin:"5px"}}
                                 onChange={(e) => handleOptionChange(e, index)}
-                            /> <span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
+                            /> 
+                            <span hidden={(!(Object.keys(choice)[0] && true))} onClick={getChoices} className="add-q" >+</span>
                         </div>
                     ))}
 
-                </div>
+                  </div>
                 {/* <label htmlFor="options">Options:</label> */}
 
                 <button onClick={addOption} className="addOption">Add Option</button>
@@ -151,6 +152,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                         <select className="select">
                             <option defaultChecked disabled>Select</option>
                             <option>Multiple Choice</option>
+                            <option>Descriptive</option>
                         </select>
                     </div>
                     <img src={close} onClick={() => { setToggle(false) }} alt="close" className="close_tag" />

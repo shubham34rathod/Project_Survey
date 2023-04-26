@@ -49,11 +49,13 @@ function Register()
         }
         else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
         {
+            // alert("All fields are required")
              updateEmt(true)
              setTimeout(()=>{updateEmt(false)},3000)
         }
         else if(reg_data.password!==conf_password)
         {
+            // alert("Password doesn't match")
             showAlert(true)
             setTimeout(()=>{showAlert(false)},3000)
             console.log("password is not match");
@@ -166,7 +168,7 @@ function Register()
                                         // },5000)
                                         // navigate('/')
                                         submitForm()
-                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px"}}>Register</button>
+                                    }} type="submit" className="register_btn" style={{position:"relative",right:"80px",bottom:"-20px"}}>Register</button>
                                     {verifyPass && <h2 className="alert_password">Password doesn't match</h2>}
                                     {emtFiled && <h2 className="alert">All fields are required</h2>}
                                 </div>

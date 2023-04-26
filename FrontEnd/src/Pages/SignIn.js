@@ -48,6 +48,7 @@ function SignIn() {
                     console.log(responce)
                     if (responce === 'incorrect password') {
                         update(true)
+                        setTimeout(()=>{update(false)},3000)
                         navigate('/')
                     }
                     else if (responce === 'not registered') {

@@ -85,7 +85,11 @@ export default function SurveyList()
 
     const [data,setData]=useState([]);
 
-    useEffect(()=>{
+    
+    // useEffect(()=>{
+              
+  
+
             fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
@@ -100,7 +104,7 @@ export default function SurveyList()
            })
            .catch(()=>console.log("servey fetching error"))
         //    const cookies=new Cookies()
-    },[])
+    // },[])
     
     return <>
         <div className='container'>
