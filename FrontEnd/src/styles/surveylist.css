@@ -120,3 +120,7 @@ tr{
     margin-bottom: .5rem;
     background: #FAFDFF 0% 0% no-repeat padding-box;
 }
+
+.survey-list th:hover{
+    cursor: pointer;
+}

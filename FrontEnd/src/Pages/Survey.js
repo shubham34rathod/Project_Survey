@@ -38,7 +38,7 @@ async function fn()
 }
 
     return <>
-        <tr>
+        <tr className='list-sur'>
             <td>{name}</td>
             <td>{description}</td>
             <td>{typeOfSurvey}</td>
