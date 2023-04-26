@@ -82,9 +82,9 @@ export default function PreviewSurvey()
         // console.log('not received');
 
         //sending survey data to backend...............
-        if(surveyInfo.isEdit){
-            await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
-            method:"POST",
+        if(surveyInfo._id !== undefined){
+            await fetch(`https://survey-backend-cp5k.onrender.com/update-survey`,{
+            method:"PUT",
             headers:{
                 "content-type":"application/json"
             },
@@ -94,6 +94,7 @@ export default function PreviewSurvey()
         .then((responce)=>console.log(responce))
         .catch(()=>console.log("uploading error"))
         console.log("sent edited");
+        setSurveyInfo({})
         navigate('/list-survey')
         }
 
@@ -108,7 +109,7 @@ else{
         .then((data)=>data.json())
         .then((responce)=>console.log(responce))
         .catch(()=>console.log("uploading error"))
-
+setSurveyInfo({})
         navigate('/list-survey')
     }
 
@@ -123,20 +124,24 @@ else{
     <div className='container dark-theme'style={{backgroundColor:wallColor}}>
         {/* <Sidebar/> */}
         <div className='sidenav dark-themesidenav' style={{backgroundColor:backColor}} >
-                <div onClick={()=>{
+        <acronym title="List"><div onClick={()=>{
                     navigate('/list-survey')
-                }} id='home'></div>
-                <div onClick={()=>{
-                    navigate('/list-survey/create')
-                }} id='create'></div>
-                <div onClick={()=>{
+                }} id='home'></div></acronym>
+                <acronym title="Create new Survey"><div onClick={()=>{
+                    if(surveyInfo._id === undefined){
+                        setSurveyInfo({...surveyInfo,isEdit: true})
+                        navigate('/list-survey/create')
+                    }
+                }} id='create'></div></acronym>
+                <acronym title="Register"><div onClick={()=>{
                     navigate('/register')
-                }} id='list'></div>
+                }} id='list'></div></acronym>
             </div>
         <div className='list-container '>
             <header className='list-header '>
                 <div id='searchform'>
                     <button onClick={()=>{
+                        setSurveyInfo({...surveyInfo,isEdit:true})
                         navigate('/list-survey/create/questions')
                     }} id='arrow'> &larr;</button>
                         <h5 style={{color:prevColor,fontStyle:FontStyle}}>Preview</h5>

@@ -7,6 +7,7 @@ import { Filecontext } from "../config/FileContext";
 const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete,  mergeQuestion }, ref) => {
     useImperativeHandle(ref, () => ({
         sendQ() {
+            if(question.question !== ""){
             listQuestions.pop()
             setListQuestions(prev=>([
                 ...prev,
@@ -26,7 +27,8 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                 ...prevQs,
                 question
             ]))}
-           
+        }
+        else{ alert('question Should not empty')}
 
         }
     }));
@@ -101,7 +103,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
 
                 <div>
                     <label htmlFor="que" style={{ color: "#2D2D2E" }}>Question</label><br />
-                     <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" /> {/* <span onClick={()=>{onDelete(question.qno)
+                     <input type="text" id="que" name="que" onChange={(e) => { getQuestion(e) }} value={question.question} className="que_input" placeholder="Enter Question" required/> {/* <span onClick={()=>{onDelete(question.qno)
                     setOnDelete(!ondelete)
                     }} id="op-delete">DELETE</span>  */}
                 </div>
@@ -110,6 +112,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                         <div key={index}>
                             <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
                             <input
+                            required
                                 type="text"
                                 value={option}
                                 className="label"

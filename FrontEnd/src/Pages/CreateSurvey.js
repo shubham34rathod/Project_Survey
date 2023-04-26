@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import Cookies from'universal-cookie'
 import Header from "./Header";
@@ -38,6 +38,9 @@ export default function CreateSurvey()
         token:cookies.get("uid"),
         questions: []
     })
+useEffect(()=>{
+    if(surveyInfo.isEdit) updateData(surveyInfo)
+}, [])
 
     function onChange(e,prop)
     {
@@ -85,6 +88,7 @@ export default function CreateSurvey()
                     <div className="util">
                         <div id="cancel-btn">
                             <button onClick={() => {
+                                setSurveyInfo({})
                                 navigate('/list-survey')
                             }}>Cancel</button>
                         </div>
@@ -99,10 +103,16 @@ export default function CreateSurvey()
                                 else{
                                     if(surveyData.name==='' || surveyData.description==='' || surveyData.typeOfSurvey==='' || surveyData.startDate==='' || surveyData.endDate==='' || surveyData.imageName==='')
                                     {
-                                       alert('All fields are required')
+                                        if(surveyData.startDate > surveyData.endDate) alert('Start date must not be ahead of end date')
+                                        alert('All fields are required')
                                     }
                                     else{
-                                        setSurveyInfo({...surveyData, isEdit: false})
+                                        if(surveyData.startDate > surveyData.endDate) {
+                                            alert('Start date must not be ahead of end date')
+                                            return
+                                        }
+                                        if(surveyInfo.isEdit) setSurveyInfo(surveyData)
+                                        else setSurveyInfo({...surveyData, isEdit: false})
                                         navigate('/list-survey/create/questions',{state:{...surveyData,isEdit: false}}) //sending data to AddQuiz                             
 
                                     } 

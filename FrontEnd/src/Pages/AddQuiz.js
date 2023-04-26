@@ -152,7 +152,11 @@ function AddQuiz()
                 <div className="s_child1">
                     <div className="rec1">
                         <img onClick={() => {
-                            navigate('/list-survey/create')
+                            if(surveyInfo._id === undefined){
+                                setSurveyInfo({...surveyInfo,isEdit: true})
+                                navigate('/list-survey/create')
+                            }
+                            
                         }} src={left_arrow} alt="arrow" className="arrow lift" />
                         <p className="create">Create Questions</p>
                     </div>
