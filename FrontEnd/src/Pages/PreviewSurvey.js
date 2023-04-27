@@ -83,7 +83,7 @@ export default function PreviewSurvey()
 
         //sending survey data to backend...............
         if(surveyInfo._id !== undefined){
-            await fetch(`https://survey-backend-cp5k.onrender.com/update-survey`,{
+            await fetch(`https://survey-backend-2coa.onrender.com/update-survey`,{
             method:"PUT",
             headers:{
                 "content-type":"application/json"
@@ -99,7 +99,7 @@ export default function PreviewSurvey()
         }
 
 else{
-        await fetch(`https://survey-backend-cp5k.onrender.com/survey_data`,{
+        await fetch(`https://survey-backend-2coa.onrender.com/survey_data`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -175,10 +175,10 @@ setSurveyInfo({})
                     </div>
                     
                </div> */}
-             {showqQuestions.map(item=>{
+             {showqQuestions.map((item,num)=>{
                 return<>
                   <div className='question'>
-                    <h4 className='dark-theme' style={{fontStyle:FontStyle,backgroundColor:wallColor}}>{`Question ${item.qno}`}</h4>
+                    <h4 className='dark-theme' style={{fontStyle:FontStyle,backgroundColor:wallColor}}>{`Question ${num+1}`}</h4>
                     <div className='prev-form-container'>
                         <form>
                             <label className='dark-theme'  htmlFor='question' style={{color:queColor,fontStyle:FontStyle}}>{item.question}</label>
@@ -187,7 +187,7 @@ setSurveyInfo({})
                                     Object.keys(item.choices).map((key)=>{
                                         return <>
                                         <div>
-                                           <input className='dark-theme' id='opt-2' type="radio" value={2} name='q' disabled />
+                                           <input className='dark-theme' id='opt-2' type={item.type}  name='q' disabled />
                                            <label className='dark-theme' htmlFor='op1-2'  style={{color:queColor,fontStyle:FontStyle}} >{key}</label>
                                         </div>
                                         </>

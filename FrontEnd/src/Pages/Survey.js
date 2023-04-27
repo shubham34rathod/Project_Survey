@@ -5,7 +5,7 @@ import { Filecontext } from '../config/FileContext';
 import backEndUrl from '../config/config'
 
 
-export default function Survey({data}) {
+export default function Survey({data,updateDelete}) {
     
     const navigate = useNavigate()
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
@@ -19,7 +19,7 @@ async function fn()
         _id:data._id
     }
     // console.log(obj);
-    await fetch(`http://localhost:8000/delete_survey`,{
+    await fetch(`https://survey-backend-cp5k.onrender.com/delete_survey`,{
         method:"POST",
         headers:{
             "content-type":"application/json"
@@ -32,6 +32,7 @@ async function fn()
         if(responce==='delete successfull')
         {
             // navigate('/list-survey/create')
+            updateDelete(true)
         }
         // window.location.reload(true)    
     })

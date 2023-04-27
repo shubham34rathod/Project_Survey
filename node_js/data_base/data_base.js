@@ -28,6 +28,7 @@ let Schema2=new mongoose.Schema({
     endDate:{type:String},
     otherCriteria:{type:String},
     imageName:{type:String},
+    type:{type:String},
     questions:{type:Array},
     token:{type:String}
 })

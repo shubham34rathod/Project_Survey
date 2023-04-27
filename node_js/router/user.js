@@ -163,7 +163,7 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
         let Boolean=req.cookies.uid
        // console.log(req.body);
 
-        let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token}=req.body;
+        let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,type,token}=req.body;
         
         let doc2=new Model2({
             name:name,
@@ -174,6 +174,7 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
             otherCriteria:otherCriteria,
             imageName:imageName,
             questions:questions,
+            type: type,
             token:token
         })
         // console.log(doc2);
