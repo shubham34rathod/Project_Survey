@@ -100,12 +100,14 @@ export default function SurveyList()
            .then((data)=>data.json())
            .then((responce)=>{
                 setData(responce)
-                // console.log(responce[0])
+                updateDelete(false)
+                setLoading(false)
                 
            })
            .catch(()=>{
             console.log("servey fetching error")})
-            
+            setLoading(false)
+            updateDelete(false)
         //    const cookies=new Cookies()
     },[])
     
@@ -122,9 +124,11 @@ export default function SurveyList()
            .then((responce)=>{
                 setData(responce)
                 updateDelete(false)
+                setLoading(false)
                 // console.log(responce[0])
            })
-           .catch(()=>console.log("servey fetching error"))
+           .catch(()=>{console.log("servey fetching error")
+           setLoading(false)})
     }
     
     return <>
@@ -194,9 +198,9 @@ export default function SurveyList()
                             })}
                         </tbody>
                     </table>
-                    { ( data.length ===0)? <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
+                    {  isLoading && <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
                         <div class="lds-facebook"><div></div><div></div><div></div></div>    
-                    </div> :<div></div>}
+                    </div> }
                 </div>
             </div>
             
