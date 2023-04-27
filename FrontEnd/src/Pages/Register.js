@@ -32,7 +32,7 @@ function Register()
         {
             showAlert(false)
             console.log(reg_data);
-            await fetch(`https://survey-backend-cp5k.onrender.com/register`,{
+            await fetch(`https://survey-backend-2coa.onrender.com/register`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"

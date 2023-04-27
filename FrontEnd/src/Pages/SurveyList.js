@@ -18,8 +18,10 @@ const config = require('../config/config')
 export default function SurveyList() 
 {
     const {questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo} = useContext(Filecontext)
+     const [deleteData,updateDelete]=useState(false)
 
     const navigate = useNavigate();
+    const [isLoading, setLoading] = useState(true);
     const [isAscending, setIsAscending] = useState({
         name: true,
         sod: true,
@@ -86,11 +88,9 @@ export default function SurveyList()
     const [data,setData]=useState([]);
 
     
-    // useEffect(()=>{
-              
+    useEffect(()=>{             
   
-
-            fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
+            fetch(`https://survey-backend-2coa.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -101,10 +101,31 @@ export default function SurveyList()
            .then((responce)=>{
                 setData(responce)
                 // console.log(responce[0])
+                
+           })
+           .catch(()=>{
+            console.log("servey fetching error")})
+            
+        //    const cookies=new Cookies()
+    },[])
+    
+    if(deleteData)
+    {
+        fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(tmp_token),
+            })
+           .then((data)=>data.json())
+           .then((responce)=>{
+                setData(responce)
+                updateDelete(false)
+                // console.log(responce[0])
            })
            .catch(()=>console.log("servey fetching error"))
-        //    const cookies=new Cookies()
-    // },[])
+    }
     
     return <>
         <div className='container'>
@@ -162,15 +183,20 @@ export default function SurveyList()
                         </thead>
                         <tbody>
                             
-                            {data && data.filter((item)=>{
+                            {
+                            
+                            data && data.filter((item)=>{
                                 return search.toLowerCase() === '' 
                                 ? item 
                                 : item['name'].toLowerCase().includes(search);
                             }).map((item, i)=>{
-                                return <Survey data={item} key={i}/>
+                                return <Survey data={item} key={i} updateDelete={updateDelete}/>
                             })}
                         </tbody>
                     </table>
+                    { ( data.length ===0)? <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
+                        <div class="lds-facebook"><div></div><div></div><div></div></div>    
+                    </div> :<div></div>}
                 </div>
             </div>
             

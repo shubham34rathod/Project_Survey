@@ -11,7 +11,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
             listQuestions.pop()
             setListQuestions(prev=>([
                 ...prev,
-                question
+                {...question, type: queType}
             ]))
             
             mergeQuestion();
@@ -19,30 +19,35 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                 mergedQuestions.pop()
                 setMergedQuestion(prevQs=>([
                     ...prevQs,
-                    question
+                    {...question, type: queType}
                 ]))
             }
             else{
             setMergedQuestion(prevQs=>([
                 ...prevQs,
-                question
+                {...question, type: queType}
             ]))}
+            return false
         }
-        else{ alert('question Should not empty')}
+        else{ 
+            alert('question Should not empty')
+            return true
+        }
 
         }
     }));
 
     const [toggle, setToggle] = useState(false)
-    const [queType,updateQueType]=useState(true)
+    const [queType,setQueType]=useState("checkbox")
     const [choice, setChoice] = useState({})
-    const [ondelete, setOnDelete] = useState(true)
+    //const [ondelete, setOnDelete] = useState(true)
     const { questions, setQuestions, mergedQuestions, setMergedQuestion, surveyInfo, setSurveyInfo } = useContext(Filecontext)
 
     const [question, setQuestion] = useState({
         qno: num + 1,
         question: data.question,
-        choices: data.choices
+        choices: data.choices,
+        type: data.type
     })
    //console.log(question);
     const getQuestion = (e) => {
@@ -93,6 +98,10 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
         }))
     }
 
+    const getvalue=(e)=>{
+        setQueType(e.target.value)
+    }
+
     return <>
         <div className="s_parent2" >
             <div className="list">
@@ -110,7 +119,7 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                   <div className="options">
                     {options.map((option, index) => (
                         <div key={index}>
-                            <input type="radio" value={Object.keys(choice)[0]} name="option" id="option" />
+                            <input type={question.type || queType} value={Object.keys(choice)[0]} name="option" id="option" />
                             <input
                             required
                                 type="text"
@@ -149,10 +158,10 @@ const Question = forwardRef(({ data,num,setListQuestions, listQuestions,onDelete
                     <div>
 
                         <p style={{ fontSize: "12px", marginBottom: "5px" }}>Question Type</p>
-                        <select className="select">
+                        <select onChange={getvalue} className="select">
                             <option defaultChecked disabled>Select</option>
-                            <option>Multiple Choice</option>
-                            <option>Descriptive</option>
+                            <option value="checkbox"> Multiple Choice</option>
+                            <option value="radio">One choice</option>
                         </select>
                     </div>
                     <img src={close} onClick={() => { setToggle(false) }} alt="close" className="close_tag" />
