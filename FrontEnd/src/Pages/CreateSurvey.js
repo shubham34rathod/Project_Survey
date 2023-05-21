@@ -123,7 +123,7 @@ useEffect(()=>{
                 </header>
                 <div className="form-container">
                     <div className="form-left">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             <div>
                                 <label>Name</label>
                                 <input type="text" id="name" name="name" value={surveyData.name} onChange={(e)=>onChange(e,"name")}/>

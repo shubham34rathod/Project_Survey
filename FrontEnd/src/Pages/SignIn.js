@@ -3,6 +3,8 @@ import "../styles/signIn.css"
 import Cookies from 'universal-cookie'
 import jwt from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import backEndUrl from '../config/config'
 
 function SignIn() {
@@ -16,6 +18,7 @@ function SignIn() {
     let [notReg, showReg] = useState(false)
     let [enterDetail, showDetalAlert] = useState(false)
     let [emptyField, updateField] = useState(false)
+    let [checkPassword,setPassStyle]=useState({})
 
     let [signIn_data, updateData] = useState({
         email: "",
@@ -36,7 +39,7 @@ function SignIn() {
                 setTimeout(()=>{updateField(false)},3000)
             }
             else{
-            await fetch(`https://survey-backend-2coa.onrender.com/login`, {
+            await fetch(`https://survey-backend-cp5k.onrender.com/login`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -48,14 +51,21 @@ function SignIn() {
                     console.log(responce)
                     if (responce === 'incorrect password') {
                         update(true)
+                        setPassStyle({
+                            color:"red",
+                            fontWeight:"bold"   
+                        })
                         setTimeout(()=>{update(false)},3000)
                         navigate('/')
                     }
                     else if (responce === 'not registered') {
+                        toast.warning("please register",{
+                            autoClose:4000
+                        })
                         showReg(true)
                         setTimeout(() => {
                             navigate('register')
-                        }, 2000)
+                        }, 4000)
 
                     }
                     else if (signIn_data.email === "" && signIn_data.password === "") {
@@ -64,11 +74,13 @@ function SignIn() {
                     }
                     else {
                         showReg(false)
+                        setPassStyle({})
                         cookies.set("uid", responce, {
                             expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
 
                         })
-                        navigate('list-survey')
+                        toast.success("Login Successfully")
+                        setTimeout(()=>{navigate('list-survey')},3000)
                     }
                     // cookies.set("uid",responce,{
                     //     expires:new Date(Date.now()+90 * 24*60*60*1000),
@@ -78,10 +90,10 @@ function SignIn() {
                 })
                 .catch(() => console.log("uploading error"))
 
-            updateData({
-                email: "",
-                password: ""
-            })
+            // updateData({
+            //     email: "",
+            //     password: ""
+            // })
 
             let token = cookies.get("uid")
             if (token) {
@@ -108,6 +120,7 @@ function SignIn() {
     // const navigate = useNavigate()
     return <>
         {/* <h2 className="invalid">invalid details</h2> */}
+        <ToastContainer ></ToastContainer>
         <div className="box">
             {/* <div id="tmp"></div> */}
             <div className="parent1">
@@ -137,7 +150,7 @@ function SignIn() {
                                 <hr style={{ marginTop: "0px" }} />
                             </div>
                             <div>
-                                <label for="password">Password</label><br />
+                                <label for="password" style={checkPassword}>Password</label><br />
                                 <input type="password" id="password" name="password" value={signIn_data.password} onChange={(e) => onChange(e, "password")} />
                                 <hr style={{ marginTop: "0px" }} />
                             </div>

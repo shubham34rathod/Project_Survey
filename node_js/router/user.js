@@ -21,8 +21,9 @@ router.use(express.urlencoded({extended:false}))
 let tmp_token=0
 
 //multer storage
-let storage=new MulterGridfsStorage.GridFsStorage({
+let storage=MulterGridfsStorage.GridFsStorage({
     url: process.env.Db_URL + process.env.Data_Base,
+    // url: 'mongodb+srv://shubham34rathod:Shubham123@cluster0.ouctqeg.mongodb.net/test?retryWrites=true&w=majority',
     file: function(req,file){
           return{
             bucketName:"survey_img",
@@ -93,10 +94,17 @@ router.post("/register",async (req,res)=>{
     {
         // console.log(req.body);
         let {name,email,phone,profession,password}=req.body;
-        const token=await jwt.sign({use:email},process.env.secret_key)
-        tmp_token=token;
+        let checkEmail=await Model1.find({email:email})
+        if(checkEmail.length!==0)
+        {
+            res.json('email already exist')
+        }
+        else
+        {
+            const token=await jwt.sign({use:email},process.env.secret_key)
+            tmp_token=token;
             let pass=await bcrypt.hash(password,10)
-            console.log(pass);
+            // console.log(pass);
             let doc1=await new Model1({
                name:name,
                email:email,
@@ -106,7 +114,8 @@ router.post("/register",async (req,res)=>{
                token:token
             })
             await doc1.save();
-            res.send("data received")            
+            res.json("data received")
+        }            
     } 
     catch (error) 
     {
@@ -161,10 +170,9 @@ router.post("/survey_data", upload.single("image"),(req,res)=>{
         //const {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,token, _id} = req.body;
         // console.log(req.body);  
         let Boolean=req.cookies.uid
-       // console.log(req.body);
+        console.log(req.body);
 
         let {name,description,typeOfSurvey,startDate,endDate,otherCriteria,imageName,questions,type,token}=req.body;
-        
         let doc2=new Model2({
             name:name,
             description:description,
@@ -196,7 +204,7 @@ router.post('/get-surveys',async (req,res)=>{
     await Model2.find({token:req.body.token})
     .then((surveys)=>{
         if(!surveys){
-            res.status(404).sendStatus({message: "No surveys are available"})
+            res.status(404).send({message: "No surveys are available"})
         }
         else{
             res.status(200).send(surveys)

@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import "../styles/register.css"
 import { useNavigate } from "react-router-dom";
 import backEndUrl from '../config/config'
+import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer,toast} from 'react-toastify'
 // import Cookies from 'universal-cookie'
 
 function Register()
@@ -12,6 +14,9 @@ function Register()
 
     let [verifyPass,showAlert]=useState(false)
     let [emtFiled,updateEmt]=useState(false)
+    let [EmailCheck,setEmail]=useState(false)
+    let [EmailAlertStyle,checkEmailStyle]=useState({})
+    let [passStyle,setPassStyle]=useState({})
 
     let [reg_data,updateData]=useState({
         name:"",
@@ -32,7 +37,7 @@ function Register()
         {
             showAlert(false)
             console.log(reg_data);
-            await fetch(`https://survey-backend-2coa.onrender.com/register`,{
+            await fetch(`https://survey-backend-cp5k.onrender.com/register`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -42,23 +47,52 @@ function Register()
             .then((data)=>data.json())
             .then((responce)=>{
                 console.log(responce);
+                if(responce==="email already exist")
+                {
+                    checkEmailStyle({
+                        color:"red",
+                        fontWeight:"bold"
+                    })
+                    setEmail(true)
+                    setTimeout(()=>{setEmail(false)},3000)
+                    // toast.error("Email already exist",{
+                    //     autoClose:3000
+                    // })
+                }
+                if(responce==='data received')
+                {
+                    checkEmailStyle({})
+                    toast.success("Registered successfully",{
+                        autoClose:3000
+                    })
+                    setTimeout(()=>{
+                        navigate('/');
+                    },4000)
+                }
             })
             .catch(()=>console.log("uploading error"))
-            // console.log(data);
-            navigate('/');
         }
-        else if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
+        if(reg_data.password==='' || reg_data.name==='' || reg_data.email==='' || reg_data.phone==='' || reg_data.profession==='')
         {
             // alert("All fields are required")
              updateEmt(true)
              setTimeout(()=>{updateEmt(false)},3000)
         }
-        else if(reg_data.password!==conf_password)
+        if(reg_data.password!==conf_password)
         {
             // alert("Password doesn't match")
             showAlert(true)
+            setPassStyle({
+                color:"red",
+                fontWeight:"bold"
+            })
+           
             setTimeout(()=>{showAlert(false)},3000)
             console.log("password is not match");
+        }
+        if(reg_data.password===conf_password)
+        {
+             setPassStyle({})
         }
           
         //sending data to backend
@@ -74,15 +108,15 @@ function Register()
         // .then((responce)=>console.log(responce))
         // .catch(()=>console.log("uploading error"))
 
-        updateData({
-            name:"",
-            email:"",
-            phone:"",
-            profession:"",
-            password:""
-        })
+        // updateData({
+        //     name:"",
+        //     email:"",
+        //     phone:"",
+        //     profession:"",
+        //     password:""
+        // })
 
-        checkPassword('')
+        // checkPassword('')
         
         // navigate('/');
     }
@@ -97,6 +131,7 @@ function Register()
 
     // const navigate = useNavigate()
     return <>
+        <ToastContainer></ToastContainer>
         <div className="grandParent">
             <div className="p1">
                 <div className="sub_p1">
@@ -129,15 +164,15 @@ function Register()
                                     <hr  className="hr"/>
                                 </div>
                                 <div>
-                                    <label For="password">Password</label><br />
+                                    <label For="password" style={passStyle}>Password</label><br />
                                     <input type="password" id="password" name="password" value={reg_data.password} onChange={(e)=>change(e,'password')}/>
                                     <hr  className="hr" />
                                 </div>
                             </div>
                             <div className="form_2">
                                 <div>
-                                    <label For="email">Email</label><br />
-                                    <input type="email" id="email" name="email" value={reg_data.email} onChange={(e)=>change(e,'email')}/>
+                                    <label For="email" style={EmailAlertStyle}>Email</label><br />
+                                    <input type="email" id="email"  name="email" value={reg_data.email} onChange={(e)=>change(e,'email')}/>
                                     <hr  className="hr"/>
                                 </div>
                                 <div>
@@ -146,7 +181,7 @@ function Register()
                                     <hr  className="hr"/>
                                 </div>
                                 <div>
-                                    <label For="c_password">Confirm Password</label><br />
+                                    <label For="c_password" style={passStyle}>Confirm Password</label><br />
                                     <input type="password" id="c_password" name="c_password" value={conf_password} onChange={(e)=>checkPassword(e.target.value)}/>
                                     <hr  className="hr" />
                                 </div>
@@ -171,6 +206,7 @@ function Register()
                                     }} type="submit" className="register_btn" style={{position:"relative",right:"80px",bottom:"-20px"}}>Register</button>
                                     {verifyPass && <h2 className="alert_password">Password doesn't match</h2>}
                                     {emtFiled && <h2 className="alert">All fields are required</h2>}
+                                    {EmailCheck && <h2 className="alert_email">Email already exist</h2>}
                                 </div>
                             </div>
                         </form>

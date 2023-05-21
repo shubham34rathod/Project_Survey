@@ -86,11 +86,13 @@ export default function SurveyList()
     // })
 
     const [data,setData]=useState([]);
+    //checking data is fetched or not
+    const [checkData,updateCheck]=useState(true)
 
     
     useEffect(()=>{             
   
-            fetch(`https://survey-backend-2coa.onrender.com/get-surveys`,{
+            fetch(`https://survey-backend-cp5k.onrender.com/get-surveys`,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -100,7 +102,29 @@ export default function SurveyList()
            .then((data)=>data.json())
            .then((responce)=>{
                 setData(responce)
-                // console.log(responce[0])
+                if(setData.length>0)
+                {
+                    updateCheck(false)
+                    
+                    // setTimeout(()=>{
+                    //     if(responce.length===0)
+                    //     {
+                    //         updateCheck(false)
+                    //     }
+                       
+                    //     console.log('no data');
+                    // },15000)
+                }
+                console.log(`value is ${checkData}`);
+                // setTimeout(()=>{
+                //     if(responce.length===0)
+                //     {
+                //         updateCheck(false)
+                //     }
+                   
+                //     console.log('no data');
+                // },15000)
+                console.log(responce)
                 
            })
            .catch(()=>{
@@ -194,9 +218,9 @@ export default function SurveyList()
                             })}
                         </tbody>
                     </table>
-                    { ( data.length ===0)? <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
+                    { ( checkData===true)? <div className="post-container" style={{ textAlign: "center", fontSize: "30px" }}>
                         <div class="lds-facebook"><div></div><div></div><div></div></div>    
-                    </div> :<div></div>}
+                    </div> :(data.length===0)? <div className='checkData'>No data available</div>:<div></div>}
                 </div>
             </div>
             
